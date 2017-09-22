@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201709222044254_InitialModel.Designer.cs">
       <DependentUpon>201709222044254_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709222128154_PopulateRestraintTypes.cs" />
+    <Compile Include="Migrations\201709222128154_PopulateRestraintTypes.Designer.cs">
+      <DependentUpon>201709222128154_PopulateRestraintTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CfsWorker.cs" />
@@ -302,6 +306,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709222044254_InitialModel.resx">
       <DependentUpon>201709222044254_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709222128154_PopulateRestraintTypes.resx">
+      <DependentUpon>201709222128154_PopulateRestraintTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
