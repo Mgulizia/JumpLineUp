@@ -200,11 +200,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CfsWorkerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Phone.cs" />
     <Compile Include="Migrations\201709222044254_InitialModel.cs" />
     <Compile Include="Migrations\201709222044254_InitialModel.Designer.cs">
       <DependentUpon>201709222044254_InitialModel.cs</DependentUpon>
@@ -212,6 +214,22 @@
     <Compile Include="Migrations\201709222128154_PopulateRestraintTypes.cs" />
     <Compile Include="Migrations\201709222128154_PopulateRestraintTypes.Designer.cs">
       <DependentUpon>201709222128154_PopulateRestraintTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709231406452_SeedBLCSoffices.cs" />
+    <Compile Include="Migrations\201709231406452_SeedBLCSoffices.Designer.cs">
+      <DependentUpon>201709231406452_SeedBLCSoffices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709231425228_RemoveDhhsOfficeTable.cs" />
+    <Compile Include="Migrations\201709231425228_RemoveDhhsOfficeTable.Designer.cs">
+      <DependentUpon>201709231425228_RemoveDhhsOfficeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709231506426_SetRequirementsForCFSWorker.cs" />
+    <Compile Include="Migrations\201709231506426_SetRequirementsForCFSWorker.Designer.cs">
+      <DependentUpon>201709231506426_SetRequirementsForCFSWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709231512451_AddIsActiveToCFSworker.cs" />
+    <Compile Include="Migrations\201709231512451_AddIsActiveToCFSworker.Designer.cs">
+      <DependentUpon>201709231512451_AddIsActiveToCFSworker.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -286,6 +304,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\CfsWorker\CfsWorkerForm.cshtml" />
+    <Content Include="Views\CfsWorker\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,6 +329,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709222128154_PopulateRestraintTypes.resx">
       <DependentUpon>201709222128154_PopulateRestraintTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709231406452_SeedBLCSoffices.resx">
+      <DependentUpon>201709231406452_SeedBLCSoffices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709231425228_RemoveDhhsOfficeTable.resx">
+      <DependentUpon>201709231425228_RemoveDhhsOfficeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709231506426_SetRequirementsForCFSWorker.resx">
+      <DependentUpon>201709231506426_SetRequirementsForCFSWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709231512451_AddIsActiveToCFSworker.resx">
+      <DependentUpon>201709231512451_AddIsActiveToCFSworker.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

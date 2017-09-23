@@ -1,0 +1,72 @@
+﻿@using JumpLineUp.Models
+@using Microsoft.Ajax.Utilities
+@model JumpLineUp.Models.CfsWorker
+@{
+    var title = (Model == null) ? "New CFS Worker" : "Edit CFS Worker";
+    var buttonTxt = (Model == null) ? "Add CFS Worker" : "Update CFS Worker";
+    ViewBag.Title = "NewCfsWorker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<div class="panel panel-default">
+    
+    <div class="panel-heading">
+     
+           <h2>@title</h2>
+
+    </div><!--Panel Heading End-->
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Save", "CfsWorker"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Phone)
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OfficeLocation)
+                @Html.TextBoxFor(m => m.OfficeLocation, new { @class = "form-control" })
+            </div>
+            
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.IsActive, new { @checked = true }) Currently Active?
+                </label>
+            </div>
+
+
+            @Html.HiddenFor(m => m.Id)
+
+            <button type="submit" class="btn btn-primary">@buttonTxt</button>
+        }
+
+        
+
+    </div><!--Panel Body End-->
+</div><!--Panel End-->
+
+
+
+
+
+
+

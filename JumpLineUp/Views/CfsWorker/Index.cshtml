@@ -1,0 +1,47 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<JumpLineUp.Models.CfsWorker>
+@{
+    ViewBag.Title = "CfsWorker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">@Html.ActionLink("+ Add CFS Worker", "NewCfsWorker", "CfsWorker", new { @class = "btn btn-primary" })</div>
+        <h2>DHHS CFS Workers</h2>
+    </div><!--Panel Heading End-->
+    <div class="panel-body">
+        @if (!Model.Any())
+        {
+            <p>There are Currently no CFS Workers in LineUp, @Html.ActionLink("add one now?", "NewCfsWorker", "CfsWorker") </p>
+        }
+        else
+        {
+            <table class="table table-hover">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                </tr>
+                @foreach (var cfs in Model)
+                {
+                    <tr>
+                        <td>@cfs.FirstName @cfs.LastName</td>
+                        <td><a href="tel:@cfs.Phone">@cfs.FormatPhone()</a> </td>
+                        <td><a href="mailto:@cfs.Email">@cfs.Email</a> </td>
+                        <td><a href="@Url.Action("EditCfsWorker", "CfsWorker",new {id = cfs.Id})" class="btn btn-sm btn-default">Edit &nbsp; <span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="@Url.Action("DisableCfsWorker", "CfsWorker",new {id = cfs.Id})" class="btn btn-sm btn-default">Disable &nbsp; <span class="glyphicon glyphicon-ban-circle"></span></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+
+
+
+
+    </div><!--Panel Body End-->
+</div>
