@@ -8,6 +8,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br/>
+@using (Html.BeginForm("Save", "CfsWorker"))
+{
 <div class="panel panel-default">
     
     <div class="panel-heading">
@@ -18,33 +20,38 @@
 
     <div class="panel-body">
 
-        @using (Html.BeginForm("Save", "CfsWorker"))
-        {
+            @Html.ValidationSummary()
+
             <div class="form-group">
                 @Html.LabelFor(m => m.FirstName)
                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FirstName)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(m => m.LastName)
                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LastName)
             </div>
 
 
             <div class="form-group">
                 @Html.LabelFor(m => m.Phone)
                 @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Phone)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(m => m.Email)
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email)
             </div>
 
 
             <div class="form-group">
                 @Html.LabelFor(m => m.OfficeLocation)
                 @Html.TextBoxFor(m => m.OfficeLocation, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OfficeLocation)
             </div>
             
             <div class="checkbox">
@@ -56,14 +63,18 @@
 
             @Html.HiddenFor(m => m.Id)
 
-            <button type="submit" class="btn btn-primary">@buttonTxt</button>
-        }
+            
 
         
 
     </div><!--Panel Body End-->
-</div><!--Panel End-->
+    <div class="panel-footer">
+        <button type="submit" class="btn btn-primary">@buttonTxt</button>
+        
 
+    </div>
+</div><!--Panel End-->
+}
 
 
 

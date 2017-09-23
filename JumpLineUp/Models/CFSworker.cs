@@ -12,30 +12,31 @@ namespace JumpLineUp.Models
         public int Id { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(40)]
+        [MinLength(3, ErrorMessage = "Text needs to be between 3 and 40 characters")]
+        [MaxLength(40, ErrorMessage = "Text needs to be between 3 and 40 characters")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(40)]
+        [MinLength(3, ErrorMessage = "Text needs to be between 3 and 40 characters")]
+        [MaxLength(40, ErrorMessage = "Text needs to be between 3 and 40 characters")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber)]
+        [Phone]
+        [MinLength(10,ErrorMessage = "Phone number must contain an area code.")]
         [Display(Name = "Phone Number")]
         public string Phone { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(50)]
+        [MinLength(3, ErrorMessage = "Text needs to be between 3 and 50 characters")]
+        [MaxLength(50, ErrorMessage = "Text needs to be between 3 and 50 characters")]
         [Display(Name = "Office Location")]
         public string OfficeLocation { get; set; }
 

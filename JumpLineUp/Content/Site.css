@@ -22,3 +22,32 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.field-validation-error {
+    color: #dc4242;
+    font-size: 80%;
+}
+
+.input-validation-error {
+    border: 1px solid #dc4242;
+    background-color: #efc3c3;
+}
+
+.validation-summary-errors {
+    border: 1px solid #dc4242;
+    background-color: #efc3c3;
+    border-radius: 15px;
+    padding: 10px;
+    color: #dc4242;
+    font-size: 80%;
+    margin-bottom: 20px;
+}
+.validation-summary-errors > ul {
+   margin: 0;
+   padding-left: 20px;
+}
+.validation-summary-errors > ul::before{
+    content: "Your form has the following errors";
+    font-size: 120%;
+    font-weight: bolder;
+}

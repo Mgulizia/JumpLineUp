@@ -49,8 +49,8 @@ namespace JumpLineUp.Controllers
         //------------------------------ New Item Creation ---------------------------------------------------------------------
         public ActionResult NewCfsWorker()
         {
-
-            return View("CfsWorkerForm");
+            var cfsWorker = new CfsWorker();
+            return View("CfsWorkerForm",cfsWorker);
         }
 
 //------------------------------ Edit Item ------------------------------------------------------------------------------
@@ -80,10 +80,17 @@ namespace JumpLineUp.Controllers
             return RedirectToAction("Index", "CfsWorker");
         }
 
-        //------------------------------ Update Item -------------------------------------------------------------------------------
+//------------------------------ Update Item -------------------------------------------------------------------------------
         [HttpPost]
         public ActionResult Save(CfsWorker cfsWorker)
         {
+            if (!ModelState.IsValid)
+            {
+
+                return View("CfsWorkerForm", cfsWorker);
+            }
+
+
             if (cfsWorker.Id == 0)
             {
                 _context.CfsWorkers.Add(cfsWorker);
