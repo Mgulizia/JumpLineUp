@@ -1,5 +1,5 @@
 ﻿@using System.Web.UI.WebControls
-@model IEnumerable<JumpLineUp.Models.CfsWorker>
+@model JumpLineUp.ViewModels.Cfs.CfsIndexViewModel
 @{
     ViewBag.Title = "CfsWorker";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,35 +13,86 @@
         <h2>DHHS CFS Workers</h2>
     </div><!--Panel Heading End-->
     <div class="panel-body">
-        @if (!Model.Any())
-        {
-            <p>There are Currently no CFS Workers in LineUp, @Html.ActionLink("add one now?", "NewCfsWorker", "CfsWorker") </p>
-        }
-        else
-        {
-            <table class="table table-hover">
-                <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Email</th>
-                    <th>Edit</th>
-                </tr>
-                @foreach (var cfs in Model)
-                {
-                    <tr>
-                        <td>@cfs.FirstName @cfs.LastName</td>
-                        <td><a href="tel:@cfs.Phone">@cfs.FormatPhone()</a> </td>
-                        <td><a href="mailto:@cfs.Email">@cfs.Email</a> </td>
-                        <td><a href="@Url.Action("EditCfsWorker", "CfsWorker",new {id = cfs.Id})" class="btn btn-sm btn-default">Edit &nbsp; <span class="glyphicon glyphicon-pencil"></span></a>
-                            <a href="@Url.Action("DisableCfsWorker", "CfsWorker",new {id = cfs.Id})" class="btn btn-sm btn-default">Disable &nbsp; <span class="glyphicon glyphicon-ban-circle"></span></a>
-                        </td>
-                    </tr>
-                }
-            </table>
-        }
+
+        
+            <ul class="nav nav-tabs">
+                <li class="active"><a  data-toggle="tab" href="#menu1">Active CFS Workers</a></li>
+                <li><a data-toggle="tab" href="#menu2">Disabled CFS Workers</a></li>
+            </ul>
+        
+
+        <div class="tab-content">
+            
+            <div class="well">
+                <div class="tab-content">
+                    <div id="menu1" class="tab-pane fade in active">
+                        @if (Model.EnabledCfsWorkers.Count < 1)
+                        {
+                            <p>There are Currently no CFS Workers in LineUp, @Html.ActionLink("add one now?", "NewCfsWorker", "CfsWorker") </p>
+                        }
+                        else
+                        {
+                            <table class="table table-responsive table-striped">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Email</th>
+                                    <th>Edit</th>
+                                </tr>
+                                @foreach (var cfs in Model.EnabledCfsWorkers)
+                                {
+                                    <tr>
+                                        <td>@cfs.FirstName @cfs.LastName</td>
+                                        <td><a href="tel:@cfs.Phone">@cfs.FormatPhone()</a> </td>
+                                        <td><a href="mailto:@cfs.Email">@cfs.Email</a> </td>
+                                        <td>
+                                            <a href="@Url.Action("EditCfsWorker", "CfsWorker",new {id = cfs.Id})" class="btn btn-sm btn-default">Edit &nbsp; <span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="@Url.Action("ToggleCfsActive", "CfsWorker",new {id = cfs.Id})" class="btn btn-sm btn-default">Disable &nbsp; <span class="glyphicon glyphicon-ban-circle"></span></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div><!-- End of Menu1 Tab-Pane -->
+                    <div id="menu2" class="tab-pane fade in">
+
+                        @if (Model.DisabledCfsWorkers.Count < 1)
+                        {
+                            <p>There are Currently no Disabled CFS Workers in LineUp</p>
+                        }
+                        else
+                        {
+                            <table class="table table-responsive table-striped">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Email</th>
+                                    <th>Edit</th>
+                                </tr>
+                                @foreach (var cfs in Model.DisabledCfsWorkers)
+                                {
+                                    <tr>
+                                        <td>@cfs.FirstName @cfs.LastName</td>
+                                        <td><a href="tel:@cfs.Phone">@cfs.FormatPhone()</a> </td>
+                                        <td><a href="mailto:@cfs.Email">@cfs.Email</a> </td>
+                                        <td>
+                                            <a href="@Url.Action("ToggleCfsActive", "CfsWorker",new {id = cfs.Id})" class="btn btn-sm btn-default">Enable &nbsp; <span class="glyphicon glyphicon-ok-circle"></span></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div><!-- End of Menu2 Tab-Pane -->
 
 
 
+                </div><!-- End of Container -->
+                
+
+                
+
+            </div><!-- End of Well-->
+        </div><!-- End of Tab-content -->
 
     </div><!--Panel Body End-->
 </div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using JumpLineUp.Models;
+using JumpLineUp.ViewModels.Cfs;
 
 namespace JumpLineUp.Controllers
 {
@@ -26,12 +27,22 @@ namespace JumpLineUp.Controllers
 
         //------------------------------ View Models ---------------------------------------------------------------------------
         public ViewResult Index()
-        {
-            var cfsWorkers = _context.CfsWorkers;
-            //var cfsWorkers = _context.CfsWorkers.Where(i => i.IsActive == true);
-            //var disabledCfsWorkers = _context.CfsWorkers.Where(i => i.IsActive == false);
+            {
+            //create list of CFS Workers
+            //var cfsWorkers = _context.CfsWorkers;
+            var enabled = _context.CfsWorkers.Where(i => i.IsActive == true).ToList();
+            var disabled = _context.CfsWorkers.Where(i => i.IsActive == false).ToList();
 
-            return View(cfsWorkers);
+            //create ViewModel
+            var ViewModel = new CfsIndexViewModel
+            {
+                EnabledCfsWorkers = enabled,
+                DisabledCfsWorkers = disabled
+            };
+            
+
+
+            return View(ViewModel);
         }
 
 
@@ -42,8 +53,8 @@ namespace JumpLineUp.Controllers
             return View("CfsWorkerForm");
         }
 
-        //------------------------------ Edit Item ------------------------------------------------------------------------------
-
+//------------------------------ Edit Item ------------------------------------------------------------------------------
+        //edit cfs worker
         public ActionResult EditCfsWorker(int id)
         {
             var cfsWorker = _context.CfsWorkers.SingleOrDefault(c => c.Id == id);
@@ -51,10 +62,22 @@ namespace JumpLineUp.Controllers
             if (cfsWorker == null)
                 return HttpNotFound();
 
-
-
-
             return View("CfsWorkerForm", cfsWorker);
+        }
+
+        //Toggle a CFS IsActive (true <> False)
+        public ActionResult ToggleCfsActive(int id)
+        {
+            var cfsWorker = _context.CfsWorkers.Single(i => i.Id == id);
+
+            if (cfsWorker.IsActive == true)
+                cfsWorker.IsActive = false;
+            else
+                cfsWorker.IsActive = true;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "CfsWorker");
         }
 
         //------------------------------ Update Item -------------------------------------------------------------------------------
@@ -82,13 +105,6 @@ namespace JumpLineUp.Controllers
         }
 
 
-        public ActionResult DisableCfsWorker(int id)
-        {
-            var cfsWorker = _context.CfsWorkers.Single(i => i.Id == id);
-            cfsWorker.IsActive = false;
-            _context.SaveChanges();
-            return RedirectToAction("Index", "CfsWorker");
-
-        }
+       
     }
 }
