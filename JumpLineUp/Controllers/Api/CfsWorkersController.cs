@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-
 using System.Web.Http;
-
+using AutoMapper;
+using JumpLineUp.Dtos;
 using JumpLineUp.Models;
 
 namespace JumpLineUp.Controllers.Api
@@ -21,40 +21,42 @@ namespace JumpLineUp.Controllers.Api
 
 
         // GET /api/CfsWorkers
-        public IEnumerable<CfsWorker> GetCfsWorkers()
+        public IEnumerable<CfsWorkerDto> GetCfsWorkers()
         {
-            return _context.CfsWorkers.ToList();
+            return _context.CfsWorkers.ToList().Select(Mapper.Map<CfsWorker,CfsWorkerDto>);
         }
 
 
         // GET /api/CfsWorkers/1
-        public CfsWorker GetCfsWorker(int id)
+        public CfsWorkerDto GetCfsWorker(int id)
         {
             var cfsWorker = _context.CfsWorkers.SingleOrDefault(c => c.Id == id);
 
             if(cfsWorker == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return cfsWorker;
+            return Mapper.Map<CfsWorker,CfsWorkerDto>(cfsWorker);
         }
 
 
         // POST /api/CfsWorkers
         [HttpPost]
-        public CfsWorker CreateCfsWorker(CfsWorker cfsWorker)
+        public CfsWorkerDto CreateCfsWorker(CfsWorkerDto cfsWorkerDto)
         {
             if(!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
+            var cfsWorker = Mapper.Map<CfsWorkerDto, CfsWorker>(cfsWorkerDto);
             _context.CfsWorkers.Add(cfsWorker);
             _context.SaveChanges();
 
-            return cfsWorker;
+            cfsWorkerDto.Id = cfsWorker.Id;
+            return cfsWorkerDto;
         }
 
         // PUT /api/CfsWorkers/1
         [HttpPut]
-        public void UpdateCfsWorker(int id, CfsWorker cfsWorker)
+        public void UpdateCfsWorker(int id, CfsWorkerDto cfsWorkerDto)
         {
             if(!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -64,12 +66,7 @@ namespace JumpLineUp.Controllers.Api
             if(cfsWorkerInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            cfsWorkerInDb.FirstName = cfsWorker.FirstName;
-            cfsWorkerInDb.LastName = cfsWorker.LastName;
-            cfsWorkerInDb.Phone = cfsWorker.Phone;
-            cfsWorkerInDb.Email = cfsWorker.Email;
-            cfsWorkerInDb.OfficeLocation = cfsWorker.OfficeLocation;
-            cfsWorkerInDb.IsActive = cfsWorker.IsActive;
+            Mapper.Map(cfsWorkerDto, cfsWorkerInDb);
 
             _context.SaveChanges();
         }
