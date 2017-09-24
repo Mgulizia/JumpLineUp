@@ -69,14 +69,17 @@
 
     </div><!--Panel Body End-->
     <div class="panel-footer">
+        @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-primary">@buttonTxt</button>
-        
+
 
     </div>
 </div><!--Panel End-->
 }
 
-
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
 
 

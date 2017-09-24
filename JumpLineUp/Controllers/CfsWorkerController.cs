@@ -82,6 +82,7 @@ namespace JumpLineUp.Controllers
 
 //------------------------------ Update Item -------------------------------------------------------------------------------
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(CfsWorker cfsWorker)
         {
             if (!ModelState.IsValid)
