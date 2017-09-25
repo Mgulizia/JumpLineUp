@@ -12,31 +12,42 @@
         <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
             @Html.ActionLink("Add CFS Worker", "NewCfsWorker", "CfsWorker", new {@class = "btn btn-primary"})
             @Html.ActionLink("View Enabled CFS Workers", "Index", "CfsWorker", new { @class = "btn btn-primary" })
-        </div>        <h2>Disabled DHHS CFS Workers</h2>
+        </div>        
+        
+        <h2>DHHS CFS Workers</h2>
+    
     </div><!--Panel Heading End-->
     <div class="panel-body">
         <div class="well">
-            @if (!Model.Any())
-            {
-                <p>There aren't currently any disabled CFS workers in Lineup, @Html.ActionLink("return to active CFS Workers", "Index", "CfsWorker") </p>
-            }
-            else
-            {
-                <table id="cfsTables" class="table table-responsive table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    
-                    </tbody>
-                                
-                </table>
-            }
+            
+
+            <div class="form-group">
+                <label for="filter">Filter Active / Inactive CFS Workers</label>
+                <select class="form-control" id="filter">
+                    <option value="All">View All CFS Workers</option>
+                    <option value="True">Current CFS Workers</option>
+                    <option value="False">Inactive CFS Workers</option>
+                </select>
+            </div>
+        
+
+            <table id="cfsTables" class="table table-responsive table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Active CFS</th>
+                    <th>Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+
+            </table>
+        
+
         </div><!-- End of Well-->
     </div><!--Panel Body End-->
 </div>
@@ -45,13 +56,14 @@
 {
     <script>
     $(document).ready(function() {
-        var message = "Are you sure you wish to enable this CFS Worker?";
+        var message = "Are you sure you wish to disable this CFS Worker?";
         var tableName = "#cfsTables";
         var toggleButton = ".js-toggle";
         var url = baseSiteURL + "api/CfsWorkers/";
         var btnDataId = "data-cfsworker-id";
 
-        $(tableName).DataTable({
+        //Create the DataTable using API.
+        var table = $(tableName).DataTable({
             ajax: {
                 url: baseSiteURL + "api/CfsWorkers",
                 dataSrc: ""
@@ -71,25 +83,40 @@
                 },
                 {
                     data: "email",
-                    render: function (data, type, cfsWorker) {
+                    render: function(data, type, cfsWorker) {
                         return "<a href='mailto:" + cfsWorker.email + "'>" + cfsWorker.email + "</a>";
                     }
                 },
                 {
+                    data: "isActive",
+                    render: function (data) {
+                        return data;
+                    }
+                },
+                {
                     data: "id",
-                    render: function(data) {
-                        return "<a href='" + baseSiteURL + "CfsWorker/Edit/" +
+                    render: function (data) {
+                        var edit = "<a href='" +
+                            baseSiteURL +
+                            "CfsWorker/Edit/" +
                             data +
-                            "' class='btn btn-sm btn-default'>Edit &nbsp; <span class='glyphicon glyphicon-pencil'></span></a>" + 
-                            "<button data-cfsworker-id='" +
+                            "' class='btn btn-sm btn-default'>Edit &nbsp; <span class='glyphicon glyphicon-pencil'></span></a>&nbsp;";
+
+
+
+
+                        var disable = "<button data-cfsworker-id='" +
                             data +
-                            "' class='js-toggle btn btn-sm btn-default'>Enable &nbsp; <span class='glyphicon glyphicon-ok-circle'></span>";
+                            "' class='js-toggle btn btn-sm btn-default'>Disable &nbsp; <span class='glyphicon glyphicon-ban-circle'></span>";
+                        return edit + disable;
+
                     }
                 }
+
             ]
-            
         });
 
+        //Make the Disable Button
         $(tableName).on("click", toggleButton, function () {
 
             var button = $(this);
@@ -99,13 +126,38 @@
                     $.ajax({
                         url: url + button.attr(btnDataId),
                         method: "DELETE",
-                        success: function() {
+                        success: function () {
+
                             button.parents("tr").remove();
                         }
                     });
                 }
             });
         });
+
+
+        $('#filter').change(function() {
+            if (this.value === "All") {
+                table
+                    .columns(3)
+                    .search('')
+                    .draw();
+
+            } else {
+                table
+                    .columns(3)
+                    .search(this.value)
+                    .draw();
+            }
+        });
+
+
+
+
+
+
+
+
     });
     </script>
 }
