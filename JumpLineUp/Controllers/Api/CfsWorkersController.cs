@@ -21,64 +21,69 @@ namespace JumpLineUp.Controllers.Api
 
 
         // GET /api/CfsWorkers
-        public IEnumerable<CfsWorkerDto> GetCfsWorkers()
+        public IHttpActionResult GetCfsWorkers()
         {
-            return _context.CfsWorkers.ToList().Select(Mapper.Map<CfsWorker,CfsWorkerDto>);
+            var customerDtos = _context.CfsWorkers.ToList().Select(Mapper.Map<CfsWorker, CfsWorkerDto>);
+
+            return Ok(customerDtos);
         }
 
 
         // GET /api/CfsWorkers/1
-        public CfsWorkerDto GetCfsWorker(int id)
+        public IHttpActionResult GetCfsWorker(int id)
         {
             var cfsWorker = _context.CfsWorkers.SingleOrDefault(c => c.Id == id);
 
-            if(cfsWorker == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            if (cfsWorker == null)
+                return NotFound();
 
-            return Mapper.Map<CfsWorker,CfsWorkerDto>(cfsWorker);
+            return Ok(Mapper.Map<CfsWorker,CfsWorkerDto>(cfsWorker));
         }
 
 
         // POST /api/CfsWorkers
         [HttpPost]
-        public CfsWorkerDto CreateCfsWorker(CfsWorkerDto cfsWorkerDto)
+        public IHttpActionResult CreateCfsWorker(CfsWorkerDto cfsWorkerDto)
         {
-            if(!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
             var cfsWorker = Mapper.Map<CfsWorkerDto, CfsWorker>(cfsWorkerDto);
             _context.CfsWorkers.Add(cfsWorker);
             _context.SaveChanges();
 
             cfsWorkerDto.Id = cfsWorker.Id;
-            return cfsWorkerDto;
+
+            return Created(new Uri(Request.RequestUri + "/" + cfsWorker.Id), cfsWorkerDto);
         }
 
         // PUT /api/CfsWorkers/1
         [HttpPut]
-        public void UpdateCfsWorker(int id, CfsWorkerDto cfsWorkerDto)
+        public IHttpActionResult UpdateCfsWorker(int id, CfsWorkerDto cfsWorkerDto)
         {
-            if(!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
             var cfsWorkerInDb = _context.CfsWorkers.SingleOrDefault(c => c.Id == id);
 
-            if(cfsWorkerInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            if (cfsWorkerInDb == null)
+                NotFound();
 
             Mapper.Map(cfsWorkerDto, cfsWorkerInDb);
 
             _context.SaveChanges();
+
+            return Ok();
         }
 
         // DELETE /api/CfsWorker/1
         [HttpDelete]
-        public void ToggleCfsWorker(int id)
+        public IHttpActionResult ToggleCfsWorker(int id)
         {
             var cfsWorkerInDb = _context.CfsWorkers.SingleOrDefault(c => c.Id == id);
 
             if (cfsWorkerInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
             if (cfsWorkerInDb.IsActive == true)
                 cfsWorkerInDb.IsActive = false;
@@ -86,6 +91,8 @@ namespace JumpLineUp.Controllers.Api
                 cfsWorkerInDb.IsActive = true;
 
             _context.SaveChanges();
+
+            return Ok();
         }
 
 

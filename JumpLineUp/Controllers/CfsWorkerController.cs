@@ -31,18 +31,16 @@ namespace JumpLineUp.Controllers
             //create list of CFS Workers
             //var cfsWorkers = _context.CfsWorkers;
             var enabled = _context.CfsWorkers.Where(i => i.IsActive == true).ToList();
-            var disabled = _context.CfsWorkers.Where(i => i.IsActive == false).ToList();
-
-            //create ViewModel
-            var ViewModel = new CfsIndexViewModel
-            {
-                EnabledCfsWorkers = enabled,
-                DisabledCfsWorkers = disabled
-            };
             
 
+            return View(enabled);
+        }
 
-            return View(ViewModel);
+        public ViewResult Disabled()
+        {
+            var disabled = _context.CfsWorkers.Where(i => i.IsActive == false).ToList();
+
+            return View(disabled);
         }
 
 

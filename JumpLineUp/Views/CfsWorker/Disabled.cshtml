@@ -1,0 +1,111 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<JumpLineUp.Models.CfsWorker>
+@{
+    ViewBag.Title = "CfsWorker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+            @Html.ActionLink("Add CFS Worker", "NewCfsWorker", "CfsWorker", new {@class = "btn btn-primary"})
+            @Html.ActionLink("View Enabled CFS Workers", "Index", "CfsWorker", new { @class = "btn btn-primary" })
+        </div>        <h2>Disabled DHHS CFS Workers</h2>
+    </div><!--Panel Heading End-->
+    <div class="panel-body">
+        <div class="well">
+            @if (!Model.Any())
+            {
+                <p>There aren't currently any disabled CFS workers in Lineup, @Html.ActionLink("return to active CFS Workers", "Index", "CfsWorker") </p>
+            }
+            else
+            {
+                <table id="cfsTables" class="table table-responsive table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                                
+                </table>
+            }
+        </div><!-- End of Well-->
+    </div><!--Panel Body End-->
+</div>
+
+@section scripts
+{
+    <script>
+    $(document).ready(function() {
+        var message = "Are you sure you wish to enable this CFS Worker?";
+        var tableName = "#cfsTables";
+        var toggleButton = ".js-toggle";
+        var url = baseSiteURL + "api/CfsWorkers/";
+        var btnDataId = "data-cfsworker-id";
+
+        $(tableName).DataTable({
+            ajax: {
+                url: baseSiteURL + "api/CfsWorkers",
+                dataSrc: ""
+            },
+            columns: [
+                {
+                    data: "lastName",
+                    render: function(data, type, cfs) {
+                        return cfs.firstName + " " + cfs.lastName;
+                    }
+                },
+                {
+                    data: "phone",
+                    render: function(data, type, cfsWorker) {
+                        return "<a href='tel:" + cfsWorker.phone + "'>" + cfsWorker.phone + "</a>";
+                    }
+                },
+                {
+                    data: "email",
+                    render: function (data, type, cfsWorker) {
+                        return "<a href='mailto:" + cfsWorker.email + "'>" + cfsWorker.email + "</a>";
+                    }
+                },
+                {
+                    data: "id",
+                    render: function(data) {
+                        return "<a href='" + baseSiteURL + "CfsWorker/Edit/" +
+                            data +
+                            "' class='btn btn-sm btn-default'>Edit &nbsp; <span class='glyphicon glyphicon-pencil'></span></a>" + 
+                            "<button data-cfsworker-id='" +
+                            data +
+                            "' class='js-toggle btn btn-sm btn-default'>Enable &nbsp; <span class='glyphicon glyphicon-ok-circle'></span>";
+                    }
+                }
+            ]
+            
+        });
+
+        $(tableName).on("click", toggleButton, function () {
+
+            var button = $(this);
+
+            bootbox.confirm(message, function(result) {
+                if (result) {
+                    $.ajax({
+                        url: url + button.attr(btnDataId),
+                        method: "DELETE",
+                        success: function() {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+            });
+        });
+    });
+    </script>
+}
