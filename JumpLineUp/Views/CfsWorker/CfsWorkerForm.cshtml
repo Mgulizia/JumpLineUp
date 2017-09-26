@@ -2,8 +2,8 @@
 @using Microsoft.Ajax.Utilities
 @model JumpLineUp.Models.CfsWorker
 @{
-    var title = (Model == null) ? "New CFS Worker" : "Edit CFS Worker";
-    var buttonTxt = (Model == null) ? "Add CFS Worker" : "Update CFS Worker";
+    var title = (Model.Id == 0) ? "New CFS Worker" : "Edit CFS Worker";
+    var buttonTxt = (Model.Id == 0) ? "Add CFS Worker" : "Update CFS Worker";
     ViewBag.Title = "NewCfsWorker";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }

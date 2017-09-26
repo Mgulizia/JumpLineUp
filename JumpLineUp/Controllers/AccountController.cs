@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using JumpLineUp.Models;
+using JumpLineUp.ViewModels;
+using JumpLineUp.ViewModels.Accounts;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace JumpLineUp.Controllers
 {
@@ -28,29 +31,8 @@ namespace JumpLineUp.Controllers
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
-        }
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
+        //------------------------------ LOG IN ACTIONS ------------------------------------------------------------------------------
 
         //
         // GET: /Account/Login
@@ -91,63 +73,23 @@ namespace JumpLineUp.Controllers
             }
         }
 
+
+        //------------------------------ USER CREATION ACTIONS ------------------------------------------------------------------------------
+
         //
-        // GET: /Account/VerifyCode
-        [AllowAnonymous]
-        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
+        // GET: /Account/Create
+        [Authorize(Roles = RoleName.CanManageUsers)]
+        public ActionResult Create()
         {
-            // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
-            {
-                return View("Error");
-            }
-            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            return View("UserForm");
         }
 
         //
-        // POST: /Account/VerifyCode
+        // POST: /Account/Save
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = RoleName.CanManageUsers)]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid code.");
-                    return View(model);
-            }
-        }
-
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Save(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -155,7 +97,26 @@ namespace JumpLineUp.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //---------------- TempCode -------------
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageGuardians"));
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageBlcsOffice"));
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageCfsWorkers"));
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageFosterParents"));
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageRestraintTypes"));
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageYouth"));
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageUsers"));
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageCfsWorkers");
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageBlcsOffice");
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageFosterParents");
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageGuardians");
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageRestraintTypes");
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageYouth");
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageUsers");
+
+
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -169,8 +130,25 @@ namespace JumpLineUp.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("UserForm",model);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //------------------------------ MISC USER ACTIONS ------------------------------------------------------------------------------
 
         //
         // GET: /Account/ConfirmEmail
@@ -421,6 +399,73 @@ namespace JumpLineUp.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        //
+        // GET: /Account/VerifyCode
+        [AllowAnonymous]
+        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
+        {
+            // Require that the user has already logged in via username/password or external login
+            if (!await SignInManager.HasBeenVerifiedAsync())
+            {
+                return View("Error");
+            }
+            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
+        }
+
+        //
+        // POST: /Account/VerifyCode
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // The following code protects for brute force attacks against the two factor codes. 
+            // If a user enters incorrect codes for a specified amount of time then the user account 
+            // will be locked out for a specified amount of time. 
+            // You can configure the account lockout settings in IdentityConfig
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(model.ReturnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid code.");
+                    return View(model);
+            }
         }
 
         #region Helpers

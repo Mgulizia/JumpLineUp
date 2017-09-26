@@ -51,3 +51,13 @@ textarea {
     font-size: 120%;
     font-weight: bolder;
 }
+.form-control {
+    background-color: #c7c7c7;
+    color: black
+}
+    .form-control:focus {
+    background-color: #ffffff;
+    outline: none;
+    border-color: #9eedad;
+    box-shadow: 0 0 10px #9eedbc;
+}

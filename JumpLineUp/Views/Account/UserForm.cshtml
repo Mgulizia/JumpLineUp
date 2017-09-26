@@ -1,0 +1,58 @@
+﻿@model JumpLineUp.ViewModels.Accounts.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    var title = (Model == null) ? "Create New User" : "Edit User";
+    var buttonTxt = (Model == null) ? "Add User" : "Update User";
+}
+
+<br/>
+@using (Html.BeginForm("Save", "Account"))
+{
+
+    <div class="panel panel-default">
+    
+        <div class="panel-heading">
+
+            <h2>@title</h2>
+
+        </div><!--Panel Heading End-->
+
+        <div class="panel-body">
+
+            @Html.ValidationSummary()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+
+            <hr/>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+
+            <hr/>
+
+        </div><!--Panel Body End-->
+        <div class="panel-footer">
+
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">@buttonTxt</button>
+
+        </div><!--Panel Footer End-->
+    </div><!--Panel End-->
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

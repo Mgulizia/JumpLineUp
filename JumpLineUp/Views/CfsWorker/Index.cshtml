@@ -22,7 +22,7 @@
                 <select class="form-control" id="filter">
                     <option value="All">View All CFS Workers</option>
                     <option value="Active">Current CFS Workers</option>
-                    <option value="Inactive">Inactive CFS Workers</option>
+                    <option value="Disabled">Inactive CFS Workers</option>
                 </select>
             </div>
 
@@ -81,9 +81,9 @@
                         data: "isActive",
                         render: function (data) {
                             if (data === true) {
-                                return "<span class='glyphicon glyphicon-ok' style='color: lightgreen'></span> Active";
+                                return "Active <span class='glyphicon glyphicon-ok' style='color: lightgreen'></span>";
                             } else {
-                                return "<span class='glyphicon glyphicon-remove' style='color: #e07979'></span> Inactive";
+                                return "Disabled <span class='glyphicon glyphicon-remove' style='color: #e07979'></span>";
                             }
                             return data;
                         }
@@ -114,15 +114,14 @@
                         .columns(3)
                         .search('')
                         .draw();
-                    table.column(3).visible(true);
                 } else {
                     table
                         .columns(3)
                         .search(this.value)
                         .draw();
-                    table.column(3).visible(false);
                 }
             });
         });
     </script>
+   
 }

@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44344</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -196,12 +196,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ApplicationSignInManager.cs" />
+    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\EmailService.cs" />
     <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\SmsService.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
@@ -213,40 +216,65 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Phone.cs" />
-    <Compile Include="Migrations\201709222044254_InitialModel.cs" />
-    <Compile Include="Migrations\201709222044254_InitialModel.Designer.cs">
-      <DependentUpon>201709222044254_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\InitialModel.cs" />
+    <Compile Include="Migrations\InitialModel.Designer.cs">
+      <DependentUpon>InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709222128154_PopulateRestraintTypes.cs" />
-    <Compile Include="Migrations\201709222128154_PopulateRestraintTypes.Designer.cs">
-      <DependentUpon>201709222128154_PopulateRestraintTypes.cs</DependentUpon>
+    <Compile Include="Migrations\PopulateRestraintTypes.cs" />
+    <Compile Include="Migrations\PopulateRestraintTypes.Designer.cs">
+      <DependentUpon>PopulateRestraintTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709231406452_SeedBLCSoffices.cs" />
-    <Compile Include="Migrations\201709231406452_SeedBLCSoffices.Designer.cs">
-      <DependentUpon>201709231406452_SeedBLCSoffices.cs</DependentUpon>
+    <Compile Include="Migrations\SeedBLCSoffices.cs" />
+    <Compile Include="Migrations\SeedBLCSoffices.Designer.cs">
+      <DependentUpon>SeedBLCSoffices.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709231425228_RemoveDhhsOfficeTable.cs" />
-    <Compile Include="Migrations\201709231425228_RemoveDhhsOfficeTable.Designer.cs">
-      <DependentUpon>201709231425228_RemoveDhhsOfficeTable.cs</DependentUpon>
+    <Compile Include="Migrations\RemoveDhhsOfficeTable.cs" />
+    <Compile Include="Migrations\RemoveDhhsOfficeTable.Designer.cs">
+      <DependentUpon>RemoveDhhsOfficeTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709231506426_SetRequirementsForCFSWorker.cs" />
-    <Compile Include="Migrations\201709231506426_SetRequirementsForCFSWorker.Designer.cs">
-      <DependentUpon>201709231506426_SetRequirementsForCFSWorker.cs</DependentUpon>
+    <Compile Include="Migrations\SetRequirementsForCFSWorker.cs" />
+    <Compile Include="Migrations\SetRequirementsForCFSWorker.Designer.cs">
+      <DependentUpon>SetRequirementsForCFSWorker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709231512451_AddIsActiveToCFSworker.cs" />
-    <Compile Include="Migrations\201709231512451_AddIsActiveToCFSworker.Designer.cs">
-      <DependentUpon>201709231512451_AddIsActiveToCFSworker.cs</DependentUpon>
+    <Compile Include="Migrations\AddIsActiveToCFSworker.cs" />
+    <Compile Include="Migrations\AddIsActiveToCFSworker.Designer.cs">
+      <DependentUpon>AddIsActiveToCFSworker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\SeedUsers.cs" />
+    <Compile Include="Migrations\SeedUsers.Designer.cs">
+      <DependentUpon>SeedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\SeedAdditionalRoles.cs" />
+    <Compile Include="Migrations\SeedAdditionalRoles.Designer.cs">
+      <DependentUpon>SeedAdditionalRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\AddPhoneNumberViewModel.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CfsWorker.cs" />
     <Compile Include="Models\BlcsOffice.cs" />
+    <Compile Include="ViewModels\Accounts\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="Models\DhhsOffice.cs" />
+    <Compile Include="ViewModels\Accounts\FactorViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\ForgotViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\ManageLoginsViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\SendCodeViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\SetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\FosterParent.cs" />
     <Compile Include="Models\Guardian.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="ViewModels\Accounts\IndexViewModel.cs" />
     <Compile Include="Models\RestraintType.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\Youth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -472,7 +500,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\UserForm.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -489,6 +517,7 @@
     <Content Include="Views\CfsWorker\CfsWorkerForm.cshtml" />
     <Content Include="Views\CfsWorker\Index.cshtml" />
     <Content Include="Views\CfsWorker\Disabled.cshtml" />
+    <Content Include="Views\Shared\_AdminPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -507,23 +536,29 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709222044254_InitialModel.resx">
-      <DependentUpon>201709222044254_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\InitialModel.resx">
+      <DependentUpon>InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709222128154_PopulateRestraintTypes.resx">
-      <DependentUpon>201709222128154_PopulateRestraintTypes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\PopulateRestraintTypes.resx">
+      <DependentUpon>PopulateRestraintTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709231406452_SeedBLCSoffices.resx">
-      <DependentUpon>201709231406452_SeedBLCSoffices.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\SeedBLCSoffices.resx">
+      <DependentUpon>SeedBLCSoffices.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709231425228_RemoveDhhsOfficeTable.resx">
-      <DependentUpon>201709231425228_RemoveDhhsOfficeTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\RemoveDhhsOfficeTable.resx">
+      <DependentUpon>RemoveDhhsOfficeTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709231506426_SetRequirementsForCFSWorker.resx">
-      <DependentUpon>201709231506426_SetRequirementsForCFSWorker.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\SetRequirementsForCFSWorker.resx">
+      <DependentUpon>SetRequirementsForCFSWorker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709231512451_AddIsActiveToCFSworker.resx">
-      <DependentUpon>201709231512451_AddIsActiveToCFSworker.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\AddIsActiveToCFSworker.resx">
+      <DependentUpon>AddIsActiveToCFSworker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\SeedUsers.resx">
+      <DependentUpon>SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\SeedAdditionalRoles.resx">
+      <DependentUpon>SeedAdditionalRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -544,7 +579,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57832</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57832/</IISUrl>
+          <IISUrl>https://localhost:44344/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
