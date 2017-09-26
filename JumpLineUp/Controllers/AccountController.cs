@@ -20,16 +20,20 @@ namespace JumpLineUp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _context;
 
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _context = new ApplicationDbContext();
         }
+
 
 
         //------------------------------ LOG IN ACTIONS ------------------------------------------------------------------------------
@@ -81,7 +85,13 @@ namespace JumpLineUp.Controllers
         [Authorize(Roles = RoleName.CanManageUsers)]
         public ActionResult Create()
         {
-            return View("UserForm");
+       
+            var carrierTypes = _context.CellCarriers.ToList();
+            var viewModel = new RegisterViewModel
+            {
+                CarrierTypes = carrierTypes
+            };
+            return View("UserForm",viewModel);
         }
 
         //
@@ -91,9 +101,19 @@ namespace JumpLineUp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Save(RegisterViewModel model)
         {
+            var user = new ApplicationUser();
+
+            if (!ModelState.IsValid)
+                return View("UserForm", model);
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                
+                user.UserName = model.ApplicationUser.Email;
+                user.Email = model.ApplicationUser.Email;
+                user.Phone = model.ApplicationUser.Phone;
+                user.CellCarrierId = model.ApplicationUser.CellCarrierId;
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -128,6 +148,8 @@ namespace JumpLineUp.Controllers
                 }
                 AddErrors(result);
             }
+            model.CarrierTypes = _context.CellCarriers.ToList();
+            
 
             // If we got this far, something failed, redisplay form
             return View("UserForm",model);
@@ -395,6 +417,12 @@ namespace JumpLineUp.Controllers
                 {
                     _signInManager.Dispose();
                     _signInManager = null;
+                }
+
+                if (_context != null)
+                {
+                    _context.Dispose();
+                    _context = null;
                 }
             }
 
