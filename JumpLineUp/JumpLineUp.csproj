@@ -244,33 +244,9 @@
     <Compile Include="Migrations\201709261332209_SeedBaseUsersAndRoles.Designer.cs">
       <DependentUpon>201709261332209_SeedBaseUsersAndRoles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709261613116_AddPhoneNumberToApplicationUser.cs" />
-    <Compile Include="Migrations\201709261613116_AddPhoneNumberToApplicationUser.Designer.cs">
-      <DependentUpon>201709261613116_AddPhoneNumberToApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709261624137_AddCellCarrierModel-SeedWithData.cs" />
-    <Compile Include="Migrations\201709261624137_AddCellCarrierModel-SeedWithData.Designer.cs">
-      <DependentUpon>201709261624137_AddCellCarrierModel-SeedWithData.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709261639455_updateModelError.cs" />
-    <Compile Include="Migrations\201709261639455_updateModelError.Designer.cs">
-      <DependentUpon>201709261639455_updateModelError.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709261641168_SeedCellCarriers.cs" />
-    <Compile Include="Migrations\201709261641168_SeedCellCarriers.Designer.cs">
-      <DependentUpon>201709261641168_SeedCellCarriers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709261719315_AddCellPhoneCarrierToApplicationUser.cs" />
-    <Compile Include="Migrations\201709261719315_AddCellPhoneCarrierToApplicationUser.Designer.cs">
-      <DependentUpon>201709261719315_AddCellPhoneCarrierToApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709261843588_ChangeCellCarrierByteToInt.cs" />
-    <Compile Include="Migrations\201709261843588_ChangeCellCarrierByteToInt.Designer.cs">
-      <DependentUpon>201709261843588_ChangeCellCarrierByteToInt.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\CellCarriers.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CfsWorker.cs" />
     <Compile Include="Models\BlcsOffice.cs" />
@@ -576,24 +552,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709261332209_SeedBaseUsersAndRoles.resx">
       <DependentUpon>201709261332209_SeedBaseUsersAndRoles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709261613116_AddPhoneNumberToApplicationUser.resx">
-      <DependentUpon>201709261613116_AddPhoneNumberToApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709261624137_AddCellCarrierModel-SeedWithData.resx">
-      <DependentUpon>201709261624137_AddCellCarrierModel-SeedWithData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709261639455_updateModelError.resx">
-      <DependentUpon>201709261639455_updateModelError.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709261641168_SeedCellCarriers.resx">
-      <DependentUpon>201709261641168_SeedCellCarriers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709261719315_AddCellPhoneCarrierToApplicationUser.resx">
-      <DependentUpon>201709261719315_AddCellPhoneCarrierToApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709261843588_ChangeCellCarrierByteToInt.resx">
-      <DependentUpon>201709261843588_ChangeCellCarrierByteToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

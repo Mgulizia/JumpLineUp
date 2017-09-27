@@ -1,5 +1,4 @@
-﻿@using AutoMapper.Internal
-@model JumpLineUp.ViewModels.Accounts.RegisterViewModel
+﻿@model JumpLineUp.ViewModels.Accounts.RegisterViewModel
 @{
     ViewBag.Title = "Register";
     var title = (Model == null) ? "Create New User" : "Edit User";
@@ -23,9 +22,9 @@
             @Html.ValidationSummary()
 
             <div class="form-group">
-                @Html.LabelFor(m => m.ApplicationUser.Email)
-                @Html.TextBoxFor(m => m.ApplicationUser.Email, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.ApplicationUser.Email)
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Email)
             </div>
 
             <hr/>
@@ -42,18 +41,6 @@
             </div>
 
             <hr/>
-            
-            <div class="form-group">
-                @Html.LabelFor(m => m.ApplicationUser.Phone)
-                @Html.TextBoxFor(m => m.ApplicationUser.Phone, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ApplicationUser.Phone)
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.ApplicationUser.CellCarrierId)
-                @Html.DropDownListFor(m => m.ApplicationUser.CellCarrierId, new SelectList(Model.CarrierTypes, "Id","CarrierName" ),"-- Select Cell Carrier --", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ApplicationUser.CellCarrierId)
-            </div>
 
         </div><!--Panel Body End-->
         <div class="panel-footer">
