@@ -85,9 +85,11 @@ namespace JumpLineUp.Controllers
         [Authorize(Roles = RoleName.CanManageUsers)]
         public ActionResult Create()
         {
-       
-            
-            var viewModel = new RegisterViewModel();
+            var cellularCarriers = _context.CellularCarriers.ToList();
+            var viewModel = new RegisterViewModel
+            {
+                CellularCarriers = cellularCarriers
+            };
             return View("UserForm",viewModel);
         }
 
@@ -108,7 +110,8 @@ namespace JumpLineUp.Controllers
                 
                 user.UserName = model.ApplicationUser.Email;
                 user.Email = model.ApplicationUser.Email;
-                user.Phone = model.ApplicationUser.Phone;
+                user.CellNumber = model.ApplicationUser.CellNumber;
+                user.CellularCarriersId = model.CellCarrierId;
                
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -145,9 +148,9 @@ namespace JumpLineUp.Controllers
                 }
                 AddErrors(result);
             }
-           
-            
 
+
+            model.CellularCarriers = _context.CellularCarriers.ToList();
             // If we got this far, something failed, redisplay form
             return View("UserForm",model);
         }

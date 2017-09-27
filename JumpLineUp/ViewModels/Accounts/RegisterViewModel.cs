@@ -29,8 +29,10 @@ namespace JumpLineUp.ViewModels.Accounts
         //public string Phone { get; set; }
         //
         //
-        //[Display(Name = "Cellular Carrier")]
-        //public int CellCarrierId { get; set; }
+        [Display(Name = "Cellular Carrier")]
+        public int CellCarrierId { get; set; }
+
+        public IEnumerable CellularCarriers { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
 

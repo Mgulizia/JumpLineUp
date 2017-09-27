@@ -12,10 +12,12 @@ namespace JumpLineUp.Models
         [Required]
         [Phone]
         [Display(Name = "Phone Number")]
-        public string Phone { get; set; }
+        public string CellNumber { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z0-9._%+-]+(@blcsne\.com)$", ErrorMessage = "Registration limited to blcsne.com")]
-        public string Email { get; set; }   
+        public CellularCarriers CellularCarriers { get; set; }
+
+        public int CellularCarriersId { get; set; }
+   
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -3,7 +3,7 @@ namespace JumpLineUp.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialModel : DbMigration
+    public partial class InitialCommit92717 : DbMigration
     {
         public override void Up()
         {
@@ -27,26 +27,12 @@ namespace JumpLineUp.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(),
-                        LastName = c.String(),
-                        Phone = c.String(),
-                        Email = c.String(),
-                        OfficeLocation = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.DhhsOffices",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        LocationDescription = c.String(),
-                        Phone = c.String(),
-                        Street1 = c.String(),
-                        Street2 = c.String(),
-                        City = c.String(),
-                        State = c.String(),
-                        Zip = c.String(),
+                        FirstName = c.String(nullable: false, maxLength: 40),
+                        LastName = c.String(nullable: false, maxLength: 40),
+                        Phone = c.String(nullable: false),
+                        Email = c.String(nullable: false),
+                        OfficeLocation = c.String(nullable: false, maxLength: 50),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -119,6 +105,8 @@ namespace JumpLineUp.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        CellNumber = c.String(nullable: false),
+                        CellularCarriersId = c.Int(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -132,7 +120,19 @@ namespace JumpLineUp.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.CellularCarriers", t => t.CellularCarriersId, cascadeDelete: true)
+                .Index(t => t.CellularCarriersId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+            
+            CreateTable(
+                "dbo.CellularCarriers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CarrierName = c.String(),
+                        CarrierExtension = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -179,23 +179,25 @@ namespace JumpLineUp.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUsers", "CellularCarriersId", "dbo.CellularCarriers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUsers", new[] { "CellularCarriersId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.Youths");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.CellularCarriers");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.RestraintTypes");
             DropTable("dbo.Guardians");
             DropTable("dbo.FosterParents");
-            DropTable("dbo.DhhsOffices");
             DropTable("dbo.CfsWorkers");
             DropTable("dbo.BlcsOffices");
         }

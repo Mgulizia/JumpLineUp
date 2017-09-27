@@ -216,39 +216,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Phone.cs" />
-    <Compile Include="Migrations\201709222044254_InitialModel.cs" />
-    <Compile Include="Migrations\201709222044254_InitialModel.Designer.cs">
-      <DependentUpon>201709222044254_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201709270524134_InitialCommit-9-27-17.cs" />
+    <Compile Include="Migrations\201709270524134_InitialCommit-9-27-17.Designer.cs">
+      <DependentUpon>201709270524134_InitialCommit-9-27-17.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709222128154_PopulateRestraintTypes.cs" />
-    <Compile Include="Migrations\201709222128154_PopulateRestraintTypes.Designer.cs">
-      <DependentUpon>201709222128154_PopulateRestraintTypes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709231406452_SeedBLCSoffices.cs" />
-    <Compile Include="Migrations\201709231406452_SeedBLCSoffices.Designer.cs">
-      <DependentUpon>201709231406452_SeedBLCSoffices.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709231425228_RemoveDhhsOfficeTable.cs" />
-    <Compile Include="Migrations\201709231425228_RemoveDhhsOfficeTable.Designer.cs">
-      <DependentUpon>201709231425228_RemoveDhhsOfficeTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709231506426_SetRequirementsForCFSWorker.cs" />
-    <Compile Include="Migrations\201709231506426_SetRequirementsForCFSWorker.Designer.cs">
-      <DependentUpon>201709231506426_SetRequirementsForCFSWorker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709231512451_AddIsActiveToCFSworker.cs" />
-    <Compile Include="Migrations\201709231512451_AddIsActiveToCFSworker.Designer.cs">
-      <DependentUpon>201709231512451_AddIsActiveToCFSworker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709261332209_SeedBaseUsersAndRoles.cs" />
-    <Compile Include="Migrations\201709261332209_SeedBaseUsersAndRoles.Designer.cs">
-      <DependentUpon>201709261332209_SeedBaseUsersAndRoles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709261613116_AddPhoneNumberToApplicationUser.cs" />
-    <Compile Include="Migrations\201709261613116_AddPhoneNumberToApplicationUser.Designer.cs">
-      <DependentUpon>201709261613116_AddPhoneNumberToApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\201709270527408_SeedUsers.cs" />
+    <Compile Include="Migrations\201709270527408_SeedUsers.Designer.cs">
+      <DependentUpon>201709270527408_SeedUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CellularCarriers.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CfsWorker.cs" />
@@ -535,29 +512,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709222044254_InitialModel.resx">
-      <DependentUpon>201709222044254_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709270524134_InitialCommit-9-27-17.resx">
+      <DependentUpon>201709270524134_InitialCommit-9-27-17.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709222128154_PopulateRestraintTypes.resx">
-      <DependentUpon>201709222128154_PopulateRestraintTypes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709231406452_SeedBLCSoffices.resx">
-      <DependentUpon>201709231406452_SeedBLCSoffices.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709231425228_RemoveDhhsOfficeTable.resx">
-      <DependentUpon>201709231425228_RemoveDhhsOfficeTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709231506426_SetRequirementsForCFSWorker.resx">
-      <DependentUpon>201709231506426_SetRequirementsForCFSWorker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709231512451_AddIsActiveToCFSworker.resx">
-      <DependentUpon>201709231512451_AddIsActiveToCFSworker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709261332209_SeedBaseUsersAndRoles.resx">
-      <DependentUpon>201709261332209_SeedBaseUsersAndRoles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709261613116_AddPhoneNumberToApplicationUser.resx">
-      <DependentUpon>201709261613116_AddPhoneNumberToApplicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709270527408_SeedUsers.resx">
+      <DependentUpon>201709270527408_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

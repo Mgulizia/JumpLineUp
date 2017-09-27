@@ -7,13 +7,13 @@ namespace JumpLineUp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RemoveDhhsOfficeTable : IMigrationMetadata
+    public sealed partial class SeedUsers : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveDhhsOfficeTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedUsers));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709231425228_RemoveDhhsOfficeTable"; }
+            get { return "201709270527408_SeedUsers"; }
         }
         
         string IMigrationMetadata.Source

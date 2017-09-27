@@ -7,13 +7,13 @@ namespace JumpLineUp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class SeedBaseUsersAndRoles : IMigrationMetadata
+    public sealed partial class InitialCommit92717 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedBaseUsersAndRoles));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCommit92717));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709261332209_SeedBaseUsersAndRoles"; }
+            get { return "201709270524134_InitialCommit-9-27-17"; }
         }
         
         string IMigrationMetadata.Source
