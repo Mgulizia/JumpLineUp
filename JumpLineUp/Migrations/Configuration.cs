@@ -1,4 +1,7 @@
+using System.Collections;
 using JumpLineUp.Models;
+using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace JumpLineUp.Migrations
@@ -34,6 +37,37 @@ namespace JumpLineUp.Migrations
                 new RestraintType() { Id = 4, RestraintName = "5 Point Rear Facing"}
             );
 
+            //Seed Roles
+            IEnumerable<string> role = new[]
+            {
+                "CanManageOffices",
+                "CanManageCfsWorkers",
+                "CanManageFosterParents",
+                "CanManageGuardians",
+                "CanManageRestraintTypes",
+                "CanManageUsers",
+                "CanManageYouth",
+                "basicUser"
+            };
+
+
+            foreach (var x in role){
+                if (!context.Roles.Any(r => r.Name == x))
+                {
+                    var store = new RoleStore<IdentityRole>(context);
+                    var manager = new RoleManager<IdentityRole>(store);
+                    var newRole = new IdentityRole { Name = x};
+
+                    manager.Create(newRole);
+                }
+            }
+            
+
+
+
+
+
+
             //context.Roles.AddOrUpdate(x => x.Id,
             //    new IdentityRole() {Id="CAN_MANAGE_Office_ASPNET_ROLE", Name="CanManageBlcsOffice"},
             //    new IdentityRole() {Id="CAN_MANAGE_CfsWorker_ASPNET_ROLE", Name="CAnManageCfsWorkers"},
@@ -43,13 +77,13 @@ namespace JumpLineUp.Migrations
             //    new IdentityRole() {Id="CAN_MANAGE_Users_ASPNET_ROLE", Name="CanManageUsers"},
             //    new IdentityRole() {Id="CAN_MANAGE_Youths_ASPNET_ROLE", Name="CanManageYouths"}
             //);
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
