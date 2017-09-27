@@ -86,9 +86,11 @@ namespace JumpLineUp.Controllers
         public ActionResult Create()
         {
             var cellularCarriers = _context.CellularCarriers.ToList();
+            var blcsOffices = _context.BlcsOffices.ToList();
             var viewModel = new RegisterViewModel
             {
-                CellularCarriers = cellularCarriers
+                CellularCarriers = cellularCarriers,
+                BlcsOffices = blcsOffices
             };
             return View("UserForm",viewModel);
         }

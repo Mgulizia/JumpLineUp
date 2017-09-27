@@ -14,11 +14,15 @@ namespace JumpLineUp.Models
         [Display(Name = "Phone Number")]
         public string CellNumber { get; set; }
 
+
+        //--------------------------------- Relation Entities -------------------------------------------------------------
+
         public CellularCarriers CellularCarriers { get; set; }
-
         public int CellularCarriersId { get; set; }
-   
 
+        public BlcsOffice BlcsOffice { get; set; }
+        public int BlcsOfficeId { get; set; }
+        
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

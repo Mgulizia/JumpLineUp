@@ -220,9 +220,13 @@
     <Compile Include="Migrations\201709270524134_InitialCommit-9-27-17.Designer.cs">
       <DependentUpon>201709270524134_InitialCommit-9-27-17.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709270527408_SeedUsers.cs" />
+    <None Include="Migrations\201709270527408_SeedUsers.cs.disabled" />
     <Compile Include="Migrations\201709270527408_SeedUsers.Designer.cs">
-      <DependentUpon>201709270527408_SeedUsers.cs</DependentUpon>
+      <DependentUpon>201709270527408_SeedUsers.cs.disabled</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709271612521_AddBLCSofficesToApplicationUSer.cs" />
+    <Compile Include="Migrations\201709271612521_AddBLCSofficesToApplicationUSer.Designer.cs">
+      <DependentUpon>201709271612521_AddBLCSofficesToApplicationUSer.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CellularCarriers.cs" />
@@ -516,7 +520,10 @@
       <DependentUpon>201709270524134_InitialCommit-9-27-17.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709270527408_SeedUsers.resx">
-      <DependentUpon>201709270527408_SeedUsers.cs</DependentUpon>
+      <DependentUpon>201709270527408_SeedUsers.cs.disabled</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709271612521_AddBLCSofficesToApplicationUSer.resx">
+      <DependentUpon>201709271612521_AddBLCSofficesToApplicationUSer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
