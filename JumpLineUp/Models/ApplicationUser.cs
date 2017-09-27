@@ -17,13 +17,6 @@ namespace JumpLineUp.Models
         [RegularExpression(@"^[a-zA-Z0-9._%+-]+(@blcsne\.com)$", ErrorMessage = "Registration limited to blcsne.com")]
         public string Email { get; set; }   
 
-        public CellCarriers CellCarrier { get; set; }
-
-        [Display(Name = "Cellular Carrier")]
-        public int CellCarrierId { get; set; }
-
-
-
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

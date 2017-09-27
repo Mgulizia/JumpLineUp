@@ -86,11 +86,8 @@ namespace JumpLineUp.Controllers
         public ActionResult Create()
         {
        
-            var carrierTypes = _context.CellCarriers.ToList();
-            var viewModel = new RegisterViewModel
-            {
-                CarrierTypes = carrierTypes
-            };
+            
+            var viewModel = new RegisterViewModel();
             return View("UserForm",viewModel);
         }
 
@@ -112,7 +109,7 @@ namespace JumpLineUp.Controllers
                 user.UserName = model.ApplicationUser.Email;
                 user.Email = model.ApplicationUser.Email;
                 user.Phone = model.ApplicationUser.Phone;
-                user.CellCarrierId = model.ApplicationUser.CellCarrierId;
+               
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -148,7 +145,7 @@ namespace JumpLineUp.Controllers
                 }
                 AddErrors(result);
             }
-            model.CarrierTypes = _context.CellCarriers.ToList();
+           
             
 
             // If we got this far, something failed, redisplay form
