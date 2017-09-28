@@ -22,7 +22,7 @@ namespace JumpLineUp.Migrations.SeedData
                 "CanManageRestraintTypes",
                 "CanManageUsers",
                 "CanManageYouth",
-                "basicUser"
+                "BasicUser"
             };
 
 

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -21,6 +24,7 @@ namespace JumpLineUp.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext _context;
+       
 
         public AccountController()
         {
@@ -83,12 +87,21 @@ namespace JumpLineUp.Controllers
         //
         // GET: /Account/Create
         [Authorize(Roles = RoleName.CanManageUsers)]
-        public ActionResult Create()
+        public async Task<ActionResult> Create(ApplicationUser user)
         {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
+
+            if (user == null)
+                user = new ApplicationUser();
             var cellularCarriers = _context.CellularCarriers.ToList();
             var blcsOffices = _context.BlcsOffices.ToList();
+
+       
+            var roles = new SelectList(await roleManager.Roles.ToListAsync(), "Name", "");
+
             var viewModel = new RegisterViewModel
             {
+                Roles = roles,
                 CellularCarriers = cellularCarriers,
                 BlcsOffices = blcsOffices
             };
@@ -103,6 +116,9 @@ namespace JumpLineUp.Controllers
         public async Task<ActionResult> Save(RegisterViewModel model)
         {
             var user = new ApplicationUser();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
+
+     
 
             if (!ModelState.IsValid)
                 return View("UserForm", model);
@@ -115,7 +131,11 @@ namespace JumpLineUp.Controllers
                 user.CellNumber = model.ApplicationUser.CellNumber;
                 user.CellularCarriersId = model.CellCarrierId;
                 user.BlcsOfficeId = model.BlcsOfficeId;
-               
+
+                
+
+
+
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using JumpLineUp.Models;
 
 namespace JumpLineUp.ViewModels.Accounts
@@ -20,7 +21,7 @@ namespace JumpLineUp.ViewModels.Accounts
         
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         
         //[Required]
@@ -39,9 +40,9 @@ namespace JumpLineUp.ViewModels.Accounts
 
         //Relational lists for the views
         public IEnumerable CellularCarriers { get; set; }
-
+        public SelectList Roles { get; set; }
         public IEnumerable BlcsOffices { get; set; }
-
+        
         public ApplicationUser ApplicationUser { get; set; }
 
     }

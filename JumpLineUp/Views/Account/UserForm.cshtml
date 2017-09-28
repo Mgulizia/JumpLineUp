@@ -1,4 +1,5 @@
 ﻿@using AutoMapper.Internal
+@using System.Text.RegularExpressions
 @model JumpLineUp.ViewModels.Accounts.RegisterViewModel
 @{
     ViewBag.Title = "Register";
@@ -60,6 +61,24 @@
                 @Html.DropDownListFor(m => m.BlcsOfficeId, new SelectList(Model.BlcsOffices, "Id", "LocationDescription"), "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.ApplicationUser.CellNumber)
             </div>
+            
+            <div class="well">
+                @foreach (var item in Model.Roles)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="SelectedRoles" value="@item.Value"/> @Regex.Replace(@item.Value, "[A-Z]", " $0").Trim()
+                        </label>
+                    </div>
+                }
+                    
+            </div>
+            
+            
+            
+            
+            
+            
 
         </div><!--Panel Body End-->
         <div class="panel-footer">
