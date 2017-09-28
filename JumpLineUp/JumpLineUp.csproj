@@ -220,15 +220,16 @@
     <Compile Include="Migrations\201709270524134_InitialCommit-9-27-17.Designer.cs">
       <DependentUpon>201709270524134_InitialCommit-9-27-17.cs</DependentUpon>
     </Compile>
-    <None Include="Migrations\201709270527408_SeedUsers.cs.disabled" />
-    <Compile Include="Migrations\201709270527408_SeedUsers.Designer.cs">
-      <DependentUpon>201709270527408_SeedUsers.cs.disabled</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709271612521_AddBLCSofficesToApplicationUSer.cs" />
-    <Compile Include="Migrations\201709271612521_AddBLCSofficesToApplicationUSer.Designer.cs">
-      <DependentUpon>201709271612521_AddBLCSofficesToApplicationUSer.cs</DependentUpon>
+    <Compile Include="Migrations\201709280516384_updateModels.cs" />
+    <Compile Include="Migrations\201709280516384_updateModels.Designer.cs">
+      <DependentUpon>201709280516384_updateModels.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
+    <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
+    <Compile Include="Migrations\SeedData\SeedAdminUser.cs" />
+    <Compile Include="Migrations\SeedData\SeedCellularCarriers.cs" />
+    <Compile Include="Migrations\SeedData\SeedRoles.cs" />
     <Compile Include="Models\CellularCarriers.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -519,11 +520,8 @@
     <EmbeddedResource Include="Migrations\201709270524134_InitialCommit-9-27-17.resx">
       <DependentUpon>201709270524134_InitialCommit-9-27-17.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709270527408_SeedUsers.resx">
-      <DependentUpon>201709270527408_SeedUsers.cs.disabled</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709271612521_AddBLCSofficesToApplicationUSer.resx">
-      <DependentUpon>201709271612521_AddBLCSofficesToApplicationUSer.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709280516384_updateModels.resx">
+      <DependentUpon>201709280516384_updateModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

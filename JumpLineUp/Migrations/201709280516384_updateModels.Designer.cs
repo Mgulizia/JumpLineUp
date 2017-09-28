@@ -7,13 +7,13 @@ namespace JumpLineUp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class SeedUsers : IMigrationMetadata
+    public sealed partial class updateModels : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedUsers));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateModels));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709270527408_SeedUsers"; }
+            get { return "201709280516384_updateModels"; }
         }
         
         string IMigrationMetadata.Source

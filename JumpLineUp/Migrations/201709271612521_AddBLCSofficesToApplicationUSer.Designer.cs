@@ -13,7 +13,7 @@ namespace JumpLineUp.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201709271612521_AddBLCSofficesToApplicationUSer"; }
+            get { return "201709271612521_AddBlcsOfficesToApplicationUser"; }
         }
         
         string IMigrationMetadata.Source

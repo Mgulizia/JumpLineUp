@@ -7,6 +7,15 @@ namespace JumpLineUp.Models
 {
     public class BlcsOffice
     {
+        public static readonly byte Lincoln = 1;
+        public static readonly byte Fremont = 2;
+        public static readonly byte Columbus = 3;
+        public static readonly byte York = 4;
+        public static readonly byte Beatrice = 5;
+        public static readonly byte NebraskaCity = 6;
+        public static readonly byte SiouxCity = 7;
+
+
         public int Id { get; set; }
         public string LocationDescription { get; set; }
         public string Phone { get; set; }

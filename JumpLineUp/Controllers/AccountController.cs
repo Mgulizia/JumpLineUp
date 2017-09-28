@@ -114,6 +114,7 @@ namespace JumpLineUp.Controllers
                 user.Email = model.ApplicationUser.Email;
                 user.CellNumber = model.ApplicationUser.CellNumber;
                 user.CellularCarriersId = model.CellCarrierId;
+                user.BlcsOfficeId = model.BlcsOfficeId;
                
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -151,7 +152,7 @@ namespace JumpLineUp.Controllers
                 AddErrors(result);
             }
 
-
+            model.BlcsOffices = _context.BlcsOffices.ToList();
             model.CellularCarriers = _context.CellularCarriers.ToList();
             // If we got this far, something failed, redisplay form
             return View("UserForm",model);

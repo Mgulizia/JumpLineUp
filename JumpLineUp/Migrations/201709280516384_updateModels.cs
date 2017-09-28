@@ -3,7 +3,7 @@ namespace JumpLineUp.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddBLCSofficesToApplicationUSer : DbMigration
+    public partial class updateModels : DbMigration
     {
         public override void Up()
         {
