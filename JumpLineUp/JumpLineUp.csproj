@@ -253,6 +253,7 @@
     <Compile Include="ViewModels\Accounts\ForgotViewModel.cs" />
     <Compile Include="ViewModels\Accounts\LoginViewModel.cs" />
     <Compile Include="ViewModels\Accounts\ManageLoginsViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\ManageViewModel.cs" />
     <Compile Include="ViewModels\Accounts\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Accounts\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Accounts\SendCodeViewModel.cs" />
@@ -509,6 +510,7 @@
     <Content Include="Views\CfsWorker\Index.cshtml" />
     <Content Include="Views\CfsWorker\Disabled.cshtml" />
     <Content Include="Views\Shared\_AdminPartial.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

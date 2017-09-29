@@ -42,6 +42,11 @@ namespace JumpLineUp.Controllers
 
 
 
+
+
+
+
+
         //------------------------------ LOG IN ACTIONS ------------------------------------------------------------------------------
 
         //
@@ -82,6 +87,21 @@ namespace JumpLineUp.Controllers
                     return View(model);
             }
         }
+
+        [Authorize(Roles = RoleName.CanManageUsers)]
+        public ActionResult Index()
+        {
+            var activeUsers = _context.ApplicationUsers.Include(x => x.BlcsOffice).Include(y => y.CellularCarriers)
+                .ToList();
+            var viewModel = new ManageViewModel()
+            {
+                ApplicationUsers = activeUsers
+            };
+
+            return View(viewModel);
+        }
+
+
 
 
         //------------------------------ USER CREATION ACTIONS ------------------------------------------------------------------------------

@@ -1,0 +1,28 @@
+﻿@model  JumpLineUp.ViewModels.Accounts.ManageViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+
+<table>
+    <thead>
+    <tr>
+        
+    </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var user in Model.ApplicationUsers)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.CellNumber</td>
+                <td>@user.BlcsOffice.LocationDescription</td>
+                <td>@user.CellularCarriers.CarrierName</td>
+            </tr>
+        }
+    </tbody>
+</table>
