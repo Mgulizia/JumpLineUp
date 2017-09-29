@@ -225,12 +225,17 @@
     <Compile Include="Migrations\201709280516384_updateModels.Designer.cs">
       <DependentUpon>201709280516384_updateModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709291601461_CreateApplicationSpecificClassForRoles.cs" />
+    <Compile Include="Migrations\201709291601461_CreateApplicationSpecificClassForRoles.Designer.cs">
+      <DependentUpon>201709291601461_CreateApplicationSpecificClassForRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
     <Compile Include="Migrations\SeedData\SeedAdminUser.cs" />
     <Compile Include="Migrations\SeedData\SeedCellularCarriers.cs" />
     <Compile Include="Migrations\SeedData\SeedRoles.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\CellularCarriers.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -523,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709280516384_updateModels.resx">
       <DependentUpon>201709280516384_updateModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709291601461_CreateApplicationSpecificClassForRoles.resx">
+      <DependentUpon>201709291601461_CreateApplicationSpecificClassForRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

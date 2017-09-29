@@ -12,27 +12,52 @@ namespace JumpLineUp.Migrations.SeedData
         {
             var context = ApplicationDbContext.Create();
 
-            //Seed Roles
-            IEnumerable<string> roles = new[]
-            {
-                "CanManageOffices",
-                "CanManageCfsWorkers",
-                "CanManageFosterParents",
-                "CanManageGuardians",
-                "CanManageRestraintTypes",
-                "CanManageUsers",
-                "CanManageYouth",
-                "BasicUser"
-            };
+            ////Seed Roles
+            //IEnumerable<string> roles = new[]
+            //{
+            //    "CanManageOffices",
+            //    "CanManageCfsWorkers",
+            //    "CanManageFosterParents",
+            //    "CanManageGuardians",
+            //    "CanManageRestraintTypes",
+            //    "CanManageUsers",
+            //    "CanManageYouth",
+            //    "BasicUser"
+            //};
+
+            var roles = new Dictionary<string, string>();
+            roles.Add("CanManageOffices", "Manage Offices");
+            roles.Add("CanManageCfsWorkers", "Manage CFS Workers");
+            roles.Add("CanManageFosterParents", "Manage Foster Parents");
+            roles.Add("CanManageGuardians", "Manage Client Gaurdians");
+            roles.Add("CanManageRestraintTypes", "Manage Vehicle Restraints");
+            roles.Add("CanManageUsers", "Manage User Accounts");
+            roles.Add("CanManageYouth", "Manage Client Youth");
+            roles.Add("BasicUser", "Basic User Account");
+            
 
 
-            foreach (var role in roles)
+        //foreach (var role in roles)
+        //    {
+        //        if (!context.ApplicationRoles.Any(r => r.Name == role))
+        //        {
+        //            var store = new RoleStore<ApplicationRole>(context);
+        //            var manager = new RoleManager<ApplicationRole>(store);
+        //            var newRole = new IdentityRole { Name = role };
+        //
+        //            manager.Create(newRole);
+        //        }
+        //    }
+        //    context.SaveChanges();
+        //}
+
+        foreach (var role in roles)
             {
-                if (!context.Roles.Any(r => r.Name == role))
+                if (!context.ApplicationRoles.Any(r => r.Name == role.Key))
                 {
-                    var store = new RoleStore<IdentityRole>(context);
-                    var manager = new RoleManager<IdentityRole>(store);
-                    var newRole = new IdentityRole { Name = role };
+                    var store = new RoleStore<ApplicationRole>(context);
+                    var manager = new RoleManager<ApplicationRole>(store);
+                    var newRole = new ApplicationRole() { Name = role.Key, Description = role.Value};
 
                     manager.Create(newRole);
                 }

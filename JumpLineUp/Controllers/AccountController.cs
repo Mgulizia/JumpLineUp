@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -87,21 +89,24 @@ namespace JumpLineUp.Controllers
         //
         // GET: /Account/Create
         [Authorize(Roles = RoleName.CanManageUsers)]
-        public async Task<ActionResult> Create(ApplicationUser user)
+        public ActionResult Create(ApplicationUser user)
         {
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
+            var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(_context));
 
             if (user == null)
                 user = new ApplicationUser();
             var cellularCarriers = _context.CellularCarriers.ToList();
             var blcsOffices = _context.BlcsOffices.ToList();
 
-       
-            var roles = new SelectList(await roleManager.Roles.ToListAsync(), "Name", "");
+            
+            //var roles = _context.ApplicationRoles.ToList();
+            //var roles = new SelectList(await roleManager.Roles.ToListAsync(), "Name", "Description");
+            var getRoles = _context.ApplicationRoles.ToList();
+            //var rolesList = new ApplicationRoleList {Roles = getRoles};
 
             var viewModel = new RegisterViewModel
             {
-                Roles = roles,
+                Roles = getRoles,
                 CellularCarriers = cellularCarriers,
                 BlcsOffices = blcsOffices
             };
@@ -117,8 +122,7 @@ namespace JumpLineUp.Controllers
         {
             var user = new ApplicationUser();
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
-
-     
+            var selectedRoles = new List<ApplicationRole>();
 
             if (!ModelState.IsValid)
                 return View("UserForm", model);
@@ -136,10 +140,17 @@ namespace JumpLineUp.Controllers
 
 
 
-                
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    foreach (var item in model.Roles)
+                    {
+                        if (item.IsChecked)
+                        {
+                            await UserManager.AddToRoleAsync(user.Id, item.Name);
+                        }
+                    }
                     //---------------- TempCode -------------
                     //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);

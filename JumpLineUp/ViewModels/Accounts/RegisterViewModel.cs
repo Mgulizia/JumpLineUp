@@ -40,7 +40,7 @@ namespace JumpLineUp.ViewModels.Accounts
 
         //Relational lists for the views
         public IEnumerable CellularCarriers { get; set; }
-        public SelectList Roles { get; set; }
+        public List<ApplicationRole> Roles { get; set; }
         public IEnumerable BlcsOffices { get; set; }
         
         public ApplicationUser ApplicationUser { get; set; }
