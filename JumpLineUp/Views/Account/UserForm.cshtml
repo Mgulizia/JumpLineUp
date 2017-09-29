@@ -1,11 +1,12 @@
 ﻿@using System.Net.Mime
 @using AutoMapper.Internal
 @using System.Text.RegularExpressions
+@using Microsoft.Ajax.Utilities
 @model JumpLineUp.ViewModels.Accounts.RegisterViewModel
 @{
     ViewBag.Title = "Register";
-    var title = (Model == null) ? "Create New User" : "Edit User";
-    var buttonTxt = (Model == null) ? "Add User" : "Update User";
+    var title = (Model.ApplicationUser.UserName.IsNullOrWhiteSpace()) ? "Create New User" : "Edit User";
+    var buttonTxt = (Model.ApplicationUser.UserName.IsNullOrWhiteSpace()) ? "Add User" : "Update User";
 }
 
 <br/>
@@ -21,9 +22,7 @@
         </div><!--Panel Heading End-->
 
         <div class="panel-body">
-
-            @Html.ValidationSummary()
-
+        
             <div class="form-group">
                 @Html.LabelFor(m => m.ApplicationUser.Email)
                 @Html.TextBoxFor(m => m.ApplicationUser.Email, new {@class = "form-control"})
@@ -52,38 +51,31 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.CellCarrierId)
-                @Html.DropDownListFor(m => m.CellCarrierId, new SelectList(Model.CellularCarriers, "Id", "CarrierName"), "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ApplicationUser.CellNumber)
+                @Html.LabelFor(m => m.ApplicationUser.CellularCarrierId)
+                @Html.DropDownListFor(m => m.ApplicationUser.CellularCarrierId, new SelectList(Model.CellularCarriers, "Id", "CarrierName"), "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ApplicationUser.CellularCarrierId)
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.BlcsOfficeId)
-                @Html.DropDownListFor(m => m.BlcsOfficeId, new SelectList(Model.BlcsOffices, "Id", "LocationDescription"), "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ApplicationUser.CellNumber)
+                @Html.LabelFor(m => m.ApplicationUser.BlcsOfficeId)
+                @Html.DropDownListFor(m => m.ApplicationUser.BlcsOfficeId, new SelectList(Model.BlcsOffices, "Id", "LocationDescription"), "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ApplicationUser.BlcsOfficeId)
             </div>
             
             <div class="well">
-                @for(int i =0; i < Model.Roles.Count; i++) 
+                @for (int i = 0; i < Model.Roles.Count; i++)
                 {
                     <div class="checkbox">
 
                         <label>
-                            @Html.CheckBoxFor(m => m.Roles[i].IsChecked) @Html.TextBoxFor(m => m.Roles[i].Description)
+                            @Html.CheckBoxFor(m => m.Roles[i].IsChecked) @Model.Roles[i].Description
                             @Html.HiddenFor(m => m.Roles[i].Id)
                             @Html.HiddenFor(m => m.Roles[i].Name)
                         </label>
                     </div>
+       
                 }
-
-</div>
-            
-            
-            
-            
-            
-            
-
+            </div>
         </div><!--Panel Body End-->
         <div class="panel-footer">
 
@@ -94,7 +86,6 @@
     </div><!--Panel End-->
 
 }
-@ViewBag.
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

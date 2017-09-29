@@ -17,10 +17,4 @@ namespace JumpLineUp.Models
         public string Description { get; set; }
         
     }
-
-    public class ApplicationRoleList
-    {
-        public List<ApplicationRole> Roles { get; set; }
-
-    }
 }

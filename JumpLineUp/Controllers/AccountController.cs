@@ -86,32 +86,56 @@ namespace JumpLineUp.Controllers
 
         //------------------------------ USER CREATION ACTIONS ------------------------------------------------------------------------------
 
-        //
+        //------------------------------ New Item Creation ---------------------------------------------------------------------
         // GET: /Account/Create
         [Authorize(Roles = RoleName.CanManageUsers)]
         public ActionResult Create(ApplicationUser user)
         {
-            var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(_context));
-
             if (user == null)
                 user = new ApplicationUser();
+
             var cellularCarriers = _context.CellularCarriers.ToList();
             var blcsOffices = _context.BlcsOffices.ToList();
-
-            
-            //var roles = _context.ApplicationRoles.ToList();
-            //var roles = new SelectList(await roleManager.Roles.ToListAsync(), "Name", "Description");
             var getRoles = _context.ApplicationRoles.ToList();
-            //var rolesList = new ApplicationRoleList {Roles = getRoles};
 
             var viewModel = new RegisterViewModel
             {
+                ApplicationUser = user,
                 Roles = getRoles,
                 CellularCarriers = cellularCarriers,
                 BlcsOffices = blcsOffices
             };
             return View("UserForm",viewModel);
         }
+
+        //------------------------------ Edit Item ------------------------------------------------------------------------------
+        [HttpGet]
+        [Authorize(Roles = RoleName.CanManageUsers)]
+        [Route("Account/Edit/{email}")]
+        public ActionResult Edit(string email)
+        {
+            System.Diagnostics.Debug.WriteLine("We got here!");
+            ApplicationUser user = UserManager.FindByEmail(email);
+            
+
+            //if (user.UserName == null)
+            //    return HttpNotFound();
+
+            var cellularCarriers = _context.CellularCarriers.ToList();
+            var blcsOffices = _context.BlcsOffices.ToList();
+            var getRoles = _context.ApplicationRoles.ToList();
+
+            var viewModel = new RegisterViewModel
+            {
+                ApplicationUser = user,
+                Roles = getRoles,
+                CellularCarriers = cellularCarriers,
+                BlcsOffices = blcsOffices
+            };
+            return View("UserForm", viewModel);
+        }
+
+
 
         //
         // POST: /Account/Save
@@ -133,8 +157,8 @@ namespace JumpLineUp.Controllers
                 user.UserName = model.ApplicationUser.Email;
                 user.Email = model.ApplicationUser.Email;
                 user.CellNumber = model.ApplicationUser.CellNumber;
-                user.CellularCarriersId = model.CellCarrierId;
-                user.BlcsOfficeId = model.BlcsOfficeId;
+                user.CellularCarrierId = model.ApplicationUser.CellularCarrierId;
+                user.BlcsOfficeId = model.ApplicationUser.BlcsOfficeId;
 
                 
 

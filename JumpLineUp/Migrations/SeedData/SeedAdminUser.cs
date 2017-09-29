@@ -24,7 +24,7 @@ namespace JumpLineUp.Migrations.SeedData
                 user.UserName = "admin@blcsne.com";
                 user.BlcsOfficeId = 1;
                 user.CellNumber = "4025026023";
-                user.CellularCarriersId = 1;
+                user.CellularCarrierId = 1;
                 user.Email = "admin@blcsne.com";
                 
                 manager.Create(user, "Password11!!");

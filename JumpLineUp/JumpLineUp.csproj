@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201709291601461_CreateApplicationSpecificClassForRoles.Designer.cs">
       <DependentUpon>201709291601461_CreateApplicationSpecificClassForRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709291959398_FixedApplicationUserProperyNames.cs" />
+    <Compile Include="Migrations\201709291959398_FixedApplicationUserProperyNames.Designer.cs">
+      <DependentUpon>201709291959398_FixedApplicationUserProperyNames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
@@ -531,6 +535,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709291601461_CreateApplicationSpecificClassForRoles.resx">
       <DependentUpon>201709291601461_CreateApplicationSpecificClassForRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709291959398_FixedApplicationUserProperyNames.resx">
+      <DependentUpon>201709291959398_FixedApplicationUserProperyNames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

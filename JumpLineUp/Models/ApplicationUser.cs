@@ -11,17 +11,18 @@ namespace JumpLineUp.Models
     {
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Cell Number")]
         public string CellNumber { get; set; }
-
 
         //--------------------------------- Relation Entities -------------------------------------------------------------
 
+        [Display(Name = "Cellular Carrier")]
+        public int CellularCarrierId { get; set; }
         public CellularCarriers CellularCarriers { get; set; }
-        public int CellularCarriersId { get; set; }
 
-        public BlcsOffice BlcsOffice { get; set; }
+        [Display(Name = "BLCS Offices")]
         public int BlcsOfficeId { get; set; }
+        public BlcsOffice BlcsOffice { get; set; }
         
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
