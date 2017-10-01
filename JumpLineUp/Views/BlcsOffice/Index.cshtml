@@ -1,0 +1,75 @@
+﻿@using JumpLineUp.Helpers
+@model  JumpLineUp.ViewModels.BlcsOffice.BlcsOfficeIndexViewModel
+
+@{
+    ViewBag.Title = "BLCS Offices";
+
+}
+<br />
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+            @Html.ActionLink("Add Office", "Create", "BlcsOffice", new { }, new { @class = "btn btn-primary" })
+        </div>
+        <h2>Manage User</h2>
+    </div><!-- End of Panel Heading -->
+
+    <div class="panel-body">
+
+        <table id="officeTable" class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <td>Office</td>
+                    <td>City</td>
+                    <td>Office Location</td>
+                    <td>Edit</td>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var office in Model.Offices)
+                {
+                    
+                <tr>@{ var formatted = Phone.DisplayPhone(office.Phone);}
+                    <td>@office.LocationDescription</td>
+                    <td>@office.City</td>
+                    <td><a href="tel:@office.Phone">@formatted</a></td>
+                   
+                    <td>@Html.ActionLink("Edit Office", "Edit", "BlcsOffice", new { id = office.Id }, new { @class = "btn btn-sm btn-default" })</td>
+
+                </tr>
+                        }
+            </tbody>
+        </table>
+
+    </div><!-- End of Panel Body -->
+
+</div><!-- End of Panel -->
+
+
+
+
+
+
+
+
+
+@section scripts{
+    <script>
+    $(document).ready(function() {
+        var tableName = "#officeTable";
+
+        $(tableName).DataTable({
+                "columnDefs": [
+                {
+                    "targets": 3,
+                    "orderable": false
+                }
+            ]
+        });
+
+    });
+    </script>
+}

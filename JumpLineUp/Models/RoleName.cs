@@ -14,5 +14,6 @@ namespace JumpLineUp.Models
         public const string CanManageRestraintTypes = "CanManageRestraintTypes";
         public const string CanManageUsers = "CanManageUsers";
         public const string CanManageYouth = "CanManageYouth";
+        public const string BasicUser = "BasicUser";
     }
 }
