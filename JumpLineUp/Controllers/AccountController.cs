@@ -171,6 +171,8 @@ namespace JumpLineUp.Controllers
                 user.CellNumber = model.ApplicationUser.CellNumber;
                 user.CellularCarriersId = model.ApplicationUser.CellularCarriersId;
                 user.BlcsOfficeId = model.ApplicationUser.BlcsOfficeId;
+                user.FirstName = model.ApplicationUser.FirstName;
+                user.FirstName = model.ApplicationUser.LastName;
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -224,6 +226,8 @@ namespace JumpLineUp.Controllers
                 user.CellNumber = model.ApplicationUser.CellNumber;
                 user.CellularCarriersId = model.ApplicationUser.CellularCarriersId;
                 user.BlcsOfficeId = model.ApplicationUser.BlcsOfficeId;
+                user.FirstName = model.ApplicationUser.FirstName;
+                user.LastName = model.ApplicationUser.LastName;
 
                 if (!model.Password.IsNullOrWhiteSpace())
                 {

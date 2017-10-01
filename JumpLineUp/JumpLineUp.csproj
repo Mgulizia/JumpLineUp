@@ -242,6 +242,10 @@
     <Compile Include="Migrations\201709302047304_fixNameOfCellularCarriers.Designer.cs">
       <DependentUpon>201709302047304_fixNameOfCellularCarriers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710011923492_AddedFirstAndLastNameToUser.cs" />
+    <Compile Include="Migrations\201710011923492_AddedFirstAndLastNameToUser.Designer.cs">
+      <DependentUpon>201710011923492_AddedFirstAndLastNameToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
@@ -558,6 +562,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709302047304_fixNameOfCellularCarriers.resx">
       <DependentUpon>201709302047304_fixNameOfCellularCarriers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710011923492_AddedFirstAndLastNameToUser.resx">
+      <DependentUpon>201710011923492_AddedFirstAndLastNameToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

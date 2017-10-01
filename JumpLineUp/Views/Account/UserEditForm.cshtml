@@ -24,6 +24,18 @@
         </div><!--Panel Heading End-->
 
         <div class="panel-body">
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.ApplicationUser.FirstName)
+                @Html.TextBoxFor(m => m.ApplicationUser.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ApplicationUser.FirstName)
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.ApplicationUser.LastName)
+                @Html.TextBoxFor(m => m.ApplicationUser.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ApplicationUser.LastName)
+            </div>
 
             <div class="form-group">
                 @Html.LabelFor(m => m.ApplicationUser.Email)
