@@ -8,7 +8,7 @@ namespace JumpLineUp.ViewModels.Accounts
 {
     public class ManageViewModel
     {
-        public IEnumerable<ApplicationUser> ApplicationUsers { get; set; }
+        public List<ApplicationUser> Users { get; set; }
         
     }
 }

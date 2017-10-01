@@ -1,28 +1,75 @@
-﻿@model  JumpLineUp.ViewModels.Accounts.ManageViewModel
+﻿@using JumpLineUp.Helpers
+@model  JumpLineUp.ViewModels.Accounts.ManageViewModel
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewBag.Title = "Manage Users";
+
 }
+<br/>
+<div class="panel panel-default">
+    
+    <div class="panel-heading">
+        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+            @Html.ActionLink("Add Users", "Create", "Account", new {}, new {@class = "btn btn-primary"})
+        </div>
+        <h2>Manage User</h2>
+    </div><!-- End of Panel Heading -->
 
-<h2>title</h2>
-
-<table>
-    <thead>
-    <tr>
+    <div class="panel-body">
         
-    </tr>
-    </thead>
+        <table id="userTable" class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <td>Email Address</td>
+                    <td>Cell Number</td>
+                    <td>Office Location</td>
+                    <td>Cellular Carrier</td>
+                    <td>Edit</td>
 
-    <tbody>
-        @foreach (var user in Model.ApplicationUsers)
-        {
-            <tr>
-                <td>@user.Email</td>
-                <td>@user.CellNumber</td>
-                <td>@user.BlcsOffice.LocationDescription</td>
-                <td>@user.CellularCarriers.CarrierName</td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>@{ var formated = Phone.DisplayPhone(user.CellNumber);}
+                        <td><a href="mailto:@user.Email">@user.Email</a></td>
+                        <td><a href="tel:@user.CellNumber">@formated</a></td>
+                        <td>@user.BlcsOffice.LocationDescription</td>
+                        <td><a href="mailto:@user.CellNumber@user.CellularCarriers.CarrierExtension">@user.CellularCarriers.CarrierName</a></td>
+                        <td>@Html.ActionLink("Edit User", "Edit", "Account", new { id = user.Id }, new { @class = "btn btn-sm btn-default" })</td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+    </div><!-- End of Panel Body -->
+    
+</div><!-- End of Panel -->
+
+
+
+
+
+
+
+
+
+@section scripts{
+<script>
+    $(document).ready(function() {
+        var tableName = "#userTable";
+
+        $(tableName).DataTable({
+                "columnDefs": [
+                {
+                    "targets": 4,
+                    "orderable": false
+                }
+            ]
+        });
+
+    });
+</script>
+}

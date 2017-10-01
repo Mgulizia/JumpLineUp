@@ -121,8 +121,9 @@ namespace JumpLineUp.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.CellularCarriers", t => t.CellularCarriersId, cascadeDelete: true)
-                .Index(t => t.CellularCarriersId)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
+                .Index(t => t.CellularCarriersId);
+                
             
             CreateTable(
                 "dbo.CellularCarriers",

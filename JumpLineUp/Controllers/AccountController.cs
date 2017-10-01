@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Globalization;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Configuration;
 using System.Web.Mvc;
-using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using JumpLineUp.Models;
-using JumpLineUp.ViewModels;
 using JumpLineUp.ViewModels.Accounts;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace JumpLineUp.Controllers
@@ -91,13 +85,13 @@ namespace JumpLineUp.Controllers
         [Authorize(Roles = RoleName.CanManageUsers)]
         public ActionResult Index()
         {
-            var activeUsers = _context.ApplicationUsers.Include(x => x.BlcsOffice).Include(y => y.CellularCarriers)
-                .ToList();
+            var activeUsers = _context.Users.Include(c => c.BlcsOffice).Include(c => c.CellularCarriers).ToList();
+                
             var viewModel = new ManageViewModel()
             {
-                ApplicationUsers = activeUsers
+                Users = activeUsers
             };
-
+        
             return View(viewModel);
         }
 
@@ -111,65 +105,63 @@ namespace JumpLineUp.Controllers
         [Authorize(Roles = RoleName.CanManageUsers)]
         public ActionResult Create(ApplicationUser user)
         {
-            if (user == null)
+            if (user.UserName == null)
                 user = new ApplicationUser();
 
             var cellularCarriers = _context.CellularCarriers.ToList();
             var blcsOffices = _context.BlcsOffices.ToList();
             var getRoles = _context.ApplicationRoles.ToList();
 
-            var viewModel = new RegisterViewModel
+            var viewModel = new UserNewViewModel
             {
                 ApplicationUser = user,
                 Roles = getRoles,
                 CellularCarriers = cellularCarriers,
                 BlcsOffices = blcsOffices
             };
-            return View("UserForm",viewModel);
+            return View("UserNewForm",viewModel);
         }
 
         //------------------------------ Edit Item ------------------------------------------------------------------------------
-        [HttpGet]
+        
         [Authorize(Roles = RoleName.CanManageUsers)]
-        [Route("Account/Edit/{email}")]
-        public ActionResult Edit(string email)
+        public ActionResult Edit(string id)
         {
-            System.Diagnostics.Debug.WriteLine("We got here!");
-            ApplicationUser user = UserManager.FindByEmail(email);
+            var user = UserManager.FindById(id);
             
 
-            //if (user.UserName == null)
-            //    return HttpNotFound();
+            if (user.UserName == null)
+                return HttpNotFound();
 
             var cellularCarriers = _context.CellularCarriers.ToList();
             var blcsOffices = _context.BlcsOffices.ToList();
             var getRoles = _context.ApplicationRoles.ToList();
 
-            var viewModel = new RegisterViewModel
+            var viewModel = new UserEditViewModel()
             {
                 ApplicationUser = user,
                 Roles = getRoles,
                 CellularCarriers = cellularCarriers,
                 BlcsOffices = blcsOffices
             };
-            return View("UserForm", viewModel);
+            return View("UserEditForm", viewModel);
         }
 
 
 
-        //
+        //------------------------------ Save New Item ------------------------------------------------------------------------------
         // POST: /Account/Save
         [HttpPost]
         [Authorize(Roles = RoleName.CanManageUsers)]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Save(RegisterViewModel model)
+        public async Task<ActionResult> Save(UserNewViewModel model)
         {
             var user = new ApplicationUser();
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
             var selectedRoles = new List<ApplicationRole>();
 
             if (!ModelState.IsValid)
-                return View("UserForm", model);
+                return View("UserNewForm", model);
 
             if (ModelState.IsValid)
             {
@@ -177,13 +169,8 @@ namespace JumpLineUp.Controllers
                 user.UserName = model.ApplicationUser.Email;
                 user.Email = model.ApplicationUser.Email;
                 user.CellNumber = model.ApplicationUser.CellNumber;
-                user.CellularCarrierId = model.ApplicationUser.CellularCarrierId;
+                user.CellularCarriersId = model.ApplicationUser.CellularCarriersId;
                 user.BlcsOfficeId = model.ApplicationUser.BlcsOfficeId;
-
-                
-
-
-
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -195,26 +182,6 @@ namespace JumpLineUp.Controllers
                             await UserManager.AddToRoleAsync(user.Id, item.Name);
                         }
                     }
-                    //---------------- TempCode -------------
-                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageGuardians"));
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageBlcsOffice"));
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageCfsWorkers"));
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageFosterParents"));
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageRestraintTypes"));
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageYouth"));
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageUsers"));
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageCfsWorkers");
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageBlcsOffice");
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageFosterParents");
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageGuardians");
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageRestraintTypes");
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageYouth");
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageUsers");
-
-
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -222,19 +189,80 @@ namespace JumpLineUp.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
 
             model.BlcsOffices = _context.BlcsOffices.ToList();
             model.CellularCarriers = _context.CellularCarriers.ToList();
+            model.Roles = _context.ApplicationRoles.ToList();
             // If we got this far, something failed, redisplay form
-            return View("UserForm",model);
+            return View("UserNewForm",model);
         }
 
+        //------------------------------ Save Edited Item ------------------------------------------------------------------------------
+        // POST: /Account/Save
+        [HttpPost]
+        [Authorize(Roles = RoleName.CanManageUsers)]
+        public async Task<ActionResult> Update(UserEditViewModel model)
+        {
+           
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
+            var selectedRoles = new List<ApplicationRole>();
 
 
+            if (!ModelState.IsValid)
+                return View("UserEditForm", model);
+
+            if (ModelState.IsValid)
+            {
+           
+                var user = UserManager.FindById(model.ApplicationUser.Id);
+                user.UserName = model.ApplicationUser.Email;
+                user.Email = model.ApplicationUser.Email;
+                user.CellNumber = model.ApplicationUser.CellNumber;
+                user.CellularCarriersId = model.ApplicationUser.CellularCarriersId;
+                user.BlcsOfficeId = model.ApplicationUser.BlcsOfficeId;
+
+                if (!model.Password.IsNullOrWhiteSpace())
+                {
+                    UserManager.RemovePassword(user.Id);
+                    var password = UserManager.PasswordHasher.HashPassword(model.Password);
+                    user.PasswordHash = password;
+                }
+
+                var result = UserManager.Update(user);
+                if (result.Succeeded)
+                {
+                    foreach (var item in model.Roles)
+                    {
+                        if (item.IsChecked)
+                        {
+                            await UserManager.AddToRoleAsync(user.Id, item.Name);
+                        }
+                        else
+                        {
+                            await UserManager.RemoveFromRoleAsync(user.Id, item.Name);
+                        }
+                    }
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Account");
+                }
+                AddErrors(result);
+            }
+            model.ApplicationUser = model.ApplicationUser;
+            model.BlcsOffices = _context.BlcsOffices.ToList();
+            model.CellularCarriers = _context.CellularCarriers.ToList();
+            model.Roles = _context.ApplicationRoles.ToList();
+            return View("UserEditForm", model);
+        }
 
 
 

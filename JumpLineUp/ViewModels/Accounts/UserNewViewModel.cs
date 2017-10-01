@@ -6,7 +6,7 @@ using JumpLineUp.Models;
 
 namespace JumpLineUp.ViewModels.Accounts
 {
-    public class RegisterViewModel
+    public class UserNewViewModel
     {
       
         

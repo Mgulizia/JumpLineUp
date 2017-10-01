@@ -7,13 +7,13 @@ namespace JumpLineUp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class FixedApplicationUserProperyNames : IMigrationMetadata
+    public sealed partial class fixCellularCarrierId : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FixedApplicationUserProperyNames));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fixCellularCarrierId));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709291959398_FixedApplicationUserProperyNames"; }
+            get { return "201709302033341_fixCellularCarrierId"; }
         }
         
         string IMigrationMetadata.Source

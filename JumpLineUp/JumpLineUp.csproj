@@ -217,6 +217,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Phone.cs" />
+    <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Migrations\201709270524134_InitialCommit-9-27-17.cs" />
     <Compile Include="Migrations\201709270524134_InitialCommit-9-27-17.Designer.cs">
       <DependentUpon>201709270524134_InitialCommit-9-27-17.cs</DependentUpon>
@@ -229,9 +230,17 @@
     <Compile Include="Migrations\201709291601461_CreateApplicationSpecificClassForRoles.Designer.cs">
       <DependentUpon>201709291601461_CreateApplicationSpecificClassForRoles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709291959398_FixedApplicationUserProperyNames.cs" />
-    <Compile Include="Migrations\201709291959398_FixedApplicationUserProperyNames.Designer.cs">
-      <DependentUpon>201709291959398_FixedApplicationUserProperyNames.cs</DependentUpon>
+    <Compile Include="Migrations\201709302033341_fixCellularCarrierId.cs" />
+    <Compile Include="Migrations\201709302033341_fixCellularCarrierId.Designer.cs">
+      <DependentUpon>201709302033341_fixCellularCarrierId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709302037434_howMuchMoreShitDoWeNeedToDo.cs" />
+    <Compile Include="Migrations\201709302037434_howMuchMoreShitDoWeNeedToDo.Designer.cs">
+      <DependentUpon>201709302037434_howMuchMoreShitDoWeNeedToDo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709302047304_fixNameOfCellularCarriers.cs" />
+    <Compile Include="Migrations\201709302047304_fixNameOfCellularCarriers.Designer.cs">
+      <DependentUpon>201709302047304_fixNameOfCellularCarriers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
@@ -254,7 +263,8 @@
     <Compile Include="ViewModels\Accounts\LoginViewModel.cs" />
     <Compile Include="ViewModels\Accounts\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Accounts\ManageViewModel.cs" />
-    <Compile Include="ViewModels\Accounts\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\UserEditViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\UserNewViewModel.cs" />
     <Compile Include="ViewModels\Accounts\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Accounts\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Accounts\SetPasswordViewModel.cs" />
@@ -492,7 +502,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\UserForm.cshtml" />
+    <Content Include="Views\Account\UserNewForm.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -511,9 +521,11 @@
     <Content Include="Views\CfsWorker\Disabled.cshtml" />
     <Content Include="Views\Shared\_AdminPartial.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\UserEditForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\Accounts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -538,8 +550,14 @@
     <EmbeddedResource Include="Migrations\201709291601461_CreateApplicationSpecificClassForRoles.resx">
       <DependentUpon>201709291601461_CreateApplicationSpecificClassForRoles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709291959398_FixedApplicationUserProperyNames.resx">
-      <DependentUpon>201709291959398_FixedApplicationUserProperyNames.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709302033341_fixCellularCarrierId.resx">
+      <DependentUpon>201709302033341_fixCellularCarrierId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709302037434_howMuchMoreShitDoWeNeedToDo.resx">
+      <DependentUpon>201709302037434_howMuchMoreShitDoWeNeedToDo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709302047304_fixNameOfCellularCarriers.resx">
+      <DependentUpon>201709302047304_fixNameOfCellularCarriers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
