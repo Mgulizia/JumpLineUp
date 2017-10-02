@@ -1,0 +1,105 @@
+﻿@using System.Web.UI.WebControls
+@model JumpLineUp.ViewModels.FosterParents.FosterParentCRUDViewModel
+@{
+    ViewBag.Title = "FosterParentForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = (Model.FosterParent.Id == 0) ? "New Foster Parent" : "Update Foster Parent";
+    var buttonTxt = (Model.FosterParent.Id == 0) ? "Save Foster Parent" : "Update Foster Parent";
+
+}
+
+<br />
+@using (Html.BeginForm("Save", "FosterParent"))
+{
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h2>@title</h2>
+        </div><!--Panel Heading End-->
+
+        <div class="panel-body">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FosterParent.FirstName)
+                @Html.TextBoxFor(m => m.FosterParent.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FosterParent.FirstName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FosterParent.LastName)
+                @Html.TextBoxFor(m => m.FosterParent.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FosterParent.LastName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FosterParent.Phone)
+                @Html.TextBoxFor(m => m.FosterParent.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FosterParent.Phone)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FosterParent.Street1)
+                @Html.TextBoxFor(m => m.FosterParent.Street1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FosterParent.Street1)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FosterParent.Street2)
+                @Html.TextBoxFor(m => m.FosterParent.Street2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FosterParent.Street2)
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FosterParent.City)
+                @Html.TextBoxFor(m => m.FosterParent.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FosterParent.City)
+            </div>
+        
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FosterParent.State)
+                @Html.TextBoxFor(m => m.FosterParent.State, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FosterParent.State)
+            </div>
+        
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FosterParent.Zip)
+                @Html.TextBoxFor(m => m.FosterParent.Zip, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FosterParent.Zip)
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.FosterParent.IsEnabled, new { @checked = true }) Currently Active?
+                </label>
+            </div>
+
+            @Html.HiddenFor(m => m.FosterParent.Id)
+
+
+
+
+
+        </div><!--Panel Body End-->
+        <div class="panel-footer">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">At Sign Button Text Goes Here</button>
+
+
+        </div>
+    </div><!--Panel End-->
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("LastName").on('input', function() {
+
+        })
+    </script>
+
+
+}
+

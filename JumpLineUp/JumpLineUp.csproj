@@ -211,6 +211,7 @@
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
+    <Compile Include="Controllers\FosterParentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\CfsWorkerDto.cs" />
@@ -259,6 +260,10 @@
     <Compile Include="Migrations\201710020048223_AddIsEnabledToBlcsOffice.Designer.cs">
       <DependentUpon>201710020048223_AddIsEnabledToBlcsOffice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710021437277_StructuredFosterParentModelAddIsEnabled.cs" />
+    <Compile Include="Migrations\201710021437277_StructuredFosterParentModelAddIsEnabled.Designer.cs">
+      <DependentUpon>201710021437277_StructuredFosterParentModelAddIsEnabled.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
@@ -299,6 +304,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\BlcsOffice\BlcsOfficeIndexViewModel.cs" />
     <Compile Include="ViewModels\Cfs\CfsIndexViewModel.cs" />
+    <Compile Include="ViewModels\FosterParents\FosterParentCRUDViewModel.cs" />
+    <Compile Include="ViewModels\FosterParents\FosterParentIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-Darkly.css" />
@@ -542,6 +549,8 @@
     <Content Include="Views\Account\UserEditForm.cshtml" />
     <Content Include="Views\BlcsOffice\Index.cshtml" />
     <Content Include="Views\BlcsOffice\OfficeForm.cshtml" />
+    <Content Include="Views\FosterParent\FosterParentForm.cshtml" />
+    <Content Include="Views\FosterParent\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -590,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710020048223_AddIsEnabledToBlcsOffice.resx">
       <DependentUpon>201710020048223_AddIsEnabledToBlcsOffice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021437277_StructuredFosterParentModelAddIsEnabled.resx">
+      <DependentUpon>201710021437277_StructuredFosterParentModelAddIsEnabled.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
