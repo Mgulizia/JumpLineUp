@@ -211,6 +211,8 @@
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
+    <Compile Include="Controllers\YouthController.cs" />
+    <Compile Include="Controllers\GuardianController.cs" />
     <Compile Include="Controllers\FosterParentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -264,6 +266,14 @@
     <Compile Include="Migrations\201710021437277_StructuredFosterParentModelAddIsEnabled.Designer.cs">
       <DependentUpon>201710021437277_StructuredFosterParentModelAddIsEnabled.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710021754008_addConstraintsAndIsEnabledToGuardians.cs" />
+    <Compile Include="Migrations\201710021754008_addConstraintsAndIsEnabledToGuardians.Designer.cs">
+      <DependentUpon>201710021754008_addConstraintsAndIsEnabledToGuardians.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.cs" />
+    <Compile Include="Migrations\201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.Designer.cs">
+      <DependentUpon>201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
@@ -306,6 +316,10 @@
     <Compile Include="ViewModels\Cfs\CfsIndexViewModel.cs" />
     <Compile Include="ViewModels\FosterParents\FosterParentCRUDViewModel.cs" />
     <Compile Include="ViewModels\FosterParents\FosterParentIndexViewModel.cs" />
+    <Compile Include="ViewModels\Guardians\GuardianIndexViewModel.cs" />
+    <Compile Include="ViewModels\Guardians\GuardiansCRUDViewModel.cs" />
+    <Compile Include="ViewModels\Youth\YouthIndexViewModel.cs" />
+    <Compile Include="ViewModels\Youth\YouthCRUDViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-Darkly.css" />
@@ -418,6 +432,47 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -496,9 +551,13 @@
     <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
     <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-1.12.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -551,6 +610,10 @@
     <Content Include="Views\BlcsOffice\OfficeForm.cshtml" />
     <Content Include="Views\FosterParent\FosterParentForm.cshtml" />
     <Content Include="Views\FosterParent\Index.cshtml" />
+    <Content Include="Views\Guardian\GuardianForm.cshtml" />
+    <Content Include="Views\Guardian\Index.cshtml" />
+    <Content Include="Views\Youth\Index.cshtml" />
+    <Content Include="Views\Youth\YouthForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -567,7 +630,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709270524134_InitialCommit-9-27-17.resx">
@@ -602,6 +664,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710021437277_StructuredFosterParentModelAddIsEnabled.resx">
       <DependentUpon>201710021437277_StructuredFosterParentModelAddIsEnabled.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021754008_addConstraintsAndIsEnabledToGuardians.resx">
+      <DependentUpon>201710021754008_addConstraintsAndIsEnabledToGuardians.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.resx">
+      <DependentUpon>201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

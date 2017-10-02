@@ -1,0 +1,88 @@
+﻿@using JumpLineUp.Helpers
+@model  JumpLineUp.ViewModels.Guardians.GuardianIndexViewModel
+
+@{
+    ViewBag.Title = "Foster Parents";
+
+}
+<br />
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+            @Html.ActionLink("Add Client", "Create", "Guardian", new { }, new { @class = "btn btn-primary" })
+        </div>
+        <h2>Manage Client / Guardians</h2>
+    </div><!-- End of Panel Heading -->
+
+    <div class="panel-body">
+
+        <table id="guardianTable" class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <td>Name</td>
+                    <td>City</td>
+                    <td>Phone Number</td>
+                    <td>Edit</td>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var client in Model.Guardians)
+                {
+                    
+                    <tr>@{
+                           
+                        var formated = Phone.DisplayPhone(client.Phone);
+                        var icon = "glyphicon glyphicon-remove";
+                        var color = "color: #e07979";
+                        var text = "Disabled";
+                        if (client.IsEnabled)
+                        {
+                            icon = "glyphicon glyphicon-ok";
+                            color = "color: lightgreen";
+                            text = "Enabled";
+                        }
+                        }
+                    <td>@text <span class="@icon" style="@color"></span></td>
+                    <td>@client.FirstName @client.LastName</td>
+                    <td>@client.City</td>
+                    <td><a href="tel:@client.Phone">@formated</a></td>
+                    <td>@Html.ActionLink("Edit Client", "Edit", "Guardian", new { id = client.Id }, new { @class = "btn btn-sm btn-default" })</td>
+
+                </tr>
+                        }
+            </tbody>
+        </table>
+
+    </div><!-- End of Panel Body -->
+
+</div><!-- End of Panel -->
+
+
+
+
+
+
+
+
+
+@section scripts{
+    <script>
+    $(document).ready(function() {
+        var tableName = "#guardianTable";
+
+        $(tableName).DataTable({
+                "columnDefs": [
+                {
+                    "targets": 4,
+                    "orderable": false
+                }
+            ]
+        });
+
+    });
+    </script>
+}

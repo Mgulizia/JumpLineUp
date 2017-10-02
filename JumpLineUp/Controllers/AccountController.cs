@@ -85,7 +85,7 @@ namespace JumpLineUp.Controllers
 
         
 
-
+        //----------------------------- INDEX VIEW ACTION --------------------------------------------------------------------
         [Authorize(Roles = RoleName.CanManageUsers)]
         public ActionResult Index()
         {

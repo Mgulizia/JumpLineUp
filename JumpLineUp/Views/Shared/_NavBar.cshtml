@@ -1,4 +1,5 @@
-﻿<div class="navbar navbar-default navbar-fixed-top">
+﻿@using JumpLineUp.Models
+<div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -11,11 +12,38 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("CFS Workers", "Index", "CfsWorker")</li>
-                <li>@Html.ActionLink("BLCS Offices", "Index", "BlcsOffice")</li>
-                <li>@Html.ActionLink("Foster Parents", "Index", "FosterParent")</li>
-                @Html.Partial("_AdminPartial")
                 
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Data Management<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            @if (User.IsInRole(RoleName.CanManageCfsWorkers))
+                            {
+                                <li>@Html.ActionLink("CFS Workers", "Index", "CfsWorker")</li>
+                            }
+                            @if (User.IsInRole(RoleName.CanManageBlcsOffice))
+                            {
+                                <li>@Html.ActionLink("BLCS Offices", "Index", "BlcsOffice")</li>
+                            }
+                            @if (User.IsInRole(RoleName.CanManageFosterParents))
+                            {
+                                <li>@Html.ActionLink("Foster Parents", "Index", "FosterParent")</li>
+                            }
+                            @if (User.IsInRole(RoleName.CanManageGuardians))
+                            {
+                                <li>@Html.ActionLink("Guardian Clients", "Index", "Guardian")</li>
+                            }    
+                            @if (User.IsInRole(RoleName.CanManageYouth))
+                            {
+                                <li>@Html.ActionLink("Youth Clients", "Index", "Youth")</li>
+                            }
+                            
+                        </ul>
+                    </li>
+                }
+                @Html.Partial("_AdminPartial")
+
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

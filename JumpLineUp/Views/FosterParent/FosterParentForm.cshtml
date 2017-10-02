@@ -1,7 +1,7 @@
 ﻿@using System.Web.UI.WebControls
 @model JumpLineUp.ViewModels.FosterParents.FosterParentCRUDViewModel
 @{
-    ViewBag.Title = "FosterParentForm";
+    ViewBag.Title = "GuardianForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var title = (Model.FosterParent.Id == 0) ? "New Foster Parent" : "Update Foster Parent";
     var buttonTxt = (Model.FosterParent.Id == 0) ? "Save Foster Parent" : "Update Foster Parent";
@@ -85,7 +85,7 @@
         </div><!--Panel Body End-->
         <div class="panel-footer">
             @Html.AntiForgeryToken()
-            <button type="submit" class="btn btn-primary">At Sign Button Text Goes Here</button>
+            <button type="submit" class="btn btn-primary">@buttonTxt</button>
 
 
         </div>

@@ -1,0 +1,86 @@
+﻿@using JumpLineUp.Helpers
+@model  JumpLineUp.ViewModels.Youth.YouthIndexViewModel
+
+@{
+    ViewBag.Title = "Youth";
+
+}
+<br />
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+            @Html.ActionLink("Add Youth", "Create", "Youth", new { }, new { @class = "btn btn-primary" })
+        </div>
+        <h2>Manage Youth Clients</h2>
+    </div><!-- End of Panel Heading -->
+
+    <div class="panel-body">
+
+        <table id="youthTable" class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Restraint Type</th>
+                    <th>Edit</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var kiddo in Model.Youth)
+                {
+                    
+                    <tr>@{
+                        var icon = "glyphicon glyphicon-remove";
+                        var color = "color: #e07979";
+                        var text = "Disabled";
+                        if (kiddo.IsEnabled)
+                        {
+                            icon = "glyphicon glyphicon-ok";
+                            color = "color: lightgreen";
+                            text = "Enabled";
+                        }
+                        }
+                    <td>@text <span class="@icon" style="@color"></span></td>
+                    <td>@kiddo.FirstName @kiddo.LastName</td>
+                    <td>@kiddo.GetAge()</td>
+                    <td>@kiddo.RestraintType.RestraintName</td>
+                    <td>@Html.ActionLink("Edit Youth", "Edit", "Youth", new { id = kiddo.Id }, new { @class = "btn btn-sm btn-default" })</td>
+
+                </tr>
+                        }
+            </tbody>
+        </table>
+
+    </div><!-- End of Panel Body -->
+
+</div><!-- End of Panel -->
+
+
+
+
+
+
+
+
+
+@section scripts{
+    <script>
+    $(document).ready(function() {
+        var tableName = "#youthTable";
+
+        $(tableName).DataTable({
+                "columnDefs": [
+                {
+                    "targets": 4,
+                    "orderable": false
+                }
+            ]
+        });
+
+    });
+    </script>
+}

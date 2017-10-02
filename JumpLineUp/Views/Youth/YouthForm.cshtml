@@ -1,0 +1,92 @@
+﻿@using System.Web.UI.WebControls
+@model JumpLineUp.ViewModels.Youth.YouthCRUDViewModel
+@{
+    ViewBag.Title = "YouthForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = (Model.Youth.Id == 0) ? "New Youth Client" : "Update Youth Client";
+    var buttonTxt = (Model.Youth.Id == 0) ? "Save Youth Client" : "Update Youth Client";
+
+}
+
+<br />
+@using (Html.BeginForm("Save", "Youth"))
+{
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h2>@title</h2>
+        </div><!--Panel Heading End-->
+
+        <div class="panel-body">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Youth.FirstName)
+                @Html.TextBoxFor(m => m.Youth.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Youth.FirstName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Youth.LastName)
+                @Html.TextBoxFor(m => m.Youth.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Youth.LastName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Youth.BirthDate)
+                @Html.TextBoxFor(m => m.Youth.BirthDate, @"{0:MM/dd/yyyy}", new { @class = "form-control", Id = "datepicker" })
+                @Html.ValidationMessageFor(m => m.Youth.BirthDate)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Youth.RestraintTypeId)
+                @Html.DropDownListFor(m => m.Youth.RestraintTypeId, new SelectList(Model.Restraints, "Id", "RestraintName"), " -- Select Restraint Type --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Youth.RestraintTypeId)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Youth.YouthComment)
+                @Html.TextAreaFor(m => m.Youth.YouthComment, new { @class = "form-control", @rows = 7 })
+                @Html.ValidationMessageFor(m => m.Youth.YouthComment)
+            </div>
+        
+            <hr/>
+
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.Youth.IsEnabled, new { @checked = true }) Current Client
+                </label>
+            </div>
+
+            @Html.HiddenFor(m => m.Youth.Id)
+
+
+
+
+
+        </div><!--Panel Body End-->
+        <div class="panel-footer">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">@buttonTxt</button>
+
+
+        </div>
+    </div><!--Panel End-->
+}
+
+@section scripts{
+    <script>
+
+        $(document).ready(function() {
+            $("#datepicker").datepicker({
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+
+        })
+      
+    </script>
+}
+

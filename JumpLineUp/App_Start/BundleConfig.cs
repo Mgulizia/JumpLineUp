@@ -10,6 +10,7 @@ namespace JumpLineUp
         {
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-{version}.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
@@ -28,6 +29,7 @@ namespace JumpLineUp
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/Bootstrap-Darkly.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/themes/base/jquery-ui.css",
                       "~/Content/site.css"));
         }
     }

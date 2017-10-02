@@ -8,7 +8,7 @@ namespace JumpLineUp.Models
     public static class RoleName
     {
         public const string CanManageCfsWorkers = "CanManageCfsWorkers";
-        public const string CanManageBlcsOffice = "CanManageBlcsOffice";
+        public const string CanManageBlcsOffice = "CanManageOffices";
         public const string CanManageFosterParents = "CanManageFosterParents";
         public const string CanManageGuardians = "CanManageGuardians";
         public const string CanManageRestraintTypes = "CanManageRestraintTypes";
