@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -81,6 +82,9 @@ namespace JumpLineUp.Controllers
                     return View(model);
             }
         }
+
+        
+
 
         [Authorize(Roles = RoleName.CanManageUsers)]
         public ActionResult Index()
@@ -172,7 +176,8 @@ namespace JumpLineUp.Controllers
                 user.CellularCarriersId = model.ApplicationUser.CellularCarriersId;
                 user.BlcsOfficeId = model.ApplicationUser.BlcsOfficeId;
                 user.FirstName = model.ApplicationUser.FirstName;
-                user.FirstName = model.ApplicationUser.LastName;
+                user.LastName = model.ApplicationUser.LastName;
+                user.IsEnabled = true;
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -228,6 +233,18 @@ namespace JumpLineUp.Controllers
                 user.BlcsOfficeId = model.ApplicationUser.BlcsOfficeId;
                 user.FirstName = model.ApplicationUser.FirstName;
                 user.LastName = model.ApplicationUser.LastName;
+                user.IsEnabled = model.ApplicationUser.IsEnabled;
+
+                if (user.IsEnabled == false)
+                {
+                    user.LockoutEnabled = true;
+                    user.LockoutEndDateUtc = new DateTime(2900, 12, 25);
+                }
+                else
+                {
+                    user.LockoutEnabled = false;
+                    user.LockoutEndDateUtc = null;
+                }
 
                 if (!model.Password.IsNullOrWhiteSpace())
                 {
@@ -235,6 +252,7 @@ namespace JumpLineUp.Controllers
                     var password = UserManager.PasswordHasher.HashPassword(model.Password);
                     user.PasswordHash = password;
                 }
+
 
                 var result = UserManager.Update(user);
                 if (result.Succeeded)
@@ -538,6 +556,8 @@ namespace JumpLineUp.Controllers
 
             base.Dispose(disposing);
         }
+
+
 
         public ApplicationSignInManager SignInManager
         {

@@ -37,6 +37,7 @@ namespace JumpLineUp.Controllers
         public ActionResult Create()
         {
             var office = new BlcsOffice();
+            office.IsEnabled = true;
 
             return View("OfficeForm",office);
         }
@@ -75,6 +76,7 @@ namespace JumpLineUp.Controllers
                 officeInDb.State = office.State;
                 officeInDb.Zip = office.Zip;
                 officeInDb.Phone = office.Phone;
+                officeInDb.IsEnabled = office.IsEnabled;
             }
             _context.SaveChanges();
 

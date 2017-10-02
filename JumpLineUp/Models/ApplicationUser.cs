@@ -26,6 +26,8 @@ namespace JumpLineUp.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        public bool IsEnabled { get; set; }
+
         //--------------------------------- Relation Entities -------------------------------------------------------------
 
         [Display(Name = "Cellular Carrier")]

@@ -46,5 +46,7 @@ namespace JumpLineUp.Models
         [StringLength(5)]
         [Display(Name = "Zip Code")]
         public string Zip { get; set; }
+
+        public bool IsEnabled { get; set; }
     }
 }

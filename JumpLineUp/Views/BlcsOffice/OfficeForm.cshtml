@@ -61,6 +61,10 @@
                 @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Phone)
             </div>
+        
+            <label>
+                @Html.CheckBoxFor(m => m.IsEnabled) Current Office
+            </label>
             
             @Html.HiddenFor(m => m.Id)
 

@@ -28,6 +28,7 @@ namespace JumpLineUp.Migrations.SeedData
                 user.Email = "admin@blcsne.com";
                 user.FirstName = "Mathew";
                 user.LastName = "Gulizia";
+                user.IsEnabled = true;
                 
                 manager.Create(user, "Password11!!");
             }

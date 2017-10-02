@@ -20,9 +20,10 @@
         <table id="officeTable" class="table table-responsive table-striped">
             <thead>
                 <tr>
+                    <th>Status</th>
                     <td>Office</td>
                     <td>City</td>
-                    <td>Office Location</td>
+                    <td>Phone Number</td>
                     <td>Edit</td>
 
                 </tr>
@@ -32,10 +33,23 @@
                 @foreach (var office in Model.Offices)
                 {
                     
-                <tr>@{ var formatted = Phone.DisplayPhone(office.Phone);}
+                    <tr>@{
+                           
+                        var formated = Phone.DisplayPhone(office.Phone);
+                        var icon = "glyphicon glyphicon-remove";
+                        var color = "color: #e07979";
+                        var text = "Disabled";
+                        if (office.IsEnabled)
+                        {
+                            icon = "glyphicon glyphicon-ok";
+                            color = "color: lightgreen";
+                            text = "Enabled";
+                        }
+                        }
+                    <td>@text <span class="@icon" style="@color"></span></td>
                     <td>@office.LocationDescription</td>
                     <td>@office.City</td>
-                    <td><a href="tel:@office.Phone">@formatted</a></td>
+                    <td><a href="tel:@office.Phone">@formated</a></td>
                    
                     <td>@Html.ActionLink("Edit Office", "Edit", "BlcsOffice", new { id = office.Id }, new { @class = "btn btn-sm btn-default" })</td>
 
@@ -64,7 +78,7 @@
         $(tableName).DataTable({
                 "columnDefs": [
                 {
-                    "targets": 3,
+                    "targets": 4,
                     "orderable": false
                 }
             ]

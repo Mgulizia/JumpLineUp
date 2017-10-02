@@ -14,6 +14,7 @@ namespace JumpLineUp.App_Start
         {
             Mapper.CreateMap<CfsWorker, CfsWorkerDto>();
             Mapper.CreateMap<CfsWorkerDto, CfsWorker>();
+         
         }
     }
 }

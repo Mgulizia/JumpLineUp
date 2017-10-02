@@ -251,6 +251,14 @@
     <Compile Include="Migrations\201710012013446_AddConstraintsToBlcsOffices.Designer.cs">
       <DependentUpon>201710012013446_AddConstraintsToBlcsOffices.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710020024093_AddIsEnabledToApplicationUser.cs" />
+    <Compile Include="Migrations\201710020024093_AddIsEnabledToApplicationUser.Designer.cs">
+      <DependentUpon>201710020024093_AddIsEnabledToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710020048223_AddIsEnabledToBlcsOffice.cs" />
+    <Compile Include="Migrations\201710020048223_AddIsEnabledToBlcsOffice.Designer.cs">
+      <DependentUpon>201710020048223_AddIsEnabledToBlcsOffice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
@@ -576,6 +584,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710012013446_AddConstraintsToBlcsOffices.resx">
       <DependentUpon>201710012013446_AddConstraintsToBlcsOffices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710020024093_AddIsEnabledToApplicationUser.resx">
+      <DependentUpon>201710020024093_AddIsEnabledToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710020048223_AddIsEnabledToBlcsOffice.resx">
+      <DependentUpon>201710020048223_AddIsEnabledToBlcsOffice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

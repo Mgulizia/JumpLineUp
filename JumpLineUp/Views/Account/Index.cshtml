@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Manage Users";
 
+
 }
 <br/>
 <div class="panel panel-default">
@@ -19,25 +20,42 @@
         
         <table id="userTable" class="table table-responsive table-striped">
             <thead>
-                <tr>
-                    <td>Email Address</td>
-                    <td>Cell Number</td>
-                    <td>Office Location</td>
-                    <td>Cellular Carrier</td>
-                    <td>Edit</td>
+            <tr>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Cell Number</th>
+                <th>Office Location</th>
+                <th>Cellular Carrier</th>
+                <th>Edit</th>
 
-                </tr>
+            </tr>
             </thead>
 
             <tbody>
                 @foreach (var user in Model.Users)
                 {
-                    <tr>@{ var formated = Phone.DisplayPhone(user.CellNumber);}
+                    <tr>
+                        @{
+                            var formated = Phone.DisplayPhone(user.CellNumber);
+                            var icon = "glyphicon glyphicon-remove";
+                            var color = "color: #e07979";
+                            var text = "Disabled";
+                            if (user.IsEnabled)
+                            {
+                                icon = "glyphicon glyphicon-ok";
+                                color = "color: lightgreen";
+                                text = "Enabled";
+                            }
+                            
+                         }
+                        <td>@text <span class="@icon" style="@color"></span></td>
+                        <td>@user.FirstName @user.LastName</td>
                         <td><a href="mailto:@user.Email">@user.Email</a></td>
                         <td><a href="tel:@user.CellNumber">@formated</a></td>
                         <td>@user.BlcsOffice.LocationDescription</td>
                         <td><a href="mailto:@user.CellNumber@user.CellularCarriers.CarrierExtension">@user.CellularCarriers.CarrierName</a></td>
-                        <td>@Html.ActionLink("Edit User", "Edit", "Account", new { id = user.Id }, new { @class = "btn btn-sm btn-default" })</td>
+                        <td>@Html.ActionLink("Edit User", "Edit", "Account", new {id = user.Id}, new {@class = "btn btn-sm btn-default"})</td>
                         
                     </tr>
                 }
