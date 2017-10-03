@@ -16,6 +16,7 @@ namespace JumpLineUp
                         "~/Scripts/respond.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js"
+                        
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

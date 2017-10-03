@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using JumpLineUp.App_Start;
+using JumpLineUp.MessageHandlers;
 
 namespace JumpLineUp
 {
@@ -21,6 +22,8 @@ namespace JumpLineUp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //For use of API Key's
+            //GlobalConfiguration.Configuration.MessageHandlers.Add(new APIKeyHandler());
         }
     }
 }

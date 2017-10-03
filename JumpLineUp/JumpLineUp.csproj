@@ -209,6 +209,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
+    <Compile Include="Controllers\Api\BlcsOfficesController.cs" />
+    <Compile Include="Controllers\Api\YouthsController.cs" />
+    <Compile Include="Controllers\Api\GuardiansController.cs" />
+    <Compile Include="Controllers\Api\FosterParentsController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
     <Compile Include="Controllers\YouthController.cs" />
@@ -216,12 +220,17 @@
     <Compile Include="Controllers\FosterParentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Dtos\BlcsOfficeDto.cs" />
     <Compile Include="Dtos\CfsWorkerDto.cs" />
+    <Compile Include="Dtos\FosterParentDto.cs" />
+    <Compile Include="Dtos\GuardiansDto.cs" />
+    <Compile Include="Dtos\YouthDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Phone.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
+    <Compile Include="MessageHandlers\ApiKeyHandler.cs" />
     <Compile Include="Migrations\201709270524134_InitialCommit-9-27-17.cs" />
     <Compile Include="Migrations\201709270524134_InitialCommit-9-27-17.Designer.cs">
       <DependentUpon>201709270524134_InitialCommit-9-27-17.cs</DependentUpon>
@@ -432,6 +441,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -476,7 +486,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -575,7 +584,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -614,6 +622,8 @@
     <Content Include="Views\Guardian\Index.cshtml" />
     <Content Include="Views\Youth\Index.cshtml" />
     <Content Include="Views\Youth\YouthForm.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
