@@ -18,63 +18,112 @@
         </div><!--Panel Heading End-->
 
         <div class="panel-body">
+        
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                        <h4>Primary Foster Parent</h4>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.FosterParent.FirstName)
-                @Html.TextBoxFor(m => m.FosterParent.FirstName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FosterParent.FirstName)
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.FirstName1)
+                            @Html.TextBoxFor(m => m.FosterParent.FirstName1, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.FirstName1)
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.FosterParent.LastName)
-                @Html.TextBoxFor(m => m.FosterParent.LastName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FosterParent.LastName)
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.LastName1)
+                            @Html.TextBoxFor(m => m.FosterParent.LastName1, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.LastName1)
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.FosterParent.Phone)
-                @Html.TextBoxFor(m => m.FosterParent.Phone, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FosterParent.Phone)
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.Phone1)
+                            @Html.TextBoxFor(m => m.FosterParent.Phone1, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.Phone1)
+                        </div>
+                        
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.FosterParent.Street1)
-                @Html.TextBoxFor(m => m.FosterParent.Street1, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FosterParent.Street1)
-            </div>
+                    </div> <!-- Col md 6 End -->
+                    <div class="col-md-6">
+                        
+                        <h4>Secondary Foster Parent</h4>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.FosterParent.Street2)
-                @Html.TextBoxFor(m => m.FosterParent.Street2, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FosterParent.Street2)
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.FirstName2)
+                            @Html.TextBoxFor(m => m.FosterParent.FirstName2, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.FirstName2)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.LastName2)
+                            @Html.TextBoxFor(m => m.FosterParent.LastName2, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.LastName2)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.Phone2)
+                            @Html.TextBoxFor(m => m.FosterParent.Phone2, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.Phone2)
+                        </div>
+
+                    </div><!-- Col md 6 End -->
+                </div> <!-- Row End -->
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <hr/>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.Street1)
+                            @Html.TextBoxFor(m => m.FosterParent.Street1, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.Street1)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.Street2)
+                            @Html.TextBoxFor(m => m.FosterParent.Street2, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.Street2)
+                        </div>
 
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.FosterParent.City)
-                @Html.TextBoxFor(m => m.FosterParent.City, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FosterParent.City)
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.City)
+                            @Html.TextBoxFor(m => m.FosterParent.City, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.City)
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.State)
+                            @Html.TextBoxFor(m => m.FosterParent.State, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.State)
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FosterParent.Zip)
+                            @Html.TextBoxFor(m => m.FosterParent.Zip, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FosterParent.Zip)
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(m => m.FosterParent.IsEnabled, new { @checked = true }) Foster Family is Active
+                            </label>
+                        </div>
+                        
+
+                    </div>
+                </div><!-- Row End-->
+
+            </div><!-- Container End-->
+        
+        
+        
         
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.FosterParent.State)
-                @Html.TextBoxFor(m => m.FosterParent.State, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FosterParent.State)
-            </div>
-        
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.FosterParent.Zip)
-                @Html.TextBoxFor(m => m.FosterParent.Zip, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FosterParent.Zip)
-            </div>
-
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(m => m.FosterParent.IsEnabled, new { @checked = true }) Currently Active?
-                </label>
-            </div>
+            
 
             @Html.HiddenFor(m => m.FosterParent.Id)
 

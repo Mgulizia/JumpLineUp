@@ -1,0 +1,68 @@
+﻿@using System.Web.UI.WebControls
+@model JumpLineUp.ViewModels.ServiceType.ServiceTypeCRUDViewModel
+@{
+    ViewBag.Title = "Service Type Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = (Model.ServiceType.Id == 0) ? "New Service Type" : "Update Service Type";
+    var buttonTxt = (Model.ServiceType.Id == 0) ? "Save Service Type" : "Update Service Type";
+
+}
+
+<br />
+@using (Html.BeginForm("Save", "ServiceType"))
+{
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h2>@title</h2>
+        </div><!--Panel Heading End-->
+
+        <div class="panel-body">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ServiceType.ServiceCode)
+                @Html.TextBoxFor(m => m.ServiceType.ServiceCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ServiceType.ServiceCode)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ServiceType.ServiceAbbrieviation)
+                @Html.TextBoxFor(m => m.ServiceType.ServiceAbbrieviation, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ServiceType.ServiceAbbrieviation)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ServiceType.ServiceName)
+                @Html.TextBoxFor(m => m.ServiceType.ServiceName, new { @class = "form-control"})
+                @Html.ValidationMessageFor(m => m.ServiceType.ServiceName)
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.ServiceType.CurrentService, new { @checked = true }) Currently Offered Service
+                </label>
+            </div>
+
+            @Html.HiddenFor(m => m.ServiceType.Id)
+
+
+
+
+
+        </div><!--Panel Body End-->
+        <div class="panel-footer">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">@buttonTxt</button>
+
+
+        </div>
+    </div><!--Panel End-->
+}
+
+@section scripts{
+    <script>
+
+      
+    </script>
+}
+

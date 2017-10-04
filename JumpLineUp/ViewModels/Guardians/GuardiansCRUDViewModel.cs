@@ -1,6 +1,6 @@
 ﻿using JumpLineUp.Models;
 
-namespace JumpLineUp.ViewModels.Guardians
+namespace JumpLineUp.ViewModels.ServiceType
 {
     public class GuardiansCRUDViewModel
     {

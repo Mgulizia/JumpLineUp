@@ -37,6 +37,9 @@
                             @if (User.IsInRole(RoleName.CanManageYouth))
                             {
                                 <li>@Html.ActionLink("Youth Clients", "Index", "Youth")</li>
+                            }@if (User.IsInRole(RoleName.CanManageServiceTypes))
+                            {
+                                <li>@Html.ActionLink("BLCS Services", "Index", "ServiceType")</li>
                             }
                             
                         </ul>

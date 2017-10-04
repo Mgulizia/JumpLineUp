@@ -1,4 +1,5 @@
 ﻿@using JumpLineUp.Helpers
+@using JumpLineUp.Models
 @model  JumpLineUp.ViewModels.Youth.YouthIndexViewModel
 
 @{
@@ -9,9 +10,12 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
-            @Html.ActionLink("Add Youth", "Create", "Youth", new { }, new { @class = "btn btn-primary" })
-        </div>
+        @if (User.IsInRole(RoleName.CanManageYouth))
+        {
+            <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+                @Html.ActionLink("Add Youth", "Create", "Youth", new { }, new { @class = "btn btn-primary" })
+            </div>
+        }
         <h2>Manage Youth Clients</h2>
     </div><!-- End of Panel Heading -->
 
@@ -24,7 +28,11 @@
                     <th>Name</th>
                     <th>Age</th>
                     <th>Restraint Type</th>
-                    <th>Edit</th>
+                    @if (User.IsInRole(RoleName.CanManageYouth))
+                    {
+                        <th>Edit</th>
+                    }
+                    
 
                 </tr>
             </thead>
@@ -48,7 +56,11 @@
                     <td>@kiddo.FirstName @kiddo.LastName</td>
                     <td>@kiddo.GetAge()</td>
                     <td>@kiddo.RestraintType.RestraintName</td>
-                    <td>@Html.ActionLink("Edit Youth", "Edit", "Youth", new { id = kiddo.Id }, new { @class = "btn btn-sm btn-default" })</td>
+                    @if (User.IsInRole(RoleName.CanManageYouth))
+                    {
+                        <td>@Html.ActionLink("Edit Youth", "Edit", "Youth", new { id = kiddo.Id }, new { @class = "btn btn-sm btn-default" })</td>
+
+                    }
 
                 </tr>
                         }

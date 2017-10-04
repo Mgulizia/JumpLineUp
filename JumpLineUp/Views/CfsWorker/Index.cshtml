@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using JumpLineUp.Models
 
 @{
     ViewBag.Title = "CfsWorker";
@@ -9,9 +10,13 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
-            @Html.ActionLink("Add CFS Worker", "NewCfsWorker", "CfsWorker", new {@class = "btn btn-primary"})
-        </div>
+        @if (User.IsInRole(RoleName.CanManageCfsWorkers))
+        {
+            <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+                @Html.ActionLink("Add CFS Worker", "NewCfsWorker", "CfsWorker", new { @class = "btn btn-primary" })
+            </div>
+        }
+        
         <h2>DHHS CFS Workers</h2>
     </div><!--Panel Heading End-->
     <div class="panel-body">

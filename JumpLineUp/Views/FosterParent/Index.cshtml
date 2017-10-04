@@ -1,4 +1,6 @@
 ﻿@using JumpLineUp.Helpers
+@using JumpLineUp.Models
+@using Microsoft.Ajax.Utilities
 @model  JumpLineUp.ViewModels.FosterParents.FosterParentIndexViewModel
 
 @{
@@ -9,9 +11,13 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
-            @Html.ActionLink("Add Foster Parent", "Create", "FosterParent", new { }, new { @class = "btn btn-primary" })
-        </div>
+        @if (User.IsInRole(RoleName.CanManageFosterParents))
+        {
+            <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+                @Html.ActionLink("Add Foster Parent", "Create", "FosterParent", new { }, new { @class = "btn btn-primary" })
+            </div>
+        }
+        
         <h2>Manage Foster Parents</h2>
     </div><!-- End of Panel Heading -->
 
@@ -24,8 +30,10 @@
                     <td>Name</td>
                     <td>City</td>
                     <td>Phone Number</td>
-                    <td>Edit</td>
-
+                    @if (User.IsInRole(RoleName.CanManageFosterParents))
+                    {
+                        <td>Edit</td>
+                    }
                 </tr>
             </thead>
 
@@ -35,7 +43,7 @@
                     
                     <tr>@{
                            
-                        var formated = Phone.DisplayPhone(parent.Phone);
+                        var formated = Phone.DisplayPhone(parent.Phone1);
                         var icon = "glyphicon glyphicon-remove";
                         var color = "color: #e07979";
                         var text = "Disabled";
@@ -47,10 +55,31 @@
                         }
                         }
                     <td>@text <span class="@icon" style="@color"></span></td>
-                    <td>@parent.FirstName @parent.LastName</td>
+                        <td>
+                            @parent.FirstName1 @parent.LastName1
+                            @if (!parent.FirstName1.IsNullOrWhiteSpace())
+                            {
+                                <br/>@parent.FirstName2
+                                @parent.LastName2
+                                
+                            }
+
+
+                        </td>
                     <td>@parent.City</td>
-                    <td><a href="tel:@parent.Phone">@formated</a></td>
-                    <td>@Html.ActionLink("Edit Foster Parent", "Edit", "FosterParent", new { id = parent.Id }, new { @class = "btn btn-sm btn-default" })</td>
+                        <td>
+                            <a href="tel:@parent.Phone1">@formated</a>
+                            @if (!parent.Phone2.IsNullOrWhiteSpace())
+                            {
+                                var formated2 = Phone.DisplayPhone(parent.Phone2);
+                                <br/><a href="tel:@parent.Phone2" > @formated2</a>
+                            }
+                        </td>
+                        @if (User.IsInRole(RoleName.CanManageFosterParents))
+                        {
+                            <td>@Html.ActionLink("Edit Foster Parent", "Edit", "FosterParent", new { id = parent.Id }, new { @class = "btn btn-sm btn-default" })</td>
+
+                        }
 
                 </tr>
                         }

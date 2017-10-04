@@ -7,6 +7,7 @@ using JumpLineUp.Models;
 using JumpLineUp.ViewModels;
 using JumpLineUp.ViewModels.FosterParents;
 using JumpLineUp.ViewModels.Guardians;
+using JumpLineUp.ViewModels.ServiceType;
 
 namespace JumpLineUp.Controllers
 {

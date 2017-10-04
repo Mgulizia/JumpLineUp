@@ -1,54 +1,50 @@
 ﻿@using JumpLineUp.Helpers
 @using JumpLineUp.Models
-@model  JumpLineUp.ViewModels.Guardians.GuardianIndexViewModel
+@model  JumpLineUp.ViewModels.ServiceType.ServiceTypeIndexViewModel
 
 @{
-    ViewBag.Title = "Foster Parents";
+    ViewBag.Title = "ServiceType";
 
 }
 <br />
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        @if (User.IsInRole(RoleName.CanManageGuardians))
+        @if (User.IsInRole(RoleName.CanManageServiceTypes))
         {
             <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
-                @Html.ActionLink("Add Client", "Create", "Guardian", new { }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Add Service Type", "Create", "ServiceType", new { }, new { @class = "btn btn-primary" })
             </div>
         }
-        
-
-        <h2>Manage Client / Guardians</h2>
+        <h2>Manage BLCS Services</h2>
     </div><!-- End of Panel Heading -->
 
     <div class="panel-body">
 
-        <table id="guardianTable" class="table table-responsive table-striped">
+        <table id="serviceTable" class="table table-responsive table-striped">
             <thead>
                 <tr>
                     <th>Status</th>
-                    <td>Name</td>
-                    <td>City</td>
-                    <td>Phone Number</td>
-                    @if (User.IsInRole(RoleName.CanManageGuardians))
+                    <th>Service Code</th>
+                    <th>Service Name</th>
+                    @if (User.IsInRole(RoleName.CanManageServiceTypes))
                     {
-                        <td>Edit</td>
+                        <th>Edit</th>
                     }
+                    
 
                 </tr>
             </thead>
 
             <tbody>
-                @foreach (var client in Model.Guardians)
+                @foreach (var service in Model.ServiceTypes)
                 {
                     
                     <tr>@{
-                           
-                        var formated = Phone.DisplayPhone(client.Phone);
                         var icon = "glyphicon glyphicon-remove";
                         var color = "color: #e07979";
                         var text = "Disabled";
-                        if (client.IsEnabled)
+                        if (service.CurrentService)
                         {
                             icon = "glyphicon glyphicon-ok";
                             color = "color: lightgreen";
@@ -56,14 +52,12 @@
                         }
                         }
                     <td>@text <span class="@icon" style="@color"></span></td>
-                    <td>@client.FirstName @client.LastName</td>
-                    <td>@client.City</td>
-                    <td><a href="tel:@client.Phone">@formated</a></td>
-                    @if (User.IsInRole(RoleName.CanManageGuardians))
+                    <td>@service.ServiceCode</td>
+                    <td>@service.ServiceName</td>
+                    @if (User.IsInRole(RoleName.CanManageServiceTypes))
                     {
-                        <td>@Html.ActionLink("Edit Client", "Edit", "Guardian", new { id = client.Id }, new { @class = "btn btn-sm btn-default" })</td>
+                        <td>@Html.ActionLink("Edit Service", "Edit", "ServiceType", new { id = service.Id }, new { @class = "btn btn-sm btn-default" })</td>
                     }
-
 
                 </tr>
                         }
@@ -85,12 +79,12 @@
 @section scripts{
     <script>
     $(document).ready(function() {
-        var tableName = "#guardianTable";
+        var tableName = "#serviceTable";
 
         $(tableName).DataTable({
                 "columnDefs": [
                 {
-                    "targets": 4,
+                    "targets": 3,
                     "orderable": false
                 }
             ]

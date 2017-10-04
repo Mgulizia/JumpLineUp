@@ -215,6 +215,7 @@
     <Compile Include="Controllers\Api\FosterParentsController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
+    <Compile Include="Controllers\ServiceTypeController.cs" />
     <Compile Include="Controllers\YouthController.cs" />
     <Compile Include="Controllers\GuardianController.cs" />
     <Compile Include="Controllers\FosterParentController.cs" />
@@ -283,14 +284,24 @@
     <Compile Include="Migrations\201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.Designer.cs">
       <DependentUpon>201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710041441059_AddAnotherFosterParentToFosterParentModels.cs" />
+    <Compile Include="Migrations\201710041441059_AddAnotherFosterParentToFosterParentModels.Designer.cs">
+      <DependentUpon>201710041441059_AddAnotherFosterParentToFosterParentModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710041628069_AddServiceTypesModel.cs" />
+    <Compile Include="Migrations\201710041628069_AddServiceTypesModel.Designer.cs">
+      <DependentUpon>201710041628069_AddServiceTypesModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
+    <Compile Include="Migrations\SeedData\SeedServiceTypes.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
     <Compile Include="Migrations\SeedData\SeedAdminUser.cs" />
     <Compile Include="Migrations\SeedData\SeedCellularCarriers.cs" />
     <Compile Include="Migrations\SeedData\SeedRoles.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\CellularCarriers.cs" />
+    <Compile Include="Models\ServiceType.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CfsWorker.cs" />
@@ -327,6 +338,8 @@
     <Compile Include="ViewModels\FosterParents\FosterParentIndexViewModel.cs" />
     <Compile Include="ViewModels\Guardians\GuardianIndexViewModel.cs" />
     <Compile Include="ViewModels\Guardians\GuardiansCRUDViewModel.cs" />
+    <Compile Include="ViewModels\ServiceType\ServiceTypeIndexViewModel.cs" />
+    <Compile Include="ViewModels\ServiceType\ServiceTypeCRUDViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthIndexViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthCRUDViewModel.cs" />
   </ItemGroup>
@@ -624,6 +637,8 @@
     <Content Include="Views\Youth\YouthForm.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\ServiceType\Index.cshtml" />
+    <Content Include="Views\ServiceType\ServiceTypeForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -680,6 +695,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.resx">
       <DependentUpon>201710021956313_AddedConstraintsIsEnabledRelationsToYouthModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710041441059_AddAnotherFosterParentToFosterParentModels.resx">
+      <DependentUpon>201710041441059_AddAnotherFosterParentToFosterParentModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710041628069_AddServiceTypesModel.resx">
+      <DependentUpon>201710041628069_AddServiceTypesModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

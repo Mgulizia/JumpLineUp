@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using JumpLineUp.Models;
 using JumpLineUp.ViewModels;
 using JumpLineUp.ViewModels.FosterParents;
-using JumpLineUp.ViewModels.Guardians;
+using JumpLineUp.ViewModels.ServiceType;
 using JumpLineUp.ViewModels.Youth;
 
 namespace JumpLineUp.Controllers

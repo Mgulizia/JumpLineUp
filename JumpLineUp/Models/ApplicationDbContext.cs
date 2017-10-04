@@ -13,6 +13,7 @@ namespace JumpLineUp.Models
         public DbSet<RestraintType> RestraintTypes { get; set; }
         public DbSet<Youth> Youths { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
 
         
         public ApplicationDbContext()

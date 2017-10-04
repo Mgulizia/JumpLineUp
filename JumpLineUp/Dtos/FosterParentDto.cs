@@ -12,15 +12,34 @@ namespace JumpLineUp.Dtos
 
         [Required]
         [MinLength(3)]
-        public string FirstName { get; set; }
+        [Display(Name = "Foster Parent First Name")]
+        public string FirstName1 { get; set; }
 
         [Required]
         [MinLength(3)]
-        public string LastName { get; set; }
+        [Display(Name = "Foster Parent Last Name")]
+        public string LastName1 { get; set; }
+
 
         [Required]
         [StringLength(10)]
-        public string Phone { get; set; }
+        [Display(Name = "Phone Number")]
+        public string Phone1 { get; set; }
+
+
+        [MinLength(3)]
+        [Display(Name = "Foster Parent First Name")]
+        public string FirstName2 { get; set; }
+
+
+        [MinLength(3)]
+        [Display(Name = "Foster Parent Last Name")]
+        public string LastName2 { get; set; }
+
+
+        [StringLength(10)]
+        [Display(Name = "Phone Number")]
+        public string Phone2 { get; set; }
 
         [Required]
         [MinLength(3)]

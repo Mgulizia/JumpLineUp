@@ -78,14 +78,18 @@ namespace JumpLineUp.Controllers
             if (!ModelState.IsValid)
                 return View("FosterParentForm", model);
 
-            fosterParentInDb.FirstName = model.FosterParent.FirstName;
-            fosterParentInDb.LastName = model.FosterParent.LastName;
+            fosterParentInDb.FirstName1 = model.FosterParent.FirstName1;
+            fosterParentInDb.LastName1 = model.FosterParent.LastName1;
+            fosterParentInDb.Phone1 = model.FosterParent.Phone1;
+            fosterParentInDb.FirstName2 = model.FosterParent.FirstName2;
+            fosterParentInDb.LastName2 = model.FosterParent.LastName2;
+            fosterParentInDb.Phone2 = model.FosterParent.Phone2;
             fosterParentInDb.Street1 = model.FosterParent.Street1;
             fosterParentInDb.Street2 = model.FosterParent.Street2;
             fosterParentInDb.City = model.FosterParent.City;
             fosterParentInDb.State = model.FosterParent.State;
             fosterParentInDb.Zip = model.FosterParent.Zip;
-            fosterParentInDb.Phone = model.FosterParent.Phone;
+            
             fosterParentInDb.IsEnabled = model.FosterParent.IsEnabled;
             _context.SaveChanges();
 
