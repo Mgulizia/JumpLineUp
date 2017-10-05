@@ -1,36 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace JumpLineUp.Models
+
+namespace JumpLineUp.Dtos
 {
-    public class Guardian
+    public class ClientDto
     {
         public int Id { get; set; }
 
         [Required]
         [MinLength(3)]
-        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
         [MinLength(3)]
-        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
         [StringLength(10)]
-        [Display(Name = "Phone Number")]
         public string Phone { get; set; }
 
         [Required]
         [MinLength(3)]
-        [Display(Name = "Street Address")]
         public string Street1 { get; set; }
 
-        [Display(Name = "Address Suffix")]
         public string Street2 { get; set; }
 
         [Required]

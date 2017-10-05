@@ -9,11 +9,12 @@ namespace JumpLineUp.Models
         public DbSet<CfsWorker> CfsWorkers { get; set; }
         public DbSet<CellularCarriers> CellularCarriers { get; set; }
         public DbSet<FosterParent> FosterParents { get; set; }
-        public DbSet<Guardian> Guardians { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<RestraintType> RestraintTypes { get; set; }
         public DbSet<Youth> Youths { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<ServiceArea> ServiceAreas { get; set; }
 
         
         public ApplicationDbContext()

@@ -32,7 +32,7 @@
                             }
                             @if (User.IsInRole(RoleName.CanManageGuardians))
                             {
-                                <li>@Html.ActionLink("Guardian Clients", "Index", "Guardian")</li>
+                                <li>@Html.ActionLink("Guardian Clients", "Index", "Client")</li>
                             }    
                             @if (User.IsInRole(RoleName.CanManageYouth))
                             {

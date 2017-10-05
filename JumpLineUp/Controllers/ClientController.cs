@@ -5,17 +5,17 @@ using System.Web;
 using System.Web.Mvc;
 using JumpLineUp.Models;
 using JumpLineUp.ViewModels;
+using JumpLineUp.ViewModels.Client;
 using JumpLineUp.ViewModels.FosterParents;
-using JumpLineUp.ViewModels.Guardians;
 using JumpLineUp.ViewModels.ServiceType;
 
 namespace JumpLineUp.Controllers
 {
-    public class GuardianController : Controller
+    public class ClientController : Controller
     {
         private ApplicationDbContext _context;
 
-        public GuardianController()
+        public ClientController()
         {
             _context = new ApplicationDbContext();
         }
@@ -26,8 +26,8 @@ namespace JumpLineUp.Controllers
         // GET: Guardian
         public ActionResult Index()
         {
-            var guardians = _context.Guardians.ToList();
-            var viewModel = new GuardianIndexViewModel {Guardians = guardians};
+            var guardians = _context.Clients.ToList();
+            var viewModel = new ClientIndexViewModel {Guardians = guardians};
             return View("Index", viewModel);
         }
 
@@ -37,11 +37,11 @@ namespace JumpLineUp.Controllers
         [Authorize(Roles = RoleName.CanManageGuardians)]
         public ActionResult Create()
         {
-            var guardian = new Guardian();
+            var guardian = new Client();
             guardian.IsEnabled = true;
-            var viewModel = new GuardiansCRUDViewModel() {Guardian = guardian};
+            var viewModel = new ClientCrudViewModel() {Guardian = guardian};
             
-            return View("GuardianForm",viewModel);
+            return View("ClientForm",viewModel);
         }
 
 
@@ -51,34 +51,34 @@ namespace JumpLineUp.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var guardian = _context.Guardians.SingleOrDefault(c => c.Id == id);
+            var guardian = _context.Clients.SingleOrDefault(c => c.Id == id);
             if (guardian == null)
                 return HttpNotFound();
 
-            var viewModel = new GuardiansCRUDViewModel() {Guardian = guardian };
-            return View("GuardianForm",viewModel);
+            var viewModel = new ClientCrudViewModel() {Guardian = guardian };
+            return View("ClientForm", viewModel);
         }
 
 
         //------------------------------ Save Guardian ------------------------------------------------------------------------------
         [HttpPost]
         [Authorize(Roles = RoleName.CanManageGuardians)]
-        public ActionResult Save(GuardiansCRUDViewModel model)
+        public ActionResult Save(ClientCrudViewModel model)
         {
-            Guardian guardianInDb;
+            Client guardianInDb;
 
             if (model.Guardian.Id == 0)
             {
-                guardianInDb = new Guardian();
-                _context.Guardians.Add(guardianInDb);
+                guardianInDb = new Client();
+                _context.Clients.Add(guardianInDb);
             }
             else
             {
-                guardianInDb = _context.Guardians.Single(c => c.Id == model.Guardian.Id);
+                guardianInDb = _context.Clients.Single(c => c.Id == model.Guardian.Id);
             }
 
             if (!ModelState.IsValid)
-                return View("GuardianForm", model);
+                return View("ClientForm", model);
 
             guardianInDb.FirstName = model.Guardian.FirstName;
             guardianInDb.LastName = model.Guardian.LastName;

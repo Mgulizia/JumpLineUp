@@ -1,6 +1,6 @@
 ﻿@using JumpLineUp.Helpers
 @using JumpLineUp.Models
-@model  JumpLineUp.ViewModels.Guardians.GuardianIndexViewModel
+@model  JumpLineUp.ViewModels.Client.ClientIndexViewModel
 
 @{
     ViewBag.Title = "Foster Parents";
@@ -13,7 +13,7 @@
         @if (User.IsInRole(RoleName.CanManageGuardians))
         {
             <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
-                @Html.ActionLink("Add Client", "Create", "Guardian", new { }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Add Client", "Create", "Client", new { }, new { @class = "btn btn-primary" })
             </div>
         }
         
@@ -61,7 +61,7 @@
                     <td><a href="tel:@client.Phone">@formated</a></td>
                     @if (User.IsInRole(RoleName.CanManageGuardians))
                     {
-                        <td>@Html.ActionLink("Edit Client", "Edit", "Guardian", new { id = client.Id }, new { @class = "btn btn-sm btn-default" })</td>
+                        <td>@Html.ActionLink("Edit Client", "Edit", "Client", new { id = client.Id }, new { @class = "btn btn-sm btn-default" })</td>
                     }
 
 

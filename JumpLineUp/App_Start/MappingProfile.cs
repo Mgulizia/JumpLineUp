@@ -18,8 +18,8 @@ namespace JumpLineUp.App_Start
             Mapper.CreateMap<FosterParent, FosterParentDto>();
             Mapper.CreateMap<FosterParentDto, FosterParent>();
 
-            Mapper.CreateMap<GuardiansDto, Guardian>();
-            Mapper.CreateMap<Guardian, GuardiansDto>();
+            Mapper.CreateMap<ClientDto, Client>();
+            Mapper.CreateMap<Client, ClientDto>();
 
             Mapper.CreateMap<YouthDto, Youth>();
             Mapper.CreateMap<Youth, YouthDto>();

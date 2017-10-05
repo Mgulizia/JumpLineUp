@@ -34,8 +34,11 @@ namespace JumpLineUp.Migrations
             //Seed the Admin User and give all roles
             SeedAdminUser.Seed();
 
-            //Seed the Service Types and give all roles
+            //Seed the Service Types
             SeedServiceTypes.Seed();
+
+            //Seed the Service Areas
+            SeedServiceAreas.Seed();
         }
     }
 }

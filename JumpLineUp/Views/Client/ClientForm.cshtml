@@ -1,5 +1,5 @@
 ﻿@using System.Web.UI.WebControls
-@model JumpLineUp.ViewModels.Guardians.GuardiansCRUDViewModel
+@model JumpLineUp.ViewModels.Client.ClientCrudViewModel
 @{
     ViewBag.Title = "FosterParentForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +9,7 @@
 }
 
 <br />
-@using (Html.BeginForm("Save", "Guardian"))
+@using (Html.BeginForm("Save", "Client"))
 {
     <div class="panel panel-default">
 
@@ -18,6 +18,20 @@
         </div><!--Panel Heading End-->
 
         <div class="panel-body">
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.Guardian.ClientId)
+                @Html.TextBoxFor(m => m.Guardian.ClientId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Guardian.ClientId)
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.Guardian.MasterCaseNumber)
+                @Html.TextBoxFor(m => m.Guardian.MasterCaseNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Guardian.MasterCaseNumber)
+            </div>
+        
+        <hr/>
 
             <div class="form-group">
                 @Html.LabelFor(m => m.Guardian.FirstName)

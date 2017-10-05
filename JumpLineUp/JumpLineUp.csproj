@@ -211,20 +211,20 @@
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\Api\BlcsOfficesController.cs" />
     <Compile Include="Controllers\Api\YouthsController.cs" />
-    <Compile Include="Controllers\Api\GuardiansController.cs" />
+    <Compile Include="Controllers\Api\ClientsController.cs" />
     <Compile Include="Controllers\Api\FosterParentsController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
     <Compile Include="Controllers\ServiceTypeController.cs" />
     <Compile Include="Controllers\YouthController.cs" />
-    <Compile Include="Controllers\GuardianController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FosterParentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\BlcsOfficeDto.cs" />
     <Compile Include="Dtos\CfsWorkerDto.cs" />
     <Compile Include="Dtos\FosterParentDto.cs" />
-    <Compile Include="Dtos\GuardiansDto.cs" />
+    <Compile Include="Dtos\ClientDto.cs" />
     <Compile Include="Dtos\YouthDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -292,8 +292,21 @@
     <Compile Include="Migrations\201710041628069_AddServiceTypesModel.Designer.cs">
       <DependentUpon>201710041628069_AddServiceTypesModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710052105373_ChangeGuardianToClientAndAddClientId.cs" />
+    <Compile Include="Migrations\201710052105373_ChangeGuardianToClientAndAddClientId.Designer.cs">
+      <DependentUpon>201710052105373_ChangeGuardianToClientAndAddClientId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710052127228_ChangedNameOfGuardianToClientAddMasterCaseNumber.cs" />
+    <Compile Include="Migrations\201710052127228_ChangedNameOfGuardianToClientAddMasterCaseNumber.Designer.cs">
+      <DependentUpon>201710052127228_ChangedNameOfGuardianToClientAddMasterCaseNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710052208207_AddServiceAreasToDataBase.cs" />
+    <Compile Include="Migrations\201710052208207_AddServiceAreasToDataBase.Designer.cs">
+      <DependentUpon>201710052208207_AddServiceAreasToDataBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
+    <Compile Include="Migrations\SeedData\SeedServiceAreas.cs" />
     <Compile Include="Migrations\SeedData\SeedServiceTypes.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
     <Compile Include="Migrations\SeedData\SeedAdminUser.cs" />
@@ -301,7 +314,9 @@
     <Compile Include="Migrations\SeedData\SeedRoles.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\CellularCarriers.cs" />
+    <Compile Include="Models\ServiceArea.cs" />
     <Compile Include="Models\ServiceType.cs" />
+    <Compile Include="Models\SupportService.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CfsWorker.cs" />
@@ -324,7 +339,7 @@
     <Compile Include="ViewModels\Accounts\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\FosterParent.cs" />
-    <Compile Include="Models\Guardian.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="ViewModels\Accounts\IndexViewModel.cs" />
     <Compile Include="Models\RestraintType.cs" />
@@ -336,8 +351,8 @@
     <Compile Include="ViewModels\Cfs\CfsIndexViewModel.cs" />
     <Compile Include="ViewModels\FosterParents\FosterParentCRUDViewModel.cs" />
     <Compile Include="ViewModels\FosterParents\FosterParentIndexViewModel.cs" />
-    <Compile Include="ViewModels\Guardians\GuardianIndexViewModel.cs" />
-    <Compile Include="ViewModels\Guardians\GuardiansCRUDViewModel.cs" />
+    <Compile Include="ViewModels\Client\ClientIndexViewModel.cs" />
+    <Compile Include="ViewModels\Client\ClientCRUDViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeIndexViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeCRUDViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthIndexViewModel.cs" />
@@ -631,8 +646,8 @@
     <Content Include="Views\BlcsOffice\OfficeForm.cshtml" />
     <Content Include="Views\FosterParent\FosterParentForm.cshtml" />
     <Content Include="Views\FosterParent\Index.cshtml" />
-    <Content Include="Views\Guardian\GuardianForm.cshtml" />
-    <Content Include="Views\Guardian\Index.cshtml" />
+    <Content Include="Views\Client\ClientForm.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Youth\Index.cshtml" />
     <Content Include="Views\Youth\YouthForm.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -701,6 +716,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710041628069_AddServiceTypesModel.resx">
       <DependentUpon>201710041628069_AddServiceTypesModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710052105373_ChangeGuardianToClientAndAddClientId.resx">
+      <DependentUpon>201710052105373_ChangeGuardianToClientAndAddClientId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710052127228_ChangedNameOfGuardianToClientAddMasterCaseNumber.resx">
+      <DependentUpon>201710052127228_ChangedNameOfGuardianToClientAddMasterCaseNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710052208207_AddServiceAreasToDataBase.resx">
+      <DependentUpon>201710052208207_AddServiceAreasToDataBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
