@@ -210,12 +210,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\Api\BlcsOfficesController.cs" />
+    <Compile Include="Controllers\Api\YouthInServicesController.cs" />
     <Compile Include="Controllers\Api\YouthsController.cs" />
+    <Compile Include="Controllers\Api\SupportServicesController.cs" />
     <Compile Include="Controllers\Api\ClientsController.cs" />
     <Compile Include="Controllers\Api\FosterParentsController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
     <Compile Include="Controllers\ServiceTypeController.cs" />
+    <Compile Include="Controllers\SupportServicesController.cs" />
     <Compile Include="Controllers\YouthController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FosterParentController.cs" />
@@ -225,7 +228,9 @@
     <Compile Include="Dtos\CfsWorkerDto.cs" />
     <Compile Include="Dtos\FosterParentDto.cs" />
     <Compile Include="Dtos\ClientDto.cs" />
+    <Compile Include="Dtos\SupportServiceDto.cs" />
     <Compile Include="Dtos\YouthDto.cs" />
+    <Compile Include="Dtos\YouthInServiceDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -304,6 +309,10 @@
     <Compile Include="Migrations\201710052208207_AddServiceAreasToDataBase.Designer.cs">
       <DependentUpon>201710052208207_AddServiceAreasToDataBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.cs" />
+    <Compile Include="Migrations\201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.Designer.cs">
+      <DependentUpon>201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedServiceAreas.cs" />
@@ -317,6 +326,7 @@
     <Compile Include="Models\ServiceArea.cs" />
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Models\SupportService.cs" />
+    <Compile Include="Models\YouthInService.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CfsWorker.cs" />
@@ -355,6 +365,7 @@
     <Compile Include="ViewModels\Client\ClientCRUDViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeIndexViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeCRUDViewModel.cs" />
+    <Compile Include="ViewModels\SupportServices\SupportServicesViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthIndexViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthCRUDViewModel.cs" />
   </ItemGroup>
@@ -511,9 +522,12 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bloodhound.js" />
+    <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -602,6 +616,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\typeahead.bundle.min.js" />
+    <Content Include="Scripts\typeahead.jquery.js" />
+    <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -654,6 +672,7 @@
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\ServiceType\Index.cshtml" />
     <Content Include="Views\ServiceType\ServiceTypeForm.cshtml" />
+    <Content Include="Views\SupportServices\SupportServiceCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -725,6 +744,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710052208207_AddServiceAreasToDataBase.resx">
       <DependentUpon>201710052208207_AddServiceAreasToDataBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.resx">
+      <DependentUpon>201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using JumpLineUp.Models;
 
-namespace JumpLineUp.Models
+namespace JumpLineUp.Dtos
 {
-    public class SupportService
+    public class SupportServiceDto
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -22,11 +22,11 @@ namespace JumpLineUp.Models
         public DateTime? ServiceStop { get; set; }
 
 
-        public Client Clients { get; set; }
-        public int ClientIds { get; set; }
+        public List<Client> Clients { get; set; }
+        public List<int> ClientIds { get; set; }
 
-        public List<YouthInService> YouthInServices { get; set; }
-        public List<int> YouthInServicesId { get; set; }
+        public List<Youth> Youths { get; set; }
+        public List<int> YouthIds { get; set; }
 
         public ServiceArea ServiceArea { get; set; }
         public int ServiceAreaId { get; set; }
@@ -38,6 +38,5 @@ namespace JumpLineUp.Models
         public int CfsWorkerId { get; set; }
 
         public bool OnHold { get; set; }
-
     }
 }

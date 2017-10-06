@@ -1,0 +1,188 @@
+﻿@model JumpLineUp.ViewModels.SupportServices.SupportServicesViewModel
+@{
+    ViewBag.Title = "New Support Service";
+}
+
+
+<br/>   
+<form>
+    <div class="panel panel-default">
+
+
+        <div class="panel-heading">
+            <h2>Create New Support Service</h2>
+        </div><!-- End of Panel Header -->
+
+        <div class="panel-body">
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <h4>Basic Case Information</h4>
+
+                        <div class="form-group">
+                            <label for="MasterCaseNumber">Master Case Number</label>
+                            <input id="MasterCaseNumber" type="text" value="" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="AuthorizationNumber">Authorization Number: if available</label>
+                            <input id="AuthorizationNumber" type="text" value="" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ServiceAreaId">Service Area</label>
+                            <select id="ServiceAreaId" type="text" value="" class="form-control">
+                                <option value>-- Select Service Area --</option>
+                                @foreach (var serviceArea in Model.ServiceAreas)
+                                {
+                                    <option value="@serviceArea.Id">@serviceArea.ServiceAreaAbbreviation</option>
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ServiceTypeId">Service Type </label>
+                            <select id="ServiceTypeId" type="text" value="" class="form-control">
+                                <option value>-- Select Service Area --</option>
+                                @foreach (var type in Model.ServiceTypes)
+                                {
+                                    <option value="@type.Id">@type.ServiceAbbrieviation - @type.ServiceName</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div><!-- End of Col-Md-6 -->
+
+                    <div class="col-md-6">
+                        <h4>Service Timeline</h4>
+
+                        <div class="form-group">
+                            <label for="ServiceStart">Service Start Date</label>
+                            <input id="ServiceStart" type="text" value="" class="form-control datepicker" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ServiceStop">Service End Date</label>
+                            <input id="ServiceStop" type="text" value="" class="form-control datepicker" />
+                        </div>
+
+
+                    </div><!-- End of Col-Md-6 -->
+
+                </div><!-- End of Row -->
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                        <h4>Individuals Involved</h4>
+
+                        <div class="form-group">
+                            <label for="YouthInServicesId">Youth Involved</label>
+                            <input id="YouthInServicesId" type="text" value="" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ClientIds">Clients Involved</label>
+                            <div class="tt-container">
+                                <input id="ClientIds" type="text" value="" class="form-control typeahead" />
+                            </div>
+                        </div>
+
+                        <ul id="clients" class="list-group"></ul>
+
+                        <div class="form-group">
+                            <label for="CfsWorkerId">DHHS Case Worker</label>
+                            <div class="tt-container">
+                                <input id="CfsWorkerId" type="text" value="" class="form-control" />
+                            </div>
+                        </div>
+                        
+                        
+                        
+
+                    </div><!-- End of Col-Md-6 -->
+                    <div class="col-md-6">
+                        
+                    </div><!-- End of Col-Md-6 -->
+                </div><!-- End of Row -->
+
+
+
+
+
+            </div><!-- End of Container -->
+
+
+
+
+
+            
+
+        </div><!-- End of Panel Body -->
+
+        <div class="panel-footer">
+            
+            <button class="btn btn-primary"> Add New Service </button>
+
+        </div><!-- End of Panel Footer -->
+    </div><!-- End of Panel -->
+</form>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function() {
+
+            var vm = {}
+
+            $(".datepicker").datepicker({
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+
+            var clients = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/clients?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#ClientIds').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                {
+                    name: 'clientId',
+                    display: "client as client.firstName + ' ' + client.lastName",
+                    source: clients,
+                    templates: {
+                        empty: [
+                            '<div class="empty-message">',
+                            'unable to find any Best Picture winners that match the current query',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function(data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                        }
+                    }
+                }).on("typeahead:select",
+                function(e, client) {
+                    vm.clientId = client.id;
+                    $("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+                });
+
+
+        })
+
+    </script>
+}

@@ -57,5 +57,8 @@ namespace JumpLineUp.Models
 
         public bool IsEnabled { get; set; }
 
+        public List<SupportService> SupportServices { get; set; }
+        public List<int> SupportServicesId { get; set; }
+
     }
 }

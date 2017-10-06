@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
 
@@ -34,7 +35,8 @@ namespace JumpLineUp.Models
         [Display(Name = "Types of Car Restraints Required")]
         public int? RestraintTypeId { get; set; }
 
-
+        public List<YouthInService> YouthInServices { get; set; }
+        public List<int> YouthInServicsId { get; set; }
 
 
         //------------------------------------------ Related Helper Methods ------------------------------------

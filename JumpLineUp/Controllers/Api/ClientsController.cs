@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
 using System.Web.Http;
 using AutoMapper;
@@ -20,11 +21,20 @@ namespace JumpLineUp.Controllers.Api
 
         // GET /api/Clients
         [HttpGet]
-        public IHttpActionResult GetClients()
+        public IHttpActionResult GetClients(string query = null)
         {
-            var guardiansDto = _context.Clients.ToList().Select(Mapper.Map<Client, ClientDto>);
+            var clientsQuery = _context.Clients.AsQueryable();
 
-            return Ok(guardiansDto);
+            if (!String.IsNullOrWhiteSpace(query))
+                clientsQuery = clientsQuery
+                    .Where( c =>
+                    c.FirstName.Contains(query) ||
+                    c.LastName.Contains(query) ||
+                    c.MasterCaseNumber.Contains(query));
+                
+            var clientDto = clientsQuery.ToList().Select(Mapper.Map<Client, ClientDto>);
+
+            return Ok(clientDto);
         }
 
 

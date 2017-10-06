@@ -27,6 +27,12 @@ namespace JumpLineUp.App_Start
             Mapper.CreateMap<BlcsOfficeDto, BlcsOffice>();
             Mapper.CreateMap<BlcsOffice, BlcsOfficeDto>();
 
+            Mapper.CreateMap<SupportServiceDto, SupportService>();
+            Mapper.CreateMap<SupportService, SupportServiceDto>();
+
+            Mapper.CreateMap<YouthInService, YouthInServiceDto>();
+            Mapper.CreateMap<YouthInServiceDto, YouthInService>();
+
 
         }
     }
