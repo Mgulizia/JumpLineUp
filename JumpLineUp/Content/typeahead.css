@@ -56,4 +56,13 @@
 .tt-container {
     position: relative;
     color: black;
+    
+}
+.twitter-typeahead {
+    max-width: 280px;
+    width: 100%;
+}
+.typeahead-selectedbox {
+    max-width: 280px;
+    width: 100%;
 }

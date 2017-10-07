@@ -1,0 +1,169 @@
+﻿@using System.Web.UI.HtmlControls
+@model JumpLineUp.ViewModels.ClientFamily.ClientFamilyCrudViewModel
+@{
+    ViewBag.Title = "ClientFamilyCreateForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<form>
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h2>Create Family</h2>
+        </div><!-- End of Panel Heading -->
+
+        <div class="panel-body">
+            
+            
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        
+
+                        <div class="form-group">
+                            <label for="PrimaryClientId">Primary Client</label>
+                            <div class="tt-container">
+                                <input id="PrimaryClientId" type="text" class="form-control" />
+                            </div>
+                            
+                        </div>
+                        
+                        <ul id="primaryClient" class="list-group typeahead-selectedbox">
+                            <li id="selected-primaryClient" class="list-group-item">&nbsp;</li>
+                        </ul>
+                        
+                        
+                    </div><!-- End of Col-Md-6 -->
+                    <div class="col-md-6">
+                    
+                        
+                        <div class="form-group">
+                            <label for="SecondaryClientId">Secondary Client</label>
+                            <div class="tt-container">
+                                <input id="SecondaryClientId" type="text" class="form-control typeahead" />
+                            </div>
+                            
+                        </div>
+
+                        <ul id="secondaryClientId" class="list-group typeahead-selectedbox">
+                            <li id="selected-secondaryClientId" class="list-group-item">&nbsp;</li>
+                        </ul>
+                        
+
+                    </div><!-- End of Col-Md-6 -->
+                </div><!-- End of Row -->
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+            </div><!-- End of Container -->
+
+
+        </div><!-- End of Panel Heading -->
+
+        <div class="panel-footer">
+            <button class="btn btn-primary">Create Family</button>
+        </div>
+
+
+    </div><!-- End of Panel -->
+</form>
+
+
+@section scripts{
+
+
+<script>
+$(document).ready(function () {
+    var viewModel = {};
+
+
+    //PRIMARY CLIENT TYPEAHEAD----------------------------------------------------------------------------------------------------------------
+    var primaryClient = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/api/clients?query=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+
+    $('#PrimaryClientId').typeahead({
+        minLength: 3,
+        highlight: true
+    },
+        {
+            name: 'primaryClientId',
+            display: "primaryClient as primaryClient.firstName + ' ' + primaryClient.lastName",
+            source: primaryClient,
+            templates: {
+                empty: [
+                    '<div>',
+                    'none found',
+                    '</div>'
+                ].join('\n'),
+                suggestion: function (data) {
+                    return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                }
+            }
+        }).on("typeahead:select",
+        function (e, primaryClient) {
+            viewModel.primaryClientId = primaryClient.id;
+            document.getElementById("selected-primaryClient").innerHTML = primaryClient.firstName + " " + primaryClient.lastName;
+
+            //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+        });
+
+
+
+
+
+    //SECONDARY CLIENT TYPEAHEAD----------------------------------------------------------------------------------------------------------------
+    var secondaryClient = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/api/clients?query=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+
+    $('#SecondaryClientId').typeahead({
+            minLength: 3,
+            highlight: true
+        },
+        {
+            name: 'secondaryClientId',
+            display: "secondaryClient as secondaryClient.firstName + ' ' + secondaryClient.lastName",
+            source: secondaryClient,
+            templates: {
+                empty: [
+                    '<div>',
+                    'none found',
+                    '</div>'
+                ].join('\n'),
+                suggestion: function(data) {
+                    return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                }
+            }
+        }).on("typeahead:select",
+        function(e, secondaryClient) {
+            viewModel.secondaryClientId = secondaryClient.id;
+            document.getElementById("selected-secondaryClientId").innerHTML = secondaryClient.firstName + " " + secondaryClient.lastName;
+
+            //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+        });
+});
+
+    </script>
+}

@@ -82,9 +82,15 @@
                         <h4>Individuals Involved</h4>
 
                         <div class="form-group">
-                            <label for="YouthInServicesId">Youth Involved</label>
-                            <input id="YouthInServicesId" type="text" value="" class="form-control" />
+                            <label for="YouthId">Youth Involved</label>
+                            <input id="YouthId" type="text" value="" class="form-control" />
                         </div>
+                    
+                        <ul id="youth" class="list-group typeahead-selectedbox">
+                            
+                        </ul>
+                    
+                    
 
                         <div class="form-group">
                             <label for="ClientIds">Clients Involved</label>
@@ -93,7 +99,13 @@
                             </div>
                         </div>
 
-                        <ul id="clients" class="list-group"></ul>
+                        <ul id="clients" class="list-group typeahead-selectedbox">
+                            <li id="selected-client" class="list-group-item">&nbsp;</li>
+                        </ul>
+                    
+                    
+                    
+                    
 
                         <div class="form-group">
                             <label for="CfsWorkerId">DHHS Case Worker</label>
@@ -102,8 +114,14 @@
                             </div>
                         </div>
                         
+                        <ul id="cfsWorker" class="list-group typeahead-selectedbox">
+                            <li id="selected-cfsWorker" class="list-group-item">&nbsp;</li>
+                        </ul>
                         
                         
+                        
+                        
+
 
                     </div><!-- End of Col-Md-6 -->
                     <div class="col-md-6">
@@ -134,11 +152,13 @@
 </form>
 
 @section scripts{
+    
     <script>
 
         $(document).ready(function() {
 
-            var vm = {}
+            var viewModel = {};
+            var youthInServices = {};
 
             $(".datepicker").datepicker({
                 showButtonPanel: true,
@@ -148,6 +168,86 @@
                 selectOtherMonths: true
             });
 
+            
+
+
+
+
+            //YOUTH CLIENT TYPEAHEAD -----------------------------------------------------------------------------------------------------------
+            var youth = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/cfsworkers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#YouthId').typeahead({
+                minLength: 3,
+                highlight: true
+            },
+                {
+                    name: 'youthId',
+                    display: "youth as youth.firstName + ' ' + youth.lastName",
+                    source: youth,
+                    templates: {
+                        empty: [
+                            '<div>',
+                            'none found',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function (data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                        }
+                    }
+                }).on("typeahead:select",
+                function (e, youth) {
+                    youthInServices.youthId[].add(youth.id);
+                    $("#youth").append("<li class ='list-group-item'>" + youth.firstName + " " + youth.lastName + "</li>");
+                });
+
+
+
+            //CFS WORKER TYPEAHEAD -----------------------------------------------------------------------------------------------------------
+            var cfsWorker = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/cfsworkers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#CfsWorkerId').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                {
+                    name: 'cfsWorkerId',
+                    display: "cfsWorker as cfsWorker.firstName + ' ' + cfsWorker.lastName",
+                    source: cfsWorker,
+                    templates: {
+                        empty: [
+                            '<div>',
+                            'none found',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function(data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                        }
+                    }
+                }).on("typeahead:select",
+                function (e, cfsWorker) {
+                    viewModel.cfsWorkerId = cfsWorker.id;
+                    document.getElementById("selected-cfsWorker").innerHTML = cfsWorker.firstName + " " + cfsWorker.lastName;
+
+                    //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+                });
+
+
+
+            //CLIENTS TYPEAHEAD----------------------------------------------------------------------------------------------------------------
             var clients = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -167,8 +267,8 @@
                     source: clients,
                     templates: {
                         empty: [
-                            '<div class="empty-message">',
-                            'unable to find any Best Picture winners that match the current query',
+                            '<div>',
+                            'none found',
                             '</div>'
                         ].join('\n'),
                         suggestion: function(data) {
@@ -177,12 +277,12 @@
                     }
                 }).on("typeahead:select",
                 function(e, client) {
-                    vm.clientId = client.id;
-                    $("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+                    viewModel.clientId = client.id;
+                    document.getElementById("selected-client").innerHTML = client.firstName + " " + client.lastName;
+
+                    //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
                 });
-
-
-        })
-
+        });
     </script>
+
 }

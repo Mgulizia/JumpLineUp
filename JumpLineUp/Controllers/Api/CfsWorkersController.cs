@@ -21,11 +21,19 @@ namespace JumpLineUp.Controllers.Api
 
 
         // GET /api/CfsWorkers
-        public IHttpActionResult GetCfsWorkers()
+        public IHttpActionResult GetCfsWorkers(string query = null)
         {
-            var customerDtos = _context.CfsWorkers.ToList().Select(Mapper.Map<CfsWorker, CfsWorkerDto>);
+            var cfsWorkerQuery = _context.CfsWorkers.AsQueryable();
 
-            return Ok(customerDtos);
+            if (!String.IsNullOrWhiteSpace(query))
+                cfsWorkerQuery = cfsWorkerQuery
+                    .Where(c =>
+                        c.FirstName.Contains(query) ||
+                        c.LastName.Contains(query));
+
+            var cfsWorkerDto = cfsWorkerQuery.ToList().Select(Mapper.Map<CfsWorker, CfsWorkerDto>);
+
+            return Ok(cfsWorkerDto);
         }
 
 

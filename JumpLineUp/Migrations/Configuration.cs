@@ -39,6 +39,15 @@ namespace JumpLineUp.Migrations
 
             //Seed the Service Areas
             SeedServiceAreas.Seed();
+
+            //Seed the clients
+            SeedClients.Seed();
+
+            //Seed the CFS Workers
+            SeedCfsWorkers.Seed();
+
+            //Seed the Youth
+            SeedYouth.Seed();
         }
     }
 }

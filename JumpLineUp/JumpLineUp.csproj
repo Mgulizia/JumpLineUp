@@ -217,6 +217,7 @@
     <Compile Include="Controllers\Api\FosterParentsController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
+    <Compile Include="Controllers\ClientFamilyController.cs" />
     <Compile Include="Controllers\ServiceTypeController.cs" />
     <Compile Include="Controllers\SupportServicesController.cs" />
     <Compile Include="Controllers\YouthController.cs" />
@@ -313,8 +314,15 @@
     <Compile Include="Migrations\201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.Designer.cs">
       <DependentUpon>201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710071813445_AddFamilyModel.cs" />
+    <Compile Include="Migrations\201710071813445_AddFamilyModel.Designer.cs">
+      <DependentUpon>201710071813445_AddFamilyModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
+    <Compile Include="Migrations\SeedData\SeedCfsWorkers.cs" />
+    <Compile Include="Migrations\SeedData\SeedYouth.cs" />
+    <Compile Include="Migrations\SeedData\SeedClients.cs" />
     <Compile Include="Migrations\SeedData\SeedServiceAreas.cs" />
     <Compile Include="Migrations\SeedData\SeedServiceTypes.cs" />
     <Compile Include="Migrations\SeedData\SeedRestraintTypes.cs" />
@@ -323,6 +331,7 @@
     <Compile Include="Migrations\SeedData\SeedRoles.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\CellularCarriers.cs" />
+    <Compile Include="Models\ClientFamily.cs" />
     <Compile Include="Models\ServiceArea.cs" />
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Models\SupportService.cs" />
@@ -359,6 +368,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\BlcsOffice\BlcsOfficeIndexViewModel.cs" />
     <Compile Include="ViewModels\Cfs\CfsIndexViewModel.cs" />
+    <Compile Include="ViewModels\ClientFamily\ClientFamilyCrudViewModel.cs" />
     <Compile Include="ViewModels\FosterParents\FosterParentCRUDViewModel.cs" />
     <Compile Include="ViewModels\FosterParents\FosterParentIndexViewModel.cs" />
     <Compile Include="ViewModels\Client\ClientIndexViewModel.cs" />
@@ -616,6 +626,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\serviceForm\CfsWorkerIdTypeAhead.js" />
+    <Content Include="Scripts\serviceForm\ClientIdTypeAhead.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
@@ -673,6 +685,7 @@
     <Content Include="Views\ServiceType\Index.cshtml" />
     <Content Include="Views\ServiceType\ServiceTypeForm.cshtml" />
     <Content Include="Views\SupportServices\SupportServiceCreate.cshtml" />
+    <Content Include="Views\ClientFamily\ClientFamillyCreateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -747,6 +760,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.resx">
       <DependentUpon>201710061557315_CompletedModelForSupportServicesAndAddedAPIsupport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710071813445_AddFamilyModel.resx">
+      <DependentUpon>201710071813445_AddFamilyModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

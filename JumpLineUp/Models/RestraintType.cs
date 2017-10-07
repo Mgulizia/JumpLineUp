@@ -10,14 +10,18 @@ namespace JumpLineUp.Models
         public int Id { get; set; }
         public string RestraintName { get; set; }
 
-        //Save context information from database into selectable properties.
-        public static readonly byte Unknown = 0;
-        public static readonly byte Infant = 1;
-        public static readonly byte HighBackBoosterSeat = 2;
-        public static readonly byte BoosterSeat = 3;
-        public static readonly byte FivePointFrontFacing = 4;
-        public static readonly byte FivePointRearFacing = 5;
+        public List<Youth> YouthNeedingRestraints { get; set; }
+        public List<int> YouthNeedingRestraintsId { get; set; }
     }
-    
+
+    public static class RestraintNames
+    {
+        //Save context information from database into selectable properties
+        public const int None = 1;
+        public const int HighBackBoosterSeat = 2;
+        public const int BoosterSeat = 3;
+        public const int FivePointFrontFacing = 4;
+        public const int FivePointRearFacing = 5;
+    }
 
 }
