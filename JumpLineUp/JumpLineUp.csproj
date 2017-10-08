@@ -210,6 +210,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\Api\BlcsOfficesController.cs" />
+    <Compile Include="Controllers\Api\ClientFamiliesController.cs" />
     <Compile Include="Controllers\Api\YouthInServicesController.cs" />
     <Compile Include="Controllers\Api\YouthsController.cs" />
     <Compile Include="Controllers\Api\SupportServicesController.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\BlcsOfficeDto.cs" />
     <Compile Include="Dtos\CfsWorkerDto.cs" />
+    <Compile Include="Dtos\ClientFamilyDto.cs" />
     <Compile Include="Dtos\FosterParentDto.cs" />
     <Compile Include="Dtos\ClientDto.cs" />
     <Compile Include="Dtos\SupportServiceDto.cs" />

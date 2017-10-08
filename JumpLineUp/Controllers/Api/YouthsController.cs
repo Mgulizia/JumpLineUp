@@ -20,9 +20,18 @@ namespace JumpLineUp.Controllers.Api
 
         // GET /api/Youth
         [HttpGet]
-        public IHttpActionResult GetYouths()
+        public IHttpActionResult GetYouths(string query = null)
         {
-            var item = _context.Youths.ToList().Select(Mapper.Map<Youth, YouthDto>);
+            var youthQuery = _context.Youths.AsQueryable();
+
+            if (!String.IsNullOrWhiteSpace(query))
+                youthQuery = youthQuery
+                    .Where(c =>
+                        c.FirstName.Contains(query) ||
+                        c.LastName.Contains(query));
+
+            var item = youthQuery.ToList().Select(Mapper.Map<Youth, YouthDto>);
+
 
             return Ok(item);
         }

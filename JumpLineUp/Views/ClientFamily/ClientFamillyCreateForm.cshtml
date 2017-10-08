@@ -1,16 +1,15 @@
-﻿@using System.Web.UI.HtmlControls
-@model JumpLineUp.ViewModels.ClientFamily.ClientFamilyCrudViewModel
+﻿@model JumpLineUp.ViewModels.ClientFamily.ClientFamilyCrudViewModel
 @{
     ViewBag.Title = "ClientFamilyCreateForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
-<form>
+<form id="newFamily">
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h2>Create Family</h2>
+            <h2>Create Client Family</h2>
         </div><!-- End of Panel Heading -->
 
         <div class="panel-body">
@@ -55,7 +54,25 @@
                     </div><!-- End of Col-Md-6 -->
                 </div><!-- End of Row -->
             
-                
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        
+                        <div class="form-group">
+                            <label for="YouthId">Secondary Client</label>
+                            <div class="tt-container">
+                                <input id="YouthId" type="text" class="form-control typeahead" />
+                            </div>
+
+                        </div>
+
+                        <ul id="youthId" class="list-group typeahead-selectedbox">
+                            
+                        </ul>
+
+
+                    </div><!-- End of Col-Md-12 -->
+                </div><!-- End of Row -->
                 
                 
                 
@@ -72,6 +89,7 @@
         </div><!-- End of Panel Heading -->
 
         <div class="panel-footer">
+            @Html.AntiForgeryToken()
             <button class="btn btn-primary">Create Family</button>
         </div>
 
@@ -83,87 +101,161 @@
 @section scripts{
 
 
-<script>
-$(document).ready(function () {
-    var viewModel = {};
+    <script>
+        $(document).ready(function() {
+            //variables that will be posted to the server
+            var vm = {
+                selectedyouth: []
+            };
+
+            var primaryKey;
+            var secondaryKey;
+            var selectedyouth = [];
 
 
-    //PRIMARY CLIENT TYPEAHEAD----------------------------------------------------------------------------------------------------------------
-    var primaryClient = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: '/api/clients?query=%QUERY',
-            wildcard: '%QUERY'
-        }
-    });
-
-    $('#PrimaryClientId').typeahead({
-        minLength: 3,
-        highlight: true
-    },
-        {
-            name: 'primaryClientId',
-            display: "primaryClient as primaryClient.firstName + ' ' + primaryClient.lastName",
-            source: primaryClient,
-            templates: {
-                empty: [
-                    '<div>',
-                    'none found',
-                    '</div>'
-                ].join('\n'),
-                suggestion: function (data) {
-                    return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+            //PRIMARY CLIENT TYPEAHEAD----------------------------------------------------------------------------------------------------------------
+            //This allows the user to start typing, and it will query the database and allow selection of the client.
+            var primaryClient = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/clients?query=%QUERY',
+                    wildcard: '%QUERY'
                 }
-            }
-        }).on("typeahead:select",
-        function (e, primaryClient) {
-            viewModel.primaryClientId = primaryClient.id;
-            document.getElementById("selected-primaryClient").innerHTML = primaryClient.firstName + " " + primaryClient.lastName;
+            });
 
-            //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
-        });
+            $('#PrimaryClientId').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                {
+                    name: 'primaryClientId',
+                    display: "primaryClient as primaryClient.firstName + ' ' + primaryClient.lastName",
+                    source: primaryClient,
+                    templates: {
+                        empty: [
+                            '<div>',
+                            'none found',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function(data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                        }
+                    }
+                }).on("typeahead:select",
+                function(e, primaryClient) {
+                    vm.primaryKey = primaryClient.id;
+                    document.getElementById("selected-primaryClient").innerHTML =
+                        primaryClient.firstName + " " + primaryClient.lastName;
+                });
 
 
-
-
-
-    //SECONDARY CLIENT TYPEAHEAD----------------------------------------------------------------------------------------------------------------
-    var secondaryClient = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: '/api/clients?query=%QUERY',
-            wildcard: '%QUERY'
-        }
-    });
-
-    $('#SecondaryClientId').typeahead({
-            minLength: 3,
-            highlight: true
-        },
-        {
-            name: 'secondaryClientId',
-            display: "secondaryClient as secondaryClient.firstName + ' ' + secondaryClient.lastName",
-            source: secondaryClient,
-            templates: {
-                empty: [
-                    '<div>',
-                    'none found',
-                    '</div>'
-                ].join('\n'),
-                suggestion: function(data) {
-                    return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+            //SECONDARY CLIENT TYPEAHEAD----------------------------------------------------------------------------------------------------------------
+            //This allows the user to start typing, and it will query the database and allow selecting a client item
+            var secondaryClient = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/clients?query=%QUERY',
+                    wildcard: '%QUERY'
                 }
-            }
-        }).on("typeahead:select",
-        function(e, secondaryClient) {
-            viewModel.secondaryClientId = secondaryClient.id;
-            document.getElementById("selected-secondaryClientId").innerHTML = secondaryClient.firstName + " " + secondaryClient.lastName;
+            });
 
-            //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+            $('#SecondaryClientId').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                {
+                    name: 'secondaryClientId',
+                    display: "secondaryClient as secondaryClient.firstName + ' ' + secondaryClient.lastName",
+                    source: secondaryClient,
+                    templates: {
+                        empty: [
+                            '<div>',
+                            'none found',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function(data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                        }
+                    }
+                }).on("typeahead:select",
+                function(e, secondaryClient) {
+                    vm.secondaryKey = secondaryClient.id;
+                    document.getElementById("selected-secondaryClientId").innerHTML =
+                        secondaryClient.firstName + " " + secondaryClient.lastName;
+                });
+
+
+            //YOUTH TYPEAHEAD --------------------------------------------------------------------------------------------------------------------
+            //This allows the user to start typing, and it will query the database and allow multiple selection of youth items.
+            var youth = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/youths?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#YouthId').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                {
+                    name: 'youthId',
+                    display: "youth as youth.firstName + ' ' + youth.lastName",
+                    source: youth,
+                    templates: {
+                        empty: ['none found'].join('\n'),
+                        suggestion: function(data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                        }
+                    }
+                }).on("typeahead:select",
+                function(e, youth) {
+                    vm.selectedyouth.push(youth.id.toString());
+                    $("#youthId").append("<li class ='list-group-item'>" +
+                        youth.firstName + " " + youth.lastName + "<span id='" + youth.id + "' class='close'>X</span></li>");    
+                });
+
+            //Clears out the client when the x is clicked by getting the youth id, checking if its in the array, and removing it.  It also removes the list item.
+            $("#youthId").on("click",
+                ".close",
+                function() {
+
+                    var youthId = $(this).attr("id");
+
+                    if (jQuery.inArray(youthId, vm.youth) != -1) {
+                        vm.youth = jQuery.grep(vm.youth, function(value) {
+                            return value != youthId;
+                        });
+                        $(this).parent().remove();
+                    } else {
+                        $(this).parent().remove();
+                    } 
+                });
+
+
+            //Post function to save the form
+            $("#newFamily").submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "/api/ClientFamilies",
+                    method: "post",
+                    traditional: true,
+                    data: vm
+                })
+                .done(function() {
+                        console.log("Done successfully");
+                    })
+                .fail(function() {
+                        console.log("Failed");
+                });
+            });
+
+
         });
-});
 
     </script>
 }
