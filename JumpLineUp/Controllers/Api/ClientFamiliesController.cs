@@ -35,22 +35,21 @@ namespace JumpLineUp.Controllers.Api
         [Route("api/ClientFamilies")]
         public IHttpActionResult Create(ClientFamilyDto dto)
         {
-            var primary = _context.Clients.Single(c => c.Id == dto.primaryKey);
 
-            var secondary = _context.Clients.Single(c => c.Id == dto.secondaryKey);
+            var newFamily = new ClientFamily();
 
-            var youths = _context.Youths.Where(y => dto.selectedyouth.Contains(y.Id)).ToList();
+            newFamily.PrimaryClient = _context.Clients.Single(c => c.Id == dto.primaryKey);
 
-            var newFamily = new ClientFamily()
+            if (dto.secondaryKey != 0)
             {
-                PrimaryClient = primary,
-                SecondaryClient = secondary,
-                Youths = youths
-
-            };
+                newFamily.SecondaryClient = _context.Clients.Single(c => c.Id == dto.secondaryKey);
+            }
+        
+            newFamily.Youths = _context.Youths.Where(y => dto.selectedyouth.Contains(y.Id)).ToList();
+            
 
             _context.ClientFamilies.Add(newFamily);
-
+            _context.SaveChanges();
 
             return Created(new Uri(Request.RequestUri + "/" + newFamily.Id), newFamily);
         }

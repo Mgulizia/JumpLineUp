@@ -16,7 +16,8 @@ namespace JumpLineUp
                         "~/Scripts/respond.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js",
-                        "~/Scripts/typeahead.bundle.js"
+                        "~/Scripts/typeahead.bundle.js",
+                        "~/Scripts/toastr.js"
                         
                         ));
 
@@ -33,6 +34,7 @@ namespace JumpLineUp
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/themes/base/jquery-ui.css",
                       "~/Content/typeahead.css",
+                      "~/Content/toastr.css",
                       "~/Content/site.css"
                       ));
         }

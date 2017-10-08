@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label for="PrimaryClientId">Primary Client</label>
                             <div class="tt-container">
-                                <input id="PrimaryClientId" type="text" class="form-control" />
+                                <input id="PrimaryClientId"  type="text" class="form-control" />
                             </div>
                             
                         </div>
@@ -59,7 +59,7 @@
                         
                         
                         <div class="form-group">
-                            <label for="YouthId">Secondary Client</label>
+                            <label for="YouthId">Family Youth</label>
                             <div class="tt-container">
                                 <input id="YouthId" type="text" class="form-control typeahead" />
                             </div>
@@ -99,13 +99,14 @@
 
 
 @section scripts{
-
+    @Scripts.Render("~/bundles/jqueryval")
 
     <script>
         $(document).ready(function() {
             //variables that will be posted to the server
             var vm = {
-                selectedyouth: []
+                selectedyouth: [],
+                secondaryKey: null
             };
 
             var primaryKey;
@@ -220,10 +221,8 @@
                 });
 
             //Clears out the client when the x is clicked by getting the youth id, checking if its in the array, and removing it.  It also removes the list item.
-            $("#youthId").on("click",
-                ".close",
-                function() {
-
+            $("#youthId").on("click", ".close", function () {
+               
                     var youthId = $(this).attr("id");
 
                     if (jQuery.inArray(youthId, vm.youth) != -1) {
@@ -236,6 +235,7 @@
                     } 
                 });
 
+           
 
             //Post function to save the form
             $("#newFamily").submit(function(e) {
@@ -247,11 +247,11 @@
                     data: vm
                 })
                 .done(function() {
-                        console.log("Done successfully");
+                        toastr.success("New client family has been created.");
                     })
                 .fail(function() {
-                        console.log("Failed");
-                });
+                        toastr.error("New client family was not created, Was there something missing? ");
+                    });
             });
 
 

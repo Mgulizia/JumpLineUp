@@ -8,15 +8,10 @@ namespace JumpLineUp.Dtos
 {
     public class ClientFamilyDto
     {
+
         public int Id { get; set; }
-
-        
         public int primaryKey { get; set; }
-
-        
-        public int secondaryKey { get; set; }
-
-        
+        public int? secondaryKey { get; set; }
         public List<int> selectedyouth { get; set; }
     }
 }
