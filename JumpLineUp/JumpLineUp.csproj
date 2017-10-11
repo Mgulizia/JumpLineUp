@@ -210,15 +210,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\Api\BlcsOfficesController.cs" />
-    <Compile Include="Controllers\Api\ClientFamiliesController.cs" />
+    <None Include="Controllers\Api\ClientFamiliesController.cs.disabled" />
     <Compile Include="Controllers\Api\YouthInServicesController.cs" />
     <Compile Include="Controllers\Api\YouthsController.cs" />
-    <Compile Include="Controllers\Api\SupportServicesController.cs" />
+    <None Include="Controllers\Api\SupportServicesController.cs.disabled" />
     <Compile Include="Controllers\Api\ClientsController.cs" />
     <Compile Include="Controllers\Api\FosterParentsController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
-    <Compile Include="Controllers\ClientFamilyController.cs" />
+    <None Include="Controllers\ClientFamilyController.cs.disabled" />
     <Compile Include="Controllers\ServiceTypeController.cs" />
     <Compile Include="Controllers\SupportServicesController.cs" />
     <Compile Include="Controllers\YouthController.cs" />
@@ -319,6 +319,10 @@
     <Compile Include="Migrations\201710071813445_AddFamilyModel.cs" />
     <Compile Include="Migrations\201710071813445_AddFamilyModel.Designer.cs">
       <DependentUpon>201710071813445_AddFamilyModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710101644505_RemoveClientFamilyAttributes.cs" />
+    <Compile Include="Migrations\201710101644505_RemoveClientFamilyAttributes.Designer.cs">
+      <DependentUpon>201710101644505_RemoveClientFamilyAttributes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
@@ -771,6 +775,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710071813445_AddFamilyModel.resx">
       <DependentUpon>201710071813445_AddFamilyModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710101644505_RemoveClientFamilyAttributes.resx">
+      <DependentUpon>201710101644505_RemoveClientFamilyAttributes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

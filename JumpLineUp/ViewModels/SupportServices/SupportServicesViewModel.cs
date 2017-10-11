@@ -11,5 +11,6 @@ namespace JumpLineUp.ViewModels.SupportServices
         public SupportService SupportServices { get; set; }
         public List<ServiceArea> ServiceAreas { get; set; }
         public List<Models.ServiceType> ServiceTypes { get; set; }
+        public List<RestraintType> RestraintTypes { get; set; }
     }
 }

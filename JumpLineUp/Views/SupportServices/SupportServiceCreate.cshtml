@@ -1,10 +1,14 @@
-﻿@model JumpLineUp.ViewModels.SupportServices.SupportServicesViewModel
+﻿@using JumpLineUp.Models
+@model JumpLineUp.ViewModels.SupportServices.SupportServicesViewModel
 @{
     ViewBag.Title = "New Support Service";
 }
 
 
 <br/>   
+
+
+<button class="btn btn-lg btn-danger btn-modal-open" >Do some shit, test some shit</button><br />
 <form>
     <div class="panel panel-default">
 
@@ -155,7 +159,92 @@
     
     <script>
 
+
+
         $(document).ready(function() {
+
+
+
+            @{
+            var selectBoxForYouth = "";
+            foreach (var restraint in Model.RestraintTypes)
+            {
+                selectBoxForYouth = selectBoxForYouth + @"<option value = '"+ restraint.Id +"'>"+ restraint.RestraintName + "</option>";
+            }
+            }
+            function youthBootBoxContent() {
+                var formContent = "<form id='' class='bootBoxForm' action='POST'>" +
+                    "<div class='form-group>" +
+                    "<label for='youthFirstName'>First Name</label>" +
+                    "<input type='text' id='youthFirstName' class='form-control' value='' /><br/>" +
+                    "</div>" +
+                    "<div class='form-group>" +
+                    "<label for='youthLastName'>Last Name</label>" +
+                    "<input type='text' id='youthLastName' class='form-control' value='' /><br/>" +
+                    "</div>" +
+                    "<div class='form-group'>" +
+                    "<label for='youthBirthDate'>Birth Date</label>" +
+                    "<input type='text' id='youthBirthDate' class='form-control datepicker' value='' /><br/>" +
+                    "</div>" +
+                    "<div class='form-group>" +
+                    "<label for='restraintTypes'>Restraint Types Needed</label>" +
+                    "<select class='form-control' id='restraintTypes'>" +
+                    "<option value>--- Select Restraint Type ---</option>" +
+                    "@Html.Raw(selectBoxForYouth)" +
+                    "</div>" +
+                    "</form>";
+
+                var object = $("<div/>").html(formContent).contents();
+
+                object.find(".datepicker").datepicker({
+                    format: 'mm-dd-yyyy',
+                    autoclose: true
+                }).on('changeDate',
+                    function (ev) {
+                        $(this).blur();
+                        $(this).datepicker('hide');
+                    });
+
+                return object;
+            }
+
+
+            $(".btn-modal-open").on("click", function () {
+                bootbox.dialog({
+                    message: youthBootBoxContent,
+                    title: "Add a Youth",
+                    buttons: {
+                        main: {
+                            label: "OK",
+                            className: "btn-primary"
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-default"
+                        }
+
+                    }
+                });
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             var viewModel = {};
             var youthInServices = {};
@@ -168,7 +257,7 @@
                 selectOtherMonths: true
             });
 
-            
+
 
 
 
@@ -203,7 +292,7 @@
                     }
                 }).on("typeahead:select",
                 function (e, youth) {
-                    youthInServices.youthId[].add(youth.id);
+                    youthInServices.youthId.add(youth.id);
                     $("#youth").append("<li class ='list-group-item'>" + youth.firstName + " " + youth.lastName + "</li>");
                 });
 
@@ -220,9 +309,9 @@
             });
 
             $('#CfsWorkerId').typeahead({
-                    minLength: 3,
-                    highlight: true
-                },
+                minLength: 3,
+                highlight: true
+            },
                 {
                     name: 'cfsWorkerId',
                     display: "cfsWorker as cfsWorker.firstName + ' ' + cfsWorker.lastName",
@@ -233,7 +322,7 @@
                             'none found',
                             '</div>'
                         ].join('\n'),
-                        suggestion: function(data) {
+                        suggestion: function (data) {
                             return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
                         }
                     }
@@ -258,9 +347,9 @@
             });
 
             $('#ClientIds').typeahead({
-                    minLength: 3,
-                    highlight: true
-                },
+                minLength: 3,
+                highlight: true
+            },
                 {
                     name: 'clientId',
                     display: "client as client.firstName + ' ' + client.lastName",
@@ -271,12 +360,12 @@
                             'none found',
                             '</div>'
                         ].join('\n'),
-                        suggestion: function(data) {
+                        suggestion: function (data) {
                             return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
                         }
                     }
                 }).on("typeahead:select",
-                function(e, client) {
+                function (e, client) {
                     viewModel.clientId = client.id;
                     document.getElementById("selected-client").innerHTML = client.firstName + " " + client.lastName;
 

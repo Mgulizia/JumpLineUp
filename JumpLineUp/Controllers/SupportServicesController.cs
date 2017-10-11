@@ -24,7 +24,8 @@ namespace JumpLineUp.Controllers
             {
                 SupportServices = new SupportService(),
                 ServiceAreas = _context.ServiceAreas.Where(m => m.CurrentlyServing == true).ToList(),
-                ServiceTypes = _context.ServiceTypes.Where(m => m.CurrentService == true).ToList()
+                ServiceTypes = _context.ServiceTypes.Where(m => m.CurrentService == true).ToList(),
+                RestraintTypes = _context.RestraintTypes.ToList()
             };
 
             return View("SupportServiceCreate", viewModel );
