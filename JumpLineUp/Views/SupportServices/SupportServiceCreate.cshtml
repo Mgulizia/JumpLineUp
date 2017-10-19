@@ -1,4 +1,5 @@
-﻿@using JumpLineUp.Models
+﻿@using JumpLineUp.Migrations
+@using JumpLineUp.Models
 @model JumpLineUp.ViewModels.SupportServices.SupportServicesViewModel
 @{
     ViewBag.Title = "New Support Service";
@@ -87,7 +88,9 @@
 
                         <div class="form-group">
                             <label for="YouthId">Youth Involved</label>
-                            <input id="YouthId" type="text" value="" class="form-control" />
+                            <div class="tt-container">
+                                <input id="YouthId" type="text" value="" class="form-control" />
+                            </div>
                         </div>
                     
                         <ul id="youth" class="list-group typeahead-selectedbox">
@@ -165,212 +168,306 @@
 
 
 
+
+
+//ADD YOUTH MODAL ----------------------------------------------------------------------------------------------------------------------
+//Opens modal to insert a new youth to database, validates the data, and posts, returning the data.
+
+            //Dto object, will be sent to Db
+            var youthDto =
+                {
+                    FirstName: null,
+                    LastName: null,
+                    BirthDate: null,
+                    YouthComment: null,
+                    RestraintTypeId: 0,
+                    IsEnabled: true
+                }
+
+            //Gets the restraints select ready
             @{
-            var selectBoxForYouth = "";
-            foreach (var restraint in Model.RestraintTypes)
-            {
-                selectBoxForYouth = selectBoxForYouth + @"<option value = '"+ restraint.Id +"'>"+ restraint.RestraintName + "</option>";
+                var selectBoxForYouthRestraint = "";
+
+                foreach (var restraint in Model.RestraintTypes)
+                {
+                    selectBoxForYouthRestraint = selectBoxForYouthRestraint + @"<option value = '"+ restraint.Id +"'>"+ restraint.RestraintName + "</option>";
+                }
             }
-            }
+
+            //Creates the modal form
             function youthBootBoxContent() {
                 var formContent = "<form id='' class='bootBoxForm' action='POST'>" +
+
                     "<div class='form-group>" +
                     "<label for='youthFirstName'>First Name</label>" +
-                    "<input type='text' id='youthFirstName' class='form-control' value='' /><br/>" +
+                    "<input type='text' id='youthFirstName' class='form-control' value='' />" +
+                    "<span id='errYouthFirstName' class='field-validation-error'>&nbsp;</span>" +
                     "</div>" +
+
                     "<div class='form-group>" +
                     "<label for='youthLastName'>Last Name</label>" +
-                    "<input type='text' id='youthLastName' class='form-control' value='' /><br/>" +
+                    "<input type='text' id='youthLastName' class='form-control' value='' />" +
+                    "<span id='errYouthLastName' class='field-validation-error'>&nbsp;</span>" +
                     "</div>" +
+
                     "<div class='form-group'>" +
                     "<label for='youthBirthDate'>Birth Date</label>" +
-                    "<input type='text' id='youthBirthDate' class='form-control datepicker' value='' /><br/>" +
+                    "<input type='text' id='youthBirthDate' class='form-control datepicker' value='' />" +
+                    "<span id='errYouthBirthDate' class='field-validation-error'>&nbsp;</span>" +
                     "</div>" +
-                    "<div class='form-group>" +
+
+                    "<div class='form-group'>" +
+                    "<label for='youthComment'>Optional Details about Youth</label>" +
+                    "<textarea id='youthComment' rows='6' class='form-control' /><br/>" +
+                    "</div>" +
+
+                    "<div class='form-group'>" +
                     "<label for='restraintTypes'>Restraint Types Needed</label>" +
                     "<select class='form-control' id='restraintTypes'>" +
                     "<option value>--- Select Restraint Type ---</option>" +
-                    "@Html.Raw(selectBoxForYouth)" +
-                    "</div>" +
-                    "</form>";
+                    "@Html.Raw(selectBoxForYouthRestraint)" +
+                        "</select>" +
+                        "<span id='errRestraintTypes' class='field-validation-error'>&nbsp;</span>" +
+                        "</div>" +
+                        "</form>";
 
-                var object = $("<div/>").html(formContent).contents();
+                    //Adds the datepicker to the birthdate
+                    var object = $("<div/>").html(formContent).contents();
+                    object.find(".datepicker").datepicker({
+                        format: 'mm-dd-yyyy',
+                        autoclose: true,
+                        changeMonth: true,
+                        changeYear: true,
+                        showButtonPanel: true,
+                    }).on('changeDate',
+                        function (ev) {
+                            $(this).blur();
+                            $(this).datepicker('hide');
+                        });
 
-                object.find(".datepicker").datepicker({
-                    format: 'mm-dd-yyyy',
-                    autoclose: true
-                }).on('changeDate',
-                    function (ev) {
-                        $(this).blur();
-                        $(this).datepicker('hide');
+                    return object;
+                }
+
+                //Logic for the modal.  on click -> open, on submit -> validate, on validated -> post and return ID of new youth
+                $(".btn-modal-open").on("click", function () {
+                    bootbox.dialog({
+                        message: youthBootBoxContent,
+                        title: "Add a Youth",
+                        buttons: {
+                            cancel: {
+                                label: "Cancel",
+                                className: "btn-default"
+                            },
+                            submit: {
+                                label: "Add Youth",
+                                className: "btn-primary",
+                                callback: function (e) {
+                                    e.preventDefault();
+                                    var valid = true;
+
+                                    if ($("#youthFirstName").val().trim()) {
+                                        youthDto.FirstName = $("#youthFirstName").val();
+                                        $("#errYouthFirstName").html("&nbsp;");
+                                    } else {
+                                        $("#errYouthFirstName").html("Youth's first name is required");
+                                        valid = false;
+                                    }
+
+                                    if ($("#youthLastName").val().trim()) {
+                                        youthDto.LastName = $("#youthLastName").val();
+                                        $("#errYouthLastName").html("&nbsp;");
+                                    } else {
+                                        $("#errYouthLastName").html("Youth's last name is required");
+                                        valid = false;
+                                    }
+
+                                    if ($("#youthBirthDate").val().trim()) {
+                                        youthDto.BirthDate = $("#youthBirthDate").val();
+                                        $("#errYouthBirthDate").html("&nbsp;");
+                                    } else {
+                                        $("#errYouthBirthDate").html("Youth's Birthdate is required");
+                                        valid = false;
+                                    }
+
+                                    youthDto.YouthComment = $("#youthComment").val();
+
+                                    if ($("#restraintTypes").val() !== "") {
+                                        youthDto.RestraintTypeId = $("#restraintTypes").val();
+                                        $("#errRestraintTypes").html("&nbsp;");
+                                    } else {
+                                        $("#errRestraintTypes").html("You must select a restraint type.");
+                                        valid = false;
+                                    }
+
+                                    if (valid) {
+                                        $.ajax({
+                                            url: "/api/Youths",
+                                            method: "post",
+                                            data: youthDto
+                                        })
+                                            .done(function (result) {
+                                                alert(result.id);
+                                                toastr.success(youthDto.FirstName + " " + youthDto.LastName + " has been added to Lineup.");
+                                            })
+                                            .fail(function () {
+                                                toastr.error("Youth was not created, Was there something missing? ");
+                                            });
+                                    } else {
+                                        return false;
+                                    }
+
+
+                                }
+                            }
+
+                        }
+                    });
+                });
+//END OF ADD YOUTH MODAL ------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                var viewModel = {};
+                var youthInServices = {};
+
+                $(".datepicker").datepicker({
+                    showButtonPanel: true,
+                    changeMonth: true,
+                    changeYear: true,
+                    showOtherMonths: true,
+                    selectOtherMonths: true
+                });
+
+
+//YOUTH TYPEAHEAD --------------------------------------------------------------------------------------------------------------------
+//This allows the user to start typing, and it will query the database and allow multiple selection of youth items.
+                var youth = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: {
+                        url: '/api/youths?query=%QUERY',
+                        wildcard: '%QUERY'
+                    }
+                });
+
+                $('#YouthId').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                    {
+                        name: 'youthId',
+                        display: "youth as youth.firstName + ' ' + youth.lastName",
+                        source: youth,
+                        templates: {
+                            empty: ['none found'].join('\n'),
+                            suggestion: function (data) {
+                                return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                            }
+                        }
+                    }).on("typeahead:select",
+                    function (e, youth) {
+                        vm.selectedyouth.push(youth.id.toString());
+                        $("#youthId").append("<li class ='list-group-item'>" +
+                            youth.firstName + " " + youth.lastName + "<span id='" + youth.id + "' class='close'>X</span></li>");
                     });
 
-                return object;
-            }
+                //Clears out the client when the x is clicked by getting the youth id, checking if its in the array, and removing it.  It also removes the list item.
+                $("#youthId").on("click", ".close", function () {
 
+                    var youthId = $(this).attr("id");
 
-            $(".btn-modal-open").on("click", function () {
-                bootbox.dialog({
-                    message: youthBootBoxContent,
-                    title: "Add a Youth",
-                    buttons: {
-                        main: {
-                            label: "OK",
-                            className: "btn-primary"
-                        },
-                        cancel: {
-                            label: "Cancel",
-                            className: "btn-default"
-                        }
-
+                    if (jQuery.inArray(youthId, vm.youth) != -1) {
+                        vm.youth = jQuery.grep(vm.youth, function (value) {
+                            return value != youthId;
+                        });
+                        $(this).parent().remove();
+                    } else {
+                        $(this).parent().remove();
                     }
                 });
-            });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            var viewModel = {};
-            var youthInServices = {};
-
-            $(".datepicker").datepicker({
-                showButtonPanel: true,
-                changeMonth: true,
-                changeYear: true,
-                showOtherMonths: true,
-                selectOtherMonths: true
-            });
-
-
-
-
-
-
-            //YOUTH CLIENT TYPEAHEAD -----------------------------------------------------------------------------------------------------------
-            var youth = new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                remote: {
-                    url: '/api/cfsworkers?query=%QUERY',
-                    wildcard: '%QUERY'
-                }
-            });
-
-            $('#YouthId').typeahead({
-                minLength: 3,
-                highlight: true
-            },
-                {
-                    name: 'youthId',
-                    display: "youth as youth.firstName + ' ' + youth.lastName",
-                    source: youth,
-                    templates: {
-                        empty: [
-                            '<div>',
-                            'none found',
-                            '</div>'
-                        ].join('\n'),
-                        suggestion: function (data) {
-                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                $('#CfsWorkerId').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                    {
+                        name: 'cfsWorkerId',
+                        display: "cfsWorker as cfsWorker.firstName + ' ' + cfsWorker.lastName",
+                        source: cfsWorker,
+                        templates: {
+                            empty: [
+                                '<div>',
+                                'none found',
+                                '</div>'
+                            ].join('\n'),
+                            suggestion: function (data) {
+                                return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                            }
                         }
+                    }).on("typeahead:select",
+                    function (e, cfsWorker) {
+                        viewModel.cfsWorkerId = cfsWorker.id;
+                        document.getElementById("selected-cfsWorker").innerHTML = cfsWorker.firstName + " " + cfsWorker.lastName;
+
+                        //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+                    });
+
+
+
+                //CLIENTS TYPEAHEAD----------------------------------------------------------------------------------------------------------------
+                var clients = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: {
+                        url: '/api/clients?query=%QUERY',
+                        wildcard: '%QUERY'
                     }
-                }).on("typeahead:select",
-                function (e, youth) {
-                    youthInServices.youthId.add(youth.id);
-                    $("#youth").append("<li class ='list-group-item'>" + youth.firstName + " " + youth.lastName + "</li>");
                 });
 
-
-
-            //CFS WORKER TYPEAHEAD -----------------------------------------------------------------------------------------------------------
-            var cfsWorker = new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                remote: {
-                    url: '/api/cfsworkers?query=%QUERY',
-                    wildcard: '%QUERY'
-                }
-            });
-
-            $('#CfsWorkerId').typeahead({
-                minLength: 3,
-                highlight: true
-            },
-                {
-                    name: 'cfsWorkerId',
-                    display: "cfsWorker as cfsWorker.firstName + ' ' + cfsWorker.lastName",
-                    source: cfsWorker,
-                    templates: {
-                        empty: [
-                            '<div>',
-                            'none found',
-                            '</div>'
-                        ].join('\n'),
-                        suggestion: function (data) {
-                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                $('#ClientIds').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                    {
+                        name: 'clientId',
+                        display: "client as client.firstName + ' ' + client.lastName",
+                        source: clients,
+                        templates: {
+                            empty: [
+                                '<div>',
+                                'none found',
+                                '</div>'
+                            ].join('\n'),
+                            suggestion: function (data) {
+                                return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                            }
                         }
-                    }
-                }).on("typeahead:select",
-                function (e, cfsWorker) {
-                    viewModel.cfsWorkerId = cfsWorker.id;
-                    document.getElementById("selected-cfsWorker").innerHTML = cfsWorker.firstName + " " + cfsWorker.lastName;
+                    }).on("typeahead:select",
+                    function (e, client) {
+                        viewModel.clientId = client.id;
+                        document.getElementById("selected-client").innerHTML = client.firstName + " " + client.lastName;
 
-                    //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
-                });
-
-
-
-            //CLIENTS TYPEAHEAD----------------------------------------------------------------------------------------------------------------
-            var clients = new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                remote: {
-                    url: '/api/clients?query=%QUERY',
-                    wildcard: '%QUERY'
-                }
-            });
-
-            $('#ClientIds').typeahead({
-                minLength: 3,
-                highlight: true
-            },
-                {
-                    name: 'clientId',
-                    display: "client as client.firstName + ' ' + client.lastName",
-                    source: clients,
-                    templates: {
-                        empty: [
-                            '<div>',
-                            'none found',
-                            '</div>'
-                        ].join('\n'),
-                        suggestion: function (data) {
-                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
-                        }
-                    }
-                }).on("typeahead:select",
-                function (e, client) {
-                    viewModel.clientId = client.id;
-                    document.getElementById("selected-client").innerHTML = client.firstName + " " + client.lastName;
-
-                    //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
-                });
+                        //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+                    });
         });
     </script>
 

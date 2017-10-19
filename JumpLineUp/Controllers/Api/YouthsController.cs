@@ -18,7 +18,7 @@ namespace JumpLineUp.Controllers.Api
 
 
 
-        // GET /api/Youth
+        // GET /api/Youths
         [HttpGet]
         public IHttpActionResult GetYouths(string query = null)
         {
@@ -40,7 +40,7 @@ namespace JumpLineUp.Controllers.Api
 
 
 
-        // GET /api/Youth/1
+        // GET /api/Youths/1
         [HttpGet]
         public IHttpActionResult GetYouth(int id)
         {
@@ -53,7 +53,7 @@ namespace JumpLineUp.Controllers.Api
         }
 
 
-        // POST /api/Youth
+        // POST /api/Youths
         [HttpPost]
         public IHttpActionResult CreateYouth(YouthDto itemDto)
         {
@@ -70,7 +70,7 @@ namespace JumpLineUp.Controllers.Api
         }
 
 
-        // PUT /api/Youth/1
+        // PUT /api/Youths/1
         [HttpPut]
         public IHttpActionResult UpdateYouth(int id,YouthDto itemDto)
         {
@@ -89,7 +89,7 @@ namespace JumpLineUp.Controllers.Api
             return Ok();
         }
 
-        // DELETE /api/Youth/1
+        // DELETE /api/Youths/1
         [HttpDelete]
         public IHttpActionResult ToggleYouth(int id)
         {
