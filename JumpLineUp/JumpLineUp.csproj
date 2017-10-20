@@ -208,6 +208,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\RestraintsController.cs" />
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\Api\BlcsOfficesController.cs" />
     <None Include="Controllers\Api\ClientFamiliesController.cs.disabled" />
