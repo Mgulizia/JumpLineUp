@@ -9,7 +9,6 @@
 <br/>   
 
 
-<button class="btn btn-lg btn-danger btn-modal-open" >Do some shit, test some shit</button><br />
 <form>
     <div class="panel panel-default">
 
@@ -87,13 +86,19 @@
                         <h4>Individuals Involved</h4>
 
                         <div class="form-group">
-                            <label for="YouthId">Youth Involved</label>
+                            <label for="YouthId">
+                                <button class="btn btn-default btn-xs btn-modal-youth" type="button" style="color: lightgreen">
+                                    <i class="glyphicon glyphicon-plus"> </i>
+                                </button>
+                                Youth Involved
+                            </label>
+
                             <div class="tt-container">
                                 <input id="YouthId" type="text" value="" class="form-control" />
                             </div>
                         </div>
                     
-                        <ul id="youth" class="list-group typeahead-selectedbox">
+                        <ul id="youthId" class="list-group typeahead-selectedbox">
                             
                         </ul>
                     
@@ -124,11 +129,6 @@
                         <ul id="cfsWorker" class="list-group typeahead-selectedbox">
                             <li id="selected-cfsWorker" class="list-group-item">&nbsp;</li>
                         </ul>
-                        
-                        
-                        
-                        
-
 
                     </div><!-- End of Col-Md-6 -->
                     <div class="col-md-6">
@@ -136,17 +136,7 @@
                     </div><!-- End of Col-Md-6 -->
                 </div><!-- End of Row -->
 
-
-
-
-
             </div><!-- End of Container -->
-
-
-
-
-
-            
 
         </div><!-- End of Panel Body -->
 

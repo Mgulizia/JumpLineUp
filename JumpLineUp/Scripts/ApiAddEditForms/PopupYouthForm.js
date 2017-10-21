@@ -10,37 +10,59 @@
     //Creates the modal form
     function youthBootBoxContent() {
 
-        var formContent = "<form id='' class='bootBoxForm' action='POST'>" +
+        var formContent =
+        "<form id='' class='bootBoxForm' action='POST'>" +
 
-        "<div class='form-group>" +
-        "<label for='youthFirstName'>First Name</label>" +
-        "<input type='text' id='youthFirstName' class='form-control' value='' />" +
-        "<span id='errYouthFirstName' class='field-validation-error'>&nbsp;</span>" +
-        "</div>" +
+            "<div class='row'>" +
+                "<div class='col-md-6'>" +
+                    "<div class='form-group'>" +
+                        "<label for='youthFirstName'>First Name</label>" +
+                        "<input type='text' id='youthFirstName' class='form-control' value='' />" +
+                        "<span id='errYouthFirstName' class='field-validation-error'>&nbsp;</span>" +
+                    "</div>" +
+                "</div>" +
 
-        "<div class='form-group>" +
-        "<label for='youthLastName'>Last Name</label>" +
-        "<input type='text' id='youthLastName' class='form-control' value='' />" +
-        "<span id='errYouthLastName' class='field-validation-error'>&nbsp;</span>" +
-        "</div>" +
+                "<div class='col-md-6'>" +
+                    "<div class='form-group'>" +
+                        "<label for='youthLastName'>Last Name</label>" +
+                        "<input type='text' id='youthLastName' class='form-control' value='' />" +
+                        "<span id='errYouthLastName' class='field-validation-error'>&nbsp;</span>" +
+                    "</div>" +
+                "</div>" +
+            "</div>" +
 
-        "<div class='form-group'>" +
-        "<label for='youthBirthDate'>Birth Date</label>" +
-        "<input type='text' id='youthBirthDate' class='form-control datepicker' value='' />" +
-        "<span id='errYouthBirthDate' class='field-validation-error'>&nbsp;</span>" +
-        "</div>" +
+            "<div class='row'>" +
 
-        "<div class='form-group'>" +
-        "<label for='youthComment'>Optional Details about Youth</label>" +
-        "<textarea id='youthComment' rows='6' class='form-control' /><br/>" +
-        "</div>" +
+                "<div class='col-md-6'>" +
+                    "<div class='form-group'>" +
+                        "<label for='youthBirthDate'>Birth Date</label>" +
+                        "<input type='text' id='youthBirthDate' class='form-control datepicker' value='' />" +
+                        "<span id='errYouthBirthDate' class='field-validation-error'>&nbsp;</span>" +
+                    "</div>" +
+                "</div>" +
 
-        "<div class='form-group'>" +
-        "<label for='restraintTypes'>Restraint Types Needed</label>" +
-        "<select class='form-control' id='restraintTypes'>" +
-        "</select>" +
-        "<span id='errRestraintTypes' class='field-validation-error'>&nbsp;</span>" +
-        "</div>" +
+                "<div class='col-md-6'>" +
+                    "<div class='form-group'>" +
+                        "<label for='restraintTypes'>Restraint Types Needed</label>" +
+                        "<select class='form-control' id='restraintTypes'>" +
+                        "</select>" +
+                        "<span id='errRestraintTypes' class='field-validation-error'>&nbsp;</span>" +
+                    "</div>" +
+                "</div>" +
+
+            "</div>" +
+
+            "<div class='row'>" +
+
+                "<div class='col-md-12'>" +
+                    "<div class='form-group' style ='width: 100%;' >" +
+                        "<label for='youthComment'>Optional Details about Youth</label>" +
+                        "<textarea id='youthComment' rows='6' class='form-control'  style ='max-width: 100%;' /><br/>" +
+                    "</div>" +
+                "</div>" +
+
+            "</div>" +
+
         "</form>";
 
         $.ajax({
@@ -99,7 +121,7 @@
     }
     
 //Logic for the modal.  on click -> open, on submit -> validate, on validated -> post and return ID of new youth
-    $(".btn-modal-open").on("click", function () {
+    $(".btn-modal-youth").on("click", function () {
 
         var youthDto =
         {

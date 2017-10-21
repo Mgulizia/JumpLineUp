@@ -61,3 +61,7 @@ textarea {
     border-color: #9eedad;
     box-shadow: 0 0 10px #9eedbc;
 }
+.bootBoxForm.input {
+    height: 70%;
+    font-size: 70%
+}
