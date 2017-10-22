@@ -21,19 +21,12 @@
 
             <div class="container">
                 <div class="row">
-
+                    <h4>Basic Case Information</h4>
                     <div class="col-md-6">
-
-                        <h4>Basic Case Information</h4>
 
                         <div class="form-group">
                             <label for="MasterCaseNumber">Master Case Number</label>
                             <input id="MasterCaseNumber" type="text" value="" class="form-control" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="AuthorizationNumber">Authorization Number: if available</label>
-                            <input id="AuthorizationNumber" type="text" value="" class="form-control" />
                         </div>
 
                         <div class="form-group">
@@ -45,6 +38,15 @@
                                     <option value="@serviceArea.Id">@serviceArea.ServiceAreaAbbreviation</option>
                                 }
                             </select>
+                        </div>
+
+                    </div><!-- End of Col-Md-6 -->
+
+                    <div class="col-md-6">
+                       
+                        <div class="form-group">
+                            <label for="AuthorizationNumber">Authorization Number: if available</label>
+                            <input id="AuthorizationNumber" type="text" value="" class="form-control" />
                         </div>
                         
                         <div class="form-group">
@@ -58,33 +60,88 @@
                             </select>
                         </div>
 
-                    </div><!-- End of Col-Md-6 -->
-
-                    <div class="col-md-6">
-                        <h4>Service Timeline</h4>
-
-                        <div class="form-group">
-                            <label for="ServiceStart">Service Start Date</label>
-                            <input id="ServiceStart" type="text" value="" class="form-control datepicker" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ServiceStop">Service End Date</label>
-                            <input id="ServiceStop" type="text" value="" class="form-control datepicker" />
-                        </div>
-
 
                     </div><!-- End of Col-Md-6 -->
 
                 </div><!-- End of Row -->
+            
+            
 
                 <hr />
+            
+            
 
                 <div class="row">
+                    <h4>Service Timeline</h4>
+                    <div class="col-md-6">
+
+
+                        <div class="form-group">
+                            <label for="ServiceStart">Service Start Date</label>
+                            <input id="ServiceStart" type="text" value="" class="form-control datepicker"/>
+                        </div>
+
+                    </div><!-- End of Col-Md-6 -->
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="ServiceStop">Service End Date</label>
+                            <input id="ServiceStop" type="text" value="" class="form-control datepicker"/>
+                        </div>
+
+                    </div><!-- End of Col-Md-6 -->
+
+                </div><!-- End of Row -->
+                
+            
+
+                <hr />
+            
+            
+
+                <div class="row">
+                    <h4>Individuals Involved</h4>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="CfsWorkerId">
+                                <button class="btn btn-default btn-xs btn-modal-cfs" type="button" style="color: lightgreen">
+                                    <i class="glyphicon glyphicon-plus"> </i>
+                                </button>
+                                DHHS Case Worker
+                            </label>
+                            <div class="tt-container">
+                                <input id="CfsWorkerId" type="text" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <ul id="cfsWorker" class="list-group typeahead-selectedbox">
+                            <li id="selected-cfsWorker" class="list-group-item">&nbsp;</li>
+                        </ul>
+
+                        
+
+
+
+                        <div class="form-group">
+                            <label for="ClientIds">
+                                <button class="btn btn-default btn-xs btn-modal-client" type="button" style="color: lightgreen">
+                                    <i class="glyphicon glyphicon-plus"> </i>
+                                </button>
+                                Clients Involved
+                            </label>
+                            <div class="tt-container">
+                                <input id="ClientIds" type="text" value="" class="form-control typeahead"/>
+                            </div>
+                        </div>
+
+                        <ul id="clients" class="list-group typeahead-selectedbox">
+                            <li id="selected-client" class="list-group-item">&nbsp;</li>
+                        </ul>
+                    </div><!-- End of Col-Md-6 -->
+
                     <div class="col-md-6">
                         
-                        <h4>Individuals Involved</h4>
-
                         <div class="form-group">
                             <label for="YouthId">
                                 <button class="btn btn-default btn-xs btn-modal-youth" type="button" style="color: lightgreen">
@@ -92,49 +149,20 @@
                                 </button>
                                 Youth Involved
                             </label>
-
                             <div class="tt-container">
                                 <input id="YouthId" type="text" value="" class="form-control" />
                             </div>
                         </div>
-                    
+
                         <ul id="youthId" class="list-group typeahead-selectedbox">
                             
                         </ul>
-                    
-                    
 
-                        <div class="form-group">
-                            <label for="ClientIds">Clients Involved</label>
-                            <div class="tt-container">
-                                <input id="ClientIds" type="text" value="" class="form-control typeahead" />
-                            </div>
-                        </div>
-
-                        <ul id="clients" class="list-group typeahead-selectedbox">
-                            <li id="selected-client" class="list-group-item">&nbsp;</li>
-                        </ul>
-                    
-                    
-                    
-                    
-
-                        <div class="form-group">
-                            <label for="CfsWorkerId">DHHS Case Worker</label>
-                            <div class="tt-container">
-                                <input id="CfsWorkerId" type="text" value="" class="form-control" />
-                            </div>
-                        </div>
-                        
-                        <ul id="cfsWorker" class="list-group typeahead-selectedbox">
-                            <li id="selected-cfsWorker" class="list-group-item">&nbsp;</li>
-                        </ul>
-
-                    </div><!-- End of Col-Md-6 -->
-                    <div class="col-md-6">
-                        
                     </div><!-- End of Col-Md-6 -->
                 </div><!-- End of Row -->
+            
+                
+                
 
             </div><!-- End of Container -->
 
@@ -150,132 +178,156 @@
 
 @section scripts{
     <script src="~/Scripts/ApiAddEditForms/PopupYouthForm.js"></script>    
+    <script src="~/Scripts/ApiAddEditForms/PopupClientForm.js"></script>    
+    <script src="~/Scripts/ApiAddEditForms/PopupCfsWorkerForm.js"></script>    
     <script>
-    $(document).ready(function() {
+        
+        $(document).ready(function() {
 
 
-                var vm = {};
-                var youthInServices = {};
+            var serviceFormDto = {
+                MasterCaseNumber: null,
+                AuthorizationNumber: null,
+                ServiceStart: null,
+                ServieStop: null,
+                ClientId: null,
+                YouthId: [],
+                ServiceAreaId: 0,
+                ServiceTypeId: 0,
+                CfsWorkerId: 0,
+                OnHold: false
+            };
 
-                $(".datepicker").datepicker({
-                    showButtonPanel: true,
-                    changeMonth: true,
-                    changeYear: true,
-                    showOtherMonths: true,
-                    selectOtherMonths: true
-                });
+            $(".datepicker").datepicker({
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
 
 
-//YOUTH TYPEAHEAD --------------------------------------------------------------------------------------------------------------------
-//This allows the user to start typing, and it will query the database and allow multiple selection of youth items.
-                var youth = new Bloodhound({
-                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
-                    queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    remote: {
-                        url: '/api/youths?query=%QUERY',
-                        wildcard: '%QUERY'
-                    }
-                });
+    //YOUTH TYPEAHEAD --------------------------------------------------------------------------------------------------------------------
+    //This allows the user to start typing, and it will query the database and allow multiple selection of youth items.
+            var youth = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/youths?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
 
-                $('#YouthId').typeahead({
+            $('#YouthId').typeahead({
                     minLength: 3,
                     highlight: true
                 },
-                    {
-                        name: 'youthId',
-                        display: "youth as youth.firstName + ' ' + youth.lastName",
-                        source: youth,
-                        templates: {
-                            empty: ['none found'].join('\n'),
-                            suggestion: function (data) {
-                                return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
-                            }
+                {
+                    name: 'youthId',
+                    display: "youth as youth.firstName + ' ' + youth.lastName",
+                    source: youth,
+                    templates: {
+                        empty: ['&nbsp;&nbsp; Youth not found, Click the green + above to add.'].join('\n'),
+                        suggestion: function (data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
                         }
-                    }).on("typeahead:select",
-                    function (e, youth) {
-                        vm.selectedyouth.push(youth.id.toString());
-                        $("#youthId").append("<li class ='list-group-item'>" +
-                            youth.firstName + " " + youth.lastName + "<span id='" + youth.id + "' class='close'>X</span></li>");
-                    });
-
-                //Clears out the client when the x is clicked by getting the youth id, checking if its in the array, and removing it.  It also removes the list item.
-                $("#youthId").on("click", ".close", function () {
-
-                    var youthId = $(this).attr("id");
-
-                    if (jQuery.inArray(youthId, vm.youth) != -1) {
-                        vm.youth = jQuery.grep(vm.youth, function (value) {
-                            return value != youthId;
-                        });
-                        $(this).parent().remove();
-                    } else {
-                        $(this).parent().remove();
                     }
+                }).on("typeahead:select",
+                function (e, youth) {
+                    serviceFormDto.YouthId.push(youth.id);
+                    $("#youthId").append("<li class ='list-group-item'>" +
+                        "<strong>Selected:</strong> " + youth.firstName + " " + youth.lastName + "<span id='" + youth.id + "' class='close'>X</span></li>");
                 });
 
-                $('#CfsWorkerId').typeahead({
+            //Clears out the youth when the x is clicked by getting the youth id, checking if its in the array, and removing it.  It also removes the list item.
+            $("#youthId").on("click", ".close", function () {
+               
+                var youthId = $(this).attr("id");
+
+                if (jQuery.inArray(youthId, serviceFormDto.YouthId) != -1) {
+                    serviceFormDto.YouthId = jQuery.grep(serviceFormDto.YouthId, function(value) {
+                        return value != youthId;
+                    });
+                    $(this).parent().remove();
+                } else {
+                    $(this).parent().remove();
+                } 
+            });
+
+
+    //CFS WORKER TYPEAHEAD ----------------------------------------------------------------------------------------------------------
+    //This allows the user to start typing, and it will query the database and allow multiple selection of CFS Worker items.
+            var cfsWorker = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/cfsWorkers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#CfsWorkerId').typeahead({
                     minLength: 3,
                     highlight: true
                 },
-                    {
-                        name: 'cfsWorkerId',
-                        display: "cfsWorker as cfsWorker.firstName + ' ' + cfsWorker.lastName",
-                        source: cfsWorker,
-                        templates: {
-                            empty: [
-                                '<div>',
-                                'none found',
-                                '</div>'
-                            ].join('\n'),
-                            suggestion: function (data) {
-                                return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
-                            }
+                {
+                    name: 'cfsWorkerId',
+                    display: "cfsWorker as cfsWorker.firstName + ' ' + cfsWorker.lastName",
+                    source: cfsWorker,
+                    templates: {
+                        empty: [
+                            '<div>',
+                            '&nbsp;&nbsp; CFS Worker not found, Click the green + above to add.',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function (data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
                         }
-                    }).on("typeahead:select",
-                    function (e, cfsWorker) {
-                        viewModel.cfsWorkerId = cfsWorker.id;
-                        document.getElementById("selected-cfsWorker").innerHTML = cfsWorker.firstName + " " + cfsWorker.lastName;
-
-                        //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
-                    });
-
-
-
-                //CLIENTS TYPEAHEAD----------------------------------------------------------------------------------------------------------------
-                var clients = new Bloodhound({
-                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
-                    queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    remote: {
-                        url: '/api/clients?query=%QUERY',
-                        wildcard: '%QUERY'
                     }
+                }).on("typeahead:select",
+                function (e, cfsWorker) {
+                    serviceFormDto.CfsWorkerId = cfsWorker.id;
+                    document.getElementById("selected-cfsWorker").innerHTML = "<strong>Selected</strong>: " + cfsWorker.firstName + " " + cfsWorker.lastName;
                 });
 
-                $('#ClientIds').typeahead({
+
+
+    //CLIENT GUARDIAN TYPEAHEAD ----------------------------------------------------------------------------------------------------------
+    //This allows the user to start typing, and it will query the database and allow multiple selection of CFS Worker items.
+            var clients = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('masterCaseNumber', 'firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/clients?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#ClientIds').typeahead({
                     minLength: 3,
                     highlight: true
                 },
-                    {
-                        name: 'clientId',
-                        display: "client as client.firstName + ' ' + client.lastName",
-                        source: clients,
-                        templates: {
-                            empty: [
-                                '<div>',
-                                'none found',
-                                '</div>'
-                            ].join('\n'),
-                            suggestion: function (data) {
-                                return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
-                            }
+                {
+                    name: 'clientId',
+                    display: "client as client.firstName + ' ' + client.lastName",
+                    source: clients,
+                    templates: {
+                        empty: [
+                            '<div>',
+                            '&nbsp;&nbsp; Client not found, Click the green + above to add.',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function (data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
                         }
-                    }).on("typeahead:select",
-                    function (e, client) {
-                        viewModel.clientId = client.id;
-                        document.getElementById("selected-client").innerHTML = client.firstName + " " + client.lastName;
+                    }
+                }).on("typeahead:select",
+                function (e, client) {
+                    serviceFormDto.ClientId = client.id;
+                    document.getElementById("selected-client").innerHTML = "<strong>Selected</strong>: " + client.firstName + " " + client.lastName;
 
-                        //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
-                    });
+                    //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
+                });
         });
     </script>
 

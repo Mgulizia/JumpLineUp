@@ -545,6 +545,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ApiAddEditForms\PopupClientForm.js" />
+    <Content Include="Scripts\ApiAddEditForms\PopupCfsWorkerForm.js" />
     <Content Include="Scripts\ApiAddEditForms\PopupYouthForm.js" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
@@ -560,6 +562,7 @@
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\ApiAddEditForms\ViewPage1.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

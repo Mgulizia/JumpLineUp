@@ -8,6 +8,13 @@ namespace JumpLineUp.Dtos
         public int Id { get; set; }
 
         [Required]
+        public string ClientId { get; set; }
+
+        [Required]
+        public string MasterCaseNumber { get; set; }
+
+
+        [Required]
         [MinLength(3)]
         public string FirstName { get; set; }
 

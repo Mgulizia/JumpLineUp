@@ -22,11 +22,11 @@ namespace JumpLineUp.Dtos
         public DateTime? ServiceStop { get; set; }
 
 
-        public List<Client> Clients { get; set; }
-        public List<int> ClientIds { get; set; }
+        public Client Client { get; set; }
+        public int ClientId { get; set; }
 
-        public List<Youth> Youths { get; set; }
-        public List<int> YouthIds { get; set; }
+        public List<Youth> Youth { get; set; }
+        public List<int> YouthId { get; set; }
 
         public ServiceArea ServiceArea { get; set; }
         public int ServiceAreaId { get; set; }

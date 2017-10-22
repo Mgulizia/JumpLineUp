@@ -27,10 +27,11 @@ namespace JumpLineUp.Controllers.Api
 
             if (!String.IsNullOrWhiteSpace(query))
                 clientsQuery = clientsQuery
-                    .Where( c =>
-                    c.FirstName.Contains(query) ||
-                    c.LastName.Contains(query) ||
-                    c.MasterCaseNumber.Contains(query));
+                    .Where(c =>
+                        c.FirstName.Contains(query) ||
+                        c.LastName.Contains(query) ||
+                        c.MasterCaseNumber.Contains(query) ||
+                        c.ClientId.Contains(query));
                 
             var clientDto = clientsQuery.ToList().Select(Mapper.Map<Client, ClientDto>);
 
