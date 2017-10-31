@@ -226,7 +226,6 @@
                                 data: clientDto
                             })
                                 .done(function (result) {
-                                    alert(result.id);
                                     toastr.success(clientDto.FirstName + " " + clientDto.LastName + " has been added to Lineup.");
                                 })
                                 .fail(function () {

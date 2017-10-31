@@ -1,0 +1,103 @@
+﻿@using System.Web.UI.WebControls
+@model JumpLineUp.ViewModels.OtherContact.OtherContactCrudViewModel
+@{
+    ViewBag.Title = "FosterParentForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = (Model.OtherContact.Id == 0) ? "New Contact" : "Update Contact";
+    var buttonTxt = (Model.OtherContact.Id == 0) ? "Save Contact" : "Update Contact";
+
+}
+
+<br />
+@using (Html.BeginForm("Save", "OtherContact"))
+{
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h2>@title</h2>
+        </div><!--Panel Heading End-->
+
+        <div class="panel-body">
+        
+    
+        
+        <hr/>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OtherContact.FirstName)
+                @Html.TextBoxFor(m => m.OtherContact.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OtherContact.FirstName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OtherContact.LastName)
+                @Html.TextBoxFor(m => m.OtherContact.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OtherContact.LastName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OtherContact.Phone)
+                @Html.TextBoxFor(m => m.OtherContact.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OtherContact.Phone)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OtherContact.Street1)
+                @Html.TextBoxFor(m => m.OtherContact.Street1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OtherContact.Street1)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OtherContact.Street2)
+                @Html.TextBoxFor(m => m.OtherContact.Street2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OtherContact.Street2)
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OtherContact.City)
+                @Html.TextBoxFor(m => m.OtherContact.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OtherContact.City)
+            </div>
+        
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OtherContact.State)
+                @Html.TextBoxFor(m => m.OtherContact.State, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OtherContact.State)
+            </div>
+        
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OtherContact.Zip)
+                @Html.TextBoxFor(m => m.OtherContact.Zip, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OtherContact.Zip)
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(m => m.OtherContact.IsEnabled, new { @checked = true }) Currently Active?
+                </label>
+            </div>
+
+            @Html.HiddenFor(m => m.OtherContact.Id)
+
+
+
+
+
+        </div><!--Panel Body End-->
+        <div class="panel-footer">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">@buttonTxt</button>
+
+
+        </div>
+    </div><!--Panel End-->
+}
+
+@section scripts{
+
+
+}
+

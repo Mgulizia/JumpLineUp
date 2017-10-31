@@ -146,7 +146,6 @@
                                 data: cfsDto
                             })
                                 .done(function (result) {
-                                    alert(result.id);
                                     toastr.success(cfsDto.FirstName + " " + cfsDto.LastName + " has been added to Lineup.");
                                 })
                                 .fail(function () {

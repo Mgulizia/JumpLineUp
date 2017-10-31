@@ -29,6 +29,7 @@ namespace JumpLineUp.Controllers.Api
                     .Where(c =>
                         c.FirstName.Contains(query) ||
                         c.LastName.Contains(query));
+                   
 
             var item = youthQuery.ToList().Select(Mapper.Map<Youth, YouthDto>);
 

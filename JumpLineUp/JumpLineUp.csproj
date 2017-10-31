@@ -208,18 +208,19 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\OtherContactsController.cs" />
     <Compile Include="Controllers\Api\RestraintsController.cs" />
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\Api\BlcsOfficesController.cs" />
-    <None Include="Controllers\Api\ClientFamiliesController.cs.disabled" />
     <Compile Include="Controllers\Api\YouthInServicesController.cs" />
     <Compile Include="Controllers\Api\YouthsController.cs" />
-    <None Include="Controllers\Api\SupportServicesController.cs.disabled" />
+    <Compile Include="Controllers\Api\SupportServicesController.cs" />
     <Compile Include="Controllers\Api\ClientsController.cs" />
     <Compile Include="Controllers\Api\FosterParentsController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
     <None Include="Controllers\ClientFamilyController.cs.disabled" />
+    <Compile Include="Controllers\OtherContactController.cs" />
     <Compile Include="Controllers\ServiceTypeController.cs" />
     <Compile Include="Controllers\SupportServicesController.cs" />
     <Compile Include="Controllers\YouthController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\BlcsOfficeDto.cs" />
     <Compile Include="Dtos\CfsWorkerDto.cs" />
+    <Compile Include="Dtos\OtherContactDto.cs" />
     <Compile Include="Dtos\ClientFamilyDto.cs" />
     <Compile Include="Dtos\FosterParentDto.cs" />
     <Compile Include="Dtos\ClientDto.cs" />
@@ -325,6 +327,18 @@
     <Compile Include="Migrations\201710101644505_RemoveClientFamilyAttributes.Designer.cs">
       <DependentUpon>201710101644505_RemoveClientFamilyAttributes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710311613103_AddOtherContact.cs" />
+    <Compile Include="Migrations\201710311613103_AddOtherContact.Designer.cs">
+      <DependentUpon>201710311613103_AddOtherContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710311616338_RemoveRequiredAttributesInOtherContacts.cs" />
+    <Compile Include="Migrations\201710311616338_RemoveRequiredAttributesInOtherContacts.Designer.cs">
+      <DependentUpon>201710311616338_RemoveRequiredAttributesInOtherContacts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710311933276_UpdateModelWithManyToManyJoinTables.cs" />
+    <Compile Include="Migrations\201710311933276_UpdateModelWithManyToManyJoinTables.Designer.cs">
+      <DependentUpon>201710311933276_UpdateModelWithManyToManyJoinTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedCfsWorkers.cs" />
@@ -338,10 +352,12 @@
     <Compile Include="Migrations\SeedData\SeedRoles.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\CellularCarriers.cs" />
+    <Compile Include="Models\OtherContact.cs" />
     <Compile Include="Models\ClientFamily.cs" />
     <Compile Include="Models\ServiceArea.cs" />
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Models\SupportService.cs" />
+    <Compile Include="Models\OthersInService.cs" />
     <Compile Include="Models\YouthInService.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -380,11 +396,17 @@
     <Compile Include="ViewModels\FosterParents\FosterParentIndexViewModel.cs" />
     <Compile Include="ViewModels\Client\ClientIndexViewModel.cs" />
     <Compile Include="ViewModels\Client\ClientCRUDViewModel.cs" />
+    <Compile Include="ViewModels\OtherContact\OtherContactCRUDViewModel.cs" />
+    <Compile Include="ViewModels\OtherContact\OtherContactIndexViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeIndexViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeCRUDViewModel.cs" />
     <Compile Include="ViewModels\SupportServices\SupportServicesViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthIndexViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthCRUDViewModel.cs" />
+    <Content Include="Scripts\ApiAddEditForms\PopupFosterParentForm.js" />
+    <Content Include="Scripts\ApiAddEditForms\PopupOtherContactForm.js" />
+    <Content Include="Views\OtherContact\OtherContactForm.cshtml" />
+    <Content Include="Views\OtherContact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-Darkly.css" />
@@ -784,6 +806,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710101644505_RemoveClientFamilyAttributes.resx">
       <DependentUpon>201710101644505_RemoveClientFamilyAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710311613103_AddOtherContact.resx">
+      <DependentUpon>201710311613103_AddOtherContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710311616338_RemoveRequiredAttributesInOtherContacts.resx">
+      <DependentUpon>201710311616338_RemoveRequiredAttributesInOtherContacts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710311933276_UpdateModelWithManyToManyJoinTables.resx">
+      <DependentUpon>201710311933276_UpdateModelWithManyToManyJoinTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

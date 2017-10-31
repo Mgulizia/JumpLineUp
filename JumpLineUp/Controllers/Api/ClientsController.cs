@@ -31,7 +31,8 @@ namespace JumpLineUp.Controllers.Api
                         c.FirstName.Contains(query) ||
                         c.LastName.Contains(query) ||
                         c.MasterCaseNumber.Contains(query) ||
-                        c.ClientId.Contains(query));
+                        c.ClientId.Contains(query))
+                    .Where(c => c.IsEnabled);
                 
             var clientDto = clientsQuery.ToList().Select(Mapper.Map<Client, ClientDto>);
 

@@ -1,0 +1,101 @@
+﻿@using JumpLineUp.Helpers
+@using JumpLineUp.Models
+@model  JumpLineUp.ViewModels.OtherContact.OtherContactIndexViewModel
+
+@{
+    ViewBag.Title = "Other Contacts";
+
+}
+<br />
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        @if (User.IsInRole(RoleName.CanManageGuardians))
+        {
+            <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+                @Html.ActionLink("Add Other Contacts", "Create", "OtherContact", new { }, new { @class = "btn btn-primary" })
+            </div>
+        }
+        
+
+        <h2>Manage Other Contacts</h2>
+    </div><!-- End of Panel Heading -->
+
+    <div class="panel-body">
+
+        <table id="guardianTable" class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <td>Name</td>
+                    <td>City</td>
+                    <td>Phone Number</td>
+                    @if (User.IsInRole(RoleName.CanManageGuardians))
+                    {
+                        <td>Edit</td>
+                    }
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var client in Model.OtherContacts)
+                {
+                    
+                    <tr>@{
+                           
+                        var formated = Phone.DisplayPhone(client.Phone);
+                        var icon = "glyphicon glyphicon-remove";
+                        var color = "color: #e07979";
+                        var text = "Disabled";
+                        if (client.IsEnabled)
+                        {
+                            icon = "glyphicon glyphicon-ok";
+                            color = "color: lightgreen";
+                            text = "Enabled";
+                        }
+                        }
+                    <td>@text <span class="@icon" style="@color"></span></td>
+                    <td>@client.FirstName @client.LastName</td>
+                    <td>@client.City</td>
+                    <td><a href="tel:@client.Phone">@formated</a></td>
+                    @if (User.IsInRole(RoleName.CanManageGuardians))
+                    {
+                        <td>@Html.ActionLink("Edit Contact", "Edit", "OtherContact", new { id = client.Id }, new { @class = "btn btn-sm btn-default" })</td>
+                    }
+
+
+                </tr>
+                        }
+            </tbody>
+        </table>
+
+    </div><!-- End of Panel Body -->
+
+</div><!-- End of Panel -->
+
+
+
+
+
+
+
+
+
+@section scripts{
+    <script>
+    $(document).ready(function() {
+        var tableName = "#guardianTable";
+
+        $(tableName).DataTable({
+                "columnDefs": [
+                {
+                    "targets": 4,
+                    "orderable": false
+                }
+            ]
+        });
+
+    });
+    </script>
+}

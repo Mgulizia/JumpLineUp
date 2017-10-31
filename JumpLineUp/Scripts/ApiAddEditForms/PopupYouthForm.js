@@ -189,7 +189,6 @@
                                 data: youthDto
                             })
                                 .done(function (result) {
-                                    alert(result.id);
                                     toastr.success(youthDto.FirstName + " " + youthDto.LastName + " has been added to Lineup.");
                                 })
                                 .fail(function () {

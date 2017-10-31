@@ -17,7 +17,8 @@ namespace JumpLineUp.Models
         public DbSet<ServiceArea> ServiceAreas { get; set; }
         public DbSet<SupportService> SupportServices { get; set; }
         public DbSet<YouthInService> YouthInService { get; set; }
-        //public DbSet<ClientFamily> ClientFamilies { get; set; }
+        public DbSet<OtherContact> OtherContacts { get; set; }
+        public DbSet<OthersInService> OthersInService { get; set; }
 
         
         public ApplicationDbContext()

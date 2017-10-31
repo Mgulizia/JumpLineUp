@@ -28,6 +28,9 @@ namespace JumpLineUp.Dtos
         public List<Youth> Youth { get; set; }
         public List<int> YouthId { get; set; }
 
+        public List<OtherContact> OtherContacts { get; set; }
+        public List<int> OtherContactId { get; set; }
+
         public ServiceArea ServiceArea { get; set; }
         public int ServiceAreaId { get; set; }
 

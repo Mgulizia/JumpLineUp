@@ -66,9 +66,9 @@
                 </div><!-- End of Row -->
             
             
-
+            </div>
                 <hr />
-            
+            <div class="container">
             
 
                 <div class="row">
@@ -95,7 +95,9 @@
                 
             
 
-                <hr />
+            </div>
+            <hr />
+            <div class="container">
             
             
 
@@ -138,6 +140,27 @@
                         <ul id="clients" class="list-group typeahead-selectedbox">
                             <li id="selected-client" class="list-group-item">&nbsp;</li>
                         </ul>
+                        
+                        <div class="form-group">
+                            <label for="FosterParentIds">
+                                <button class="btn btn-default btn-xs btn-modal-fosterParent" type="button" style="color: lightgreen">
+                                    <i class="glyphicon glyphicon-plus"> </i>
+                                </button>
+                                Foster Family Involved
+                            </label>
+                            <div class="tt-container">
+                                <input id="FosterParentIds" type="text" value="" class="form-control typeahead"/>
+                            </div>
+                        </div>
+
+                        <ul id="fosterParents" class="list-group typeahead-selectedbox">
+                            <li id="selected-fosterParents" class="list-group-item">&nbsp;</li>
+                        </ul>     
+                        
+                        
+                        
+                        
+
                     </div><!-- End of Col-Md-6 -->
 
                     <div class="col-md-6">
@@ -157,6 +180,29 @@
                         <ul id="youthId" class="list-group typeahead-selectedbox">
                             
                         </ul>
+                    
+                        <div class="form-group">
+                            <label for="OtherContactId">
+                                <button class="btn btn-default btn-xs btn-modal-otherContact" type="button" style="color: lightgreen">
+                                    <i class="glyphicon glyphicon-plus"> </i>
+                                </button>
+                                Other Contacts Involved
+                            </label>
+                            <div class="tt-container">
+                                <input id="OtherContactId" type="text" value="" class="form-control" />
+                            </div>
+                        </div>
+
+                        <ul id="otherContactId" class="list-group typeahead-selectedbox"></ul>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
 
                     </div><!-- End of Col-Md-6 -->
                 </div><!-- End of Row -->
@@ -180,6 +226,8 @@
     <script src="~/Scripts/ApiAddEditForms/PopupYouthForm.js"></script>    
     <script src="~/Scripts/ApiAddEditForms/PopupClientForm.js"></script>    
     <script src="~/Scripts/ApiAddEditForms/PopupCfsWorkerForm.js"></script>    
+    <script src="~/Scripts/ApiAddEditForms/PopupOtherContactForm.js"></script>    
+    <script src="~/Scripts/ApiAddEditForms/PopupFosterParentForm.js"></script>    
     <script>
         
         $(document).ready(function() {
@@ -192,6 +240,7 @@
                 ServieStop: null,
                 ClientId: null,
                 YouthId: [],
+                OtherContact: [],
                 ServiceAreaId: 0,
                 ServiceTypeId: 0,
                 CfsWorkerId: 0,
@@ -328,7 +377,72 @@
 
                     //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
                 });
+
+
+
+
+
+    //OTHER CONTACT TYPEAHEAD ----------------------------------------------------------------------------------------------------------
+    //This allows the user to start typing, and it will query the database and allow multiple selection of Other Contact items.
+            var otherContacts = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/OtherContacts?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#OtherContactId').typeahead({
+                    minLength: 3,
+                    highlight: true
+                },
+                {
+                    name: 'otherContactId',
+                    display: "otherContact as otherContact.firstName + ' ' + otherContact.lastName",
+                    source: otherContacts,
+                    templates: {
+                        empty: [
+                            '<div>',
+                            '&nbsp;&nbsp; Other Contact not found, Click the green + above to add.',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function (data) {
+                            return '<div><strong>' + data.firstName + ' ' + data.lastName + '</strong></div>';
+                        }
+                    }
+                }).on("typeahead:select",
+                function (e, otherContact) {
+                    serviceFormDto.OtherContact.push(otherContact.id);
+                    $("#otherContactId").append("<li class ='list-group-item'>" +
+                        "<strong>Selected:</strong> " + otherContact.firstName + " " + otherContact.lastName + "<span id='" + otherContact.id + "' class='close'>X</span></li>");
+                });
+
+
+            //Clears out the other contact when the x is clicked by getting the other contact id, checking if its in the array, and removing it.  It also removes the list item.
+            $("#otherContactId").on("click", ".close", function () {
+
+                var otherContactId = $(this).attr("id");
+
+                if (jQuery.inArray(otherContactId, serviceFormDto.OtherContact) != -1) {
+                    serviceFormDto.OtherContact = jQuery.grep(serviceFormDto.OtherContact, function (value) {
+                        return value != otherContactId;
+                    });
+                    $(this).parent().remove();
+                } else {
+                    $(this).parent().remove();
+                }
+            });
+
+
+
+
+
+
+
+
         });
+
     </script>
 
 }

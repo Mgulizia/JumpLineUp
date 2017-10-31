@@ -30,6 +30,9 @@ namespace JumpLineUp.App_Start
             Mapper.CreateMap<SupportServiceDto, SupportService>();
             Mapper.CreateMap<SupportService, SupportServiceDto>();
 
+            Mapper.CreateMap<OtherContact, OtherContactDto>();
+            Mapper.CreateMap<OtherContactDto, OtherContact>();
+
             Mapper.CreateMap<YouthInService, YouthInServiceDto>();
             Mapper.CreateMap<YouthInServiceDto, YouthInService>();
 
