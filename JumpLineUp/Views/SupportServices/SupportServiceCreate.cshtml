@@ -27,6 +27,7 @@
                         <div class="form-group">
                             <label for="MasterCaseNumber">Master Case Number</label>
                             <input id="MasterCaseNumber" type="text" value="" class="form-control" />
+                            <span id="errMasterCaseNumber" class="field-validation-error">&nbsp;</span>
                         </div>
 
                         <div class="form-group">
@@ -38,6 +39,7 @@
                                     <option value="@serviceArea.Id">@serviceArea.ServiceAreaAbbreviation</option>
                                 }
                             </select>
+                            <span id="errServiceAreaId" class="field-validation-error">&nbsp;</span>
                         </div>
 
                     </div><!-- End of Col-Md-6 -->
@@ -47,6 +49,7 @@
                         <div class="form-group">
                             <label for="AuthorizationNumber">Authorization Number: if available</label>
                             <input id="AuthorizationNumber" type="text" value="" class="form-control" />
+                            <span id="errAuthorizationNumber" class="field-validation-error">&nbsp;</span>
                         </div>
                         
                         <div class="form-group">
@@ -58,6 +61,7 @@
                                     <option value="@type.Id">@type.ServiceAbbrieviation - @type.ServiceName</option>
                                 }
                             </select>
+                            <span id="errServiceTypeId" class="field-validation-error">&nbsp;</span>
                         </div>
 
 
@@ -79,6 +83,7 @@
                         <div class="form-group">
                             <label for="ServiceStart">Service Start Date</label>
                             <input id="ServiceStart" type="text" value="" class="form-control datepicker"/>
+                            <span id="errServiceStart" class="field-validation-error">&nbsp;</span>
                         </div>
 
                     </div><!-- End of Col-Md-6 -->
@@ -87,6 +92,7 @@
                         <div class="form-group">
                             <label for="ServiceStop">Service End Date</label>
                             <input id="ServiceStop" type="text" value="" class="form-control datepicker"/>
+                            <span id="errServiceStop" class="field-validation-error">&nbsp;</span>
                         </div>
 
                     </div><!-- End of Col-Md-6 -->
@@ -216,7 +222,7 @@
 
         <div class="panel-footer">
             
-            <button class="btn btn-primary"> Add New Service </button>
+            <button class="btn btn-primary" id="supportServiceSubmit"> Add New Service </button>
 
         </div><!-- End of Panel Footer -->
     </div><!-- End of Panel -->
@@ -253,6 +259,79 @@
                 changeYear: true,
                 showOtherMonths: true,
                 selectOtherMonths: true
+            });
+
+            $("#supportServiceSubmit").click(function(e) {
+                e.preventDefault();
+               
+                //Validation for Support Service Form
+                var valid = true;
+
+                if (/^\d+$/.test($("#MasterCaseNumber").val()) && $("#MasterCaseNumber").val().trim()) {
+                    serviceFormDto.MasterCaseNumber = $("#MasterCaseNumber").val();
+                    $("#errMasterCaseNumber").html("&nbsp;");
+                } else {
+                    $("#errMasterCaseNumber").html("Master case number is required and must be a number.");
+                    valid = false;
+                }
+
+                if ($("#ServiceAreaId")[0].selectedIndex > 0) {
+                    serviceFormDto.ServiceAreaId = $("#ServiceAreaId")[0].selectedIndex;
+                    $("#errServiceAreaId").html("&nbsp;");
+                } else {
+                    $("#errServiceAreaId").html("Service area is required.");
+                    valid = false;
+                }
+
+                if (/^\d+$/.test($("#AuthorizationNumber").val()) && $("#AuthorizationNumber").val().trim()) {
+                    serviceFormDto.AuthorizationNumber = $("#AuthorizationNumber").val();
+                    $("#errAuthorizationNumber").html("&nbsp;");
+                } else {
+                    $("#errAuthorizationNumber").html("Authorization number is required and must be a number.");
+                    valid = false;
+                }
+
+                if ($("#ServiceTypeId")[0].selectedIndex > 0) {
+                    serviceFormDto.ServiceTypeId = $("#ServiceTypeId")[0].selectedIndex;
+                    $("#errServiceTypeId").html("&nbsp;");
+                } else {
+                    $("#errServiceTypeId").html("Service type is required.");
+                    valid = false;
+                }
+
+                $("#ServiceStart").blur(function() {
+
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+                if ($("#ServiceStart").val() == "") {
+                    serviceFormDto.ServiceStart = $("#ServiceStart").val;
+                    $("#errServiceStart").html("&nbsp;");
+                } else {
+                    $("#errServiceStart").html("Service start date is required.");
+                    valid = false;
+                }
+
+                if ($("#ServiceStop").val() == "") {
+                    serviceFormDto.ServiceStop = $("#ServiceStop").val;
+                    $("#errServiceStop").html("&nbsp;");
+                } else {
+                    $("#errServiceStop").html("Service stop date is required.");
+                    valid = false;
+                }
+
+
+
             });
 
 
