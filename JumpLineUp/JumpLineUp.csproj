@@ -212,7 +212,6 @@
     <Compile Include="Controllers\Api\RestraintsController.cs" />
     <Compile Include="Controllers\Api\CfsWorkersController.cs" />
     <Compile Include="Controllers\Api\BlcsOfficesController.cs" />
-    <Compile Include="Controllers\Api\YouthInServicesController.cs" />
     <Compile Include="Controllers\Api\YouthsController.cs" />
     <Compile Include="Controllers\Api\SupportServicesController.cs" />
     <Compile Include="Controllers\Api\ClientsController.cs" />
@@ -338,6 +337,22 @@
     <Compile Include="Migrations\201710311933276_UpdateModelWithManyToManyJoinTables.cs" />
     <Compile Include="Migrations\201710311933276_UpdateModelWithManyToManyJoinTables.Designer.cs">
       <DependentUpon>201710311933276_UpdateModelWithManyToManyJoinTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711241943135_FixServiceFormsClientSection.cs" />
+    <Compile Include="Migrations\201711241943135_FixServiceFormsClientSection.Designer.cs">
+      <DependentUpon>201711241943135_FixServiceFormsClientSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711241955238_UpdateSupportServiceModel.cs" />
+    <Compile Include="Migrations\201711241955238_UpdateSupportServiceModel.Designer.cs">
+      <DependentUpon>201711241955238_UpdateSupportServiceModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711241958514_RemoveUnUsedTables.cs" />
+    <Compile Include="Migrations\201711241958514_RemoveUnUsedTables.Designer.cs">
+      <DependentUpon>201711241958514_RemoveUnUsedTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711242005572_updateSupportServicesClientId.cs" />
+    <Compile Include="Migrations\201711242005572_updateSupportServicesClientId.Designer.cs">
+      <DependentUpon>201711242005572_updateSupportServicesClientId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
@@ -815,6 +830,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710311933276_UpdateModelWithManyToManyJoinTables.resx">
       <DependentUpon>201710311933276_UpdateModelWithManyToManyJoinTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711241943135_FixServiceFormsClientSection.resx">
+      <DependentUpon>201711241943135_FixServiceFormsClientSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711241955238_UpdateSupportServiceModel.resx">
+      <DependentUpon>201711241955238_UpdateSupportServiceModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711241958514_RemoveUnUsedTables.resx">
+      <DependentUpon>201711241958514_RemoveUnUsedTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711242005572_updateSupportServicesClientId.resx">
+      <DependentUpon>201711242005572_updateSupportServicesClientId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

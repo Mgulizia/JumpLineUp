@@ -51,6 +51,12 @@ namespace JumpLineUp.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (itemDto.FosterParentId == 0)
+                itemDto.FosterParentId = null;
+            
+
+
+
             var item = Mapper.Map<SupportServiceDto, SupportService>(itemDto);
             _context.SupportServices.Add(item);
             _context.SaveChanges();

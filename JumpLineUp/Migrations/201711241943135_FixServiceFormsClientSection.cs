@@ -1,0 +1,18 @@
+namespace JumpLineUp.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class FixServiceFormsClientSection : DbMigration
+    {
+        public override void Up()
+        {
+            DropColumn("dbo.SupportServices", "ClientIds");
+        }
+        
+        public override void Down()
+        {
+            AddColumn("dbo.SupportServices", "ClientIds", c => c.Int(nullable: false));
+        }
+    }
+}

@@ -35,8 +35,8 @@ namespace JumpLineUp.Models
         [Display(Name = "Types of Car Restraints Required")]
         public int? RestraintTypeId { get; set; }
 
-        public List<YouthInService> YouthInServices { get; set; }
-        public List<int> YouthInServicsId { get; set; }
+        public List<SupportService> SupportServices { get; set; }
+        public List<int> SupportServicesId { get; set; }
 
 
         //------------------------------------------ Related Helper Methods ------------------------------------

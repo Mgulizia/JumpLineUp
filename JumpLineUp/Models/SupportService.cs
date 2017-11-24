@@ -21,12 +21,17 @@ namespace JumpLineUp.Models
 
         public DateTime? ServiceStop { get; set; }
 
+        public Client Client { get; set; }
+        public int ClientId { get; set; }
 
-        public Client Clients { get; set; }
-        public int ClientIds { get; set; }
+        public List<Youth> Youth { get; set; }
+        public List<int> YouthId { get; set; }
 
-        public List<YouthInService> YouthInServices { get; set; }
-        public List<int> YouthInServicesId { get; set; }
+        public List<OtherContact> OtherContacts { get; set; }
+        public List<int> OtherContactId { get; set; }
+
+        public FosterParent FosterParent { get; set; }
+        public int? FosterParentId { get; set; }
 
         public ServiceArea ServiceArea { get; set; }
         public int ServiceAreaId { get; set; }

@@ -20,15 +20,23 @@ namespace JumpLineUp.Controllers.Api
 
         // GET /api/FosterParents
         [HttpGet]
-        public IHttpActionResult GetFosterParents()
+        public IHttpActionResult GetFosterParents(string query = null)
         {
-            var fosterParentDto = _context.FosterParents.ToList().Select(Mapper.Map<FosterParent, FosterParentDto>);
+            var fosterParentQuery = _context.FosterParents.AsQueryable();
+
+            if (!String.IsNullOrWhiteSpace(query))
+                fosterParentQuery = fosterParentQuery
+                    .Where(c =>
+                        c.FirstName1.Contains(query) ||
+                        c.LastName1.Contains(query) ||
+                        c.FirstName2.Contains(query) ||
+                        c.LastName2.Contains(query))
+                    .Where(c => c.IsEnabled);
+
+            var fosterParentDto = fosterParentQuery.ToList().Select(Mapper.Map<FosterParent, FosterParentDto>);
 
             return Ok(fosterParentDto);
         }
-
-
-
 
 
         // GET /api/FosterParents/1

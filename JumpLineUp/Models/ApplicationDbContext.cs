@@ -16,10 +16,8 @@ namespace JumpLineUp.Models
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<ServiceArea> ServiceAreas { get; set; }
         public DbSet<SupportService> SupportServices { get; set; }
-        public DbSet<YouthInService> YouthInService { get; set; }
         public DbSet<OtherContact> OtherContacts { get; set; }
-        public DbSet<OthersInService> OthersInService { get; set; }
-
+    
         
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

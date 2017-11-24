@@ -17,9 +17,9 @@ namespace JumpLineUp.Dtos
 
         public string AuthorizationNumber { get; set; }
 
-        public DateTime? ServiceStart { get; set; }
+        public DateTime ServiceStart { get; set; }
 
-        public DateTime? ServiceStop { get; set; }
+        public DateTime ServiceStop { get; set; }
 
 
         public Client Client { get; set; }
@@ -39,6 +39,9 @@ namespace JumpLineUp.Dtos
 
         public CfsWorker CfsWorker { get; set; }
         public int CfsWorkerId { get; set; }
+
+        public FosterParent FosterParent { get; set; }
+        public int? FosterParentId { get; set; }
 
         public bool OnHold { get; set; }
     }

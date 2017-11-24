@@ -47,7 +47,7 @@
                     <div class="col-md-6">
                        
                         <div class="form-group">
-                            <label for="AuthorizationNumber">Authorization Number: if available</label>
+                            <label for="AuthorizationNumber">Authorization Number</label>
                             <input id="AuthorizationNumber" type="text" value="" class="form-control" />
                             <span id="errAuthorizationNumber" class="field-validation-error">&nbsp;</span>
                         </div>
@@ -121,6 +121,7 @@
                             <div class="tt-container">
                                 <input id="CfsWorkerId" type="text" value="" class="form-control" />
                             </div>
+                            <span id="errCfsWorkerId" class="field-validation-error">&nbsp;</span>
                         </div>
 
                         <ul id="cfsWorker" class="list-group typeahead-selectedbox">
@@ -141,6 +142,7 @@
                             <div class="tt-container">
                                 <input id="ClientIds" type="text" value="" class="form-control typeahead"/>
                             </div>
+                            <span id="errClientIds" class="field-validation-error">&nbsp;</span>
                         </div>
 
                         <ul id="clients" class="list-group typeahead-selectedbox">
@@ -157,6 +159,7 @@
                             <div class="tt-container">
                                 <input id="FosterParentIds" type="text" value="" class="form-control typeahead"/>
                             </div>
+                            <span id="errForsterParentIds" class="field-validation-error">&nbsp;</span>
                         </div>
 
                         <ul id="fosterParents" class="list-group typeahead-selectedbox">
@@ -181,6 +184,7 @@
                             <div class="tt-container">
                                 <input id="YouthId" type="text" value="" class="form-control" />
                             </div>
+                            <span id="errYouthId" class="field-validation-error">&nbsp;</span>
                         </div>
 
                         <ul id="youthId" class="list-group typeahead-selectedbox">
@@ -197,6 +201,7 @@
                             <div class="tt-container">
                                 <input id="OtherContactId" type="text" value="" class="form-control" />
                             </div>
+                            <span id="errOtherContactId" class="field-validation-error">&nbsp;</span>
                         </div>
 
                         <ul id="otherContactId" class="list-group typeahead-selectedbox"></ul>
@@ -235,7 +240,7 @@
     <script src="~/Scripts/ApiAddEditForms/PopupOtherContactForm.js"></script>    
     <script src="~/Scripts/ApiAddEditForms/PopupFosterParentForm.js"></script>    
     <script>
-        
+
         $(document).ready(function() {
 
 
@@ -243,13 +248,14 @@
                 MasterCaseNumber: null,
                 AuthorizationNumber: null,
                 ServiceStart: null,
-                ServieStop: null,
-                ClientId: null,
+                ServiceStop: null,
+                ClientId: 0,
                 YouthId: [],
-                OtherContact: [],
+                OtherContactId: [],
                 ServiceAreaId: 0,
                 ServiceTypeId: 0,
                 CfsWorkerId: 0,
+                FosterParentId: 0,
                 OnHold: false
             };
 
@@ -263,9 +269,10 @@
 
             $("#supportServiceSubmit").click(function(e) {
                 e.preventDefault();
-               
+
                 //Validation for Support Service Form
                 var valid = true;
+                var needsFoster = false;
 
                 if (/^\d+$/.test($("#MasterCaseNumber").val()) && $("#MasterCaseNumber").val().trim()) {
                     serviceFormDto.MasterCaseNumber = $("#MasterCaseNumber").val();
@@ -275,6 +282,7 @@
                     valid = false;
                 }
 
+
                 if ($("#ServiceAreaId")[0].selectedIndex > 0) {
                     serviceFormDto.ServiceAreaId = $("#ServiceAreaId")[0].selectedIndex;
                     $("#errServiceAreaId").html("&nbsp;");
@@ -282,6 +290,7 @@
                     $("#errServiceAreaId").html("Service area is required.");
                     valid = false;
                 }
+
 
                 if (/^\d+$/.test($("#AuthorizationNumber").val()) && $("#AuthorizationNumber").val().trim()) {
                     serviceFormDto.AuthorizationNumber = $("#AuthorizationNumber").val();
@@ -291,6 +300,7 @@
                     valid = false;
                 }
 
+
                 if ($("#ServiceTypeId")[0].selectedIndex > 0) {
                     serviceFormDto.ServiceTypeId = $("#ServiceTypeId")[0].selectedIndex;
                     $("#errServiceTypeId").html("&nbsp;");
@@ -299,36 +309,94 @@
                     valid = false;
                 }
 
-                $("#ServiceStart").blur(function() {
 
-                });
-
-
-
-
-
-
-
-
-
-
-
-
-                if ($("#ServiceStart").val() == "") {
-                    serviceFormDto.ServiceStart = $("#ServiceStart").val;
-                    $("#errServiceStart").html("&nbsp;");
-                } else {
+                if ($("#ServiceStart").datepicker("getDate") == null) {
                     $("#errServiceStart").html("Service start date is required.");
                     valid = false;
+                } else {
+                    serviceFormDto.ServiceStart = $("#ServiceStart").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+                    $("#errServiceStart").html("&nbsp;");
+                    alert(serviceFormDto.ServiceStart);
                 }
 
-                if ($("#ServiceStop").val() == "") {
-                    serviceFormDto.ServiceStop = $("#ServiceStop").val;
-                    $("#errServiceStop").html("&nbsp;");
-                } else {
+
+                if ($("#ServiceStop").datepicker("getDate") == null) {
                     $("#errServiceStop").html("Service stop date is required.");
                     valid = false;
+                } else {
+                    serviceFormDto.ServiceStop = $("#ServiceStop").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+                    $("#errServiceStop").html("&nbsp;");
+                    alert(serviceFormDto.ServiceStop);
                 }
+
+
+                if (serviceFormDto.CfsWorkerId === 0) {
+                    $("#errCfsWorkerId").html("CFS Worker is required.");
+                    valid = false;
+                } else {
+                    $("#errCfsWorkerId").html("&nbsp;");
+                }
+
+
+                if (serviceFormDto.ClientId === 0) {
+                    $("#errClientIds").html("Client is required.");
+                    valid = false;
+                } else {
+                    $("#errClientIds").html("&nbsp;");
+                }
+
+
+                if ($("#ServiceTypeId")[0].selectedIndex > 0) {
+                    var serviceId = $("#ServiceTypeId")[0].selectedIndex;
+                    if ([1, 2, 6, 8, 9, 12, 13, 14, 15].indexOf(serviceId) > -1) {
+                        $("#errYouthId").html("&nbsp;");
+                        serviceFormDto.YouthId = [];
+                    } else {
+                        if (serviceFormDto.YouthId.length < 1) {
+                            $("#errYouthId").html("At least one youth is required.");
+                            valid = false;
+                        } else {
+                            $("#errYouthId").html("&nbsp;");
+                        }
+
+                        needsFoster = true;
+                    }
+                }
+
+
+                if (needsFoster) {
+                    if (serviceFormDto.FosterParentId === 0) {
+                        $("#errForsterParentIds").html("Foster parent is required.");
+                        valid = false;
+                    } else {
+                        $("#errForsterParentIds").html("&nbsp;");
+                    }
+                } else {
+                    $("#errForsterParentIds").html("&nbsp;");
+                }
+
+
+                if (valid) {
+                    $.ajax({
+                            url: "/api/SupportServices",
+                            method: "post",
+                            data: serviceFormDto
+                        })
+                        .done(function (result) {
+                            toastr.success("Support services added");
+                        })
+                        .fail(function () {
+                            toastr.error("Something is missing, please review the form.");
+                        });
+                } else {
+                    return false;
+                }
+
+
+
+
+
+
 
 
 
@@ -369,18 +437,60 @@
 
             //Clears out the youth when the x is clicked by getting the youth id, checking if its in the array, and removing it.  It also removes the list item.
             $("#youthId").on("click", ".close", function () {
-               
-                var youthId = $(this).attr("id");
 
-                if (jQuery.inArray(youthId, serviceFormDto.YouthId) != -1) {
+                var youthId = $(this).attr("id");
+                alert(youthId);
+                if (jQuery.inArray(youthId, serviceFormDto.YouthId)) {
                     serviceFormDto.YouthId = jQuery.grep(serviceFormDto.YouthId, function(value) {
                         return value != youthId;
                     });
                     $(this).parent().remove();
                 } else {
                     $(this).parent().remove();
-                } 
+                }
             });
+
+
+
+
+    //FOSTER PARENT TYPEAHEAD --------------------------------------------------------------------------------------------------------------------
+    //This allows the user to start typing, and it will query the database and allow multiple selection of foster parent items.
+            var fosterParent = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstName', 'lastName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/FosterParents?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#FosterParentIds').typeahead({
+                minLength: 3,
+                highlight: true
+            },
+                {
+                    name: 'fosterParentId',
+                    display: "fosterParent as fosterParent.firstName1 + ' & ' + fosterParent.firstName2 + ' ' + fosterParent.lastName1",
+                    source: fosterParent,
+                    templates: {
+                        empty: [
+                            '<div>',
+                            '&nbsp;&nbsp; Foster Parents not found, Click the green + above to add.',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: function (data) {
+                            return '<div><strong>' + data.firstName1 + ' & ' + data.firstName2 + ' ' + data.lastName1 + '</strong></div>';
+                        }
+                    }
+                }).on("typeahead:select",
+                function (e, fosterParent) {
+                    serviceFormDto.FosterParentId = fosterParent.id;
+                    document.getElementById("selected-fosterParents").innerHTML = "<strong>Selected</strong>: " + fosterParent.firstName1 + " & " + fosterParent.firstName2 + " " +fosterParent.lastName1;
+                });
+
+
+
+
 
 
     //CFS WORKER TYPEAHEAD ----------------------------------------------------------------------------------------------------------
@@ -453,7 +563,6 @@
                 function (e, client) {
                     serviceFormDto.ClientId = client.id;
                     document.getElementById("selected-client").innerHTML = "<strong>Selected</strong>: " + client.firstName + " " + client.lastName;
-
                     //$("#clients").append("<li class ='list-group-item'>" + client.firstName + " " + client.lastName + "</li>");
                 });
 
@@ -492,7 +601,7 @@
                     }
                 }).on("typeahead:select",
                 function (e, otherContact) {
-                    serviceFormDto.OtherContact.push(otherContact.id);
+                    serviceFormDto.OtherContactId.push(otherContact.id);
                     $("#otherContactId").append("<li class ='list-group-item'>" +
                         "<strong>Selected:</strong> " + otherContact.firstName + " " + otherContact.lastName + "<span id='" + otherContact.id + "' class='close'>X</span></li>");
                 });
@@ -503,8 +612,8 @@
 
                 var otherContactId = $(this).attr("id");
 
-                if (jQuery.inArray(otherContactId, serviceFormDto.OtherContact) != -1) {
-                    serviceFormDto.OtherContact = jQuery.grep(serviceFormDto.OtherContact, function (value) {
+                if (jQuery.inArray(otherContactId, serviceFormDto.OtherContactId) != -1) {
+                    serviceFormDto.OtherContactId = jQuery.grep(serviceFormDto.OtherContactId, function (value) {
                         return value != otherContactId;
                     });
                     $(this).parent().remove();
