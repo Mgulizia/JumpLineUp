@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +16,24 @@ namespace JumpLineUp.Controllers
         public SupportServicesController()
         {
             _context = new ApplicationDbContext();
+        }
+
+        public ActionResult Index()
+        {
+            var newSupportServices = _context.SupportServices
+                .Include(c=>c.ServiceType)
+                .Include(c=>c.Client)
+                .Include(c=>c.CfsWorker)
+                .Include(c=>c.Youth)
+                .Include(c=>c.OtherContacts)
+                .ToList();
+
+            var viewModel = new SupportServiceIndexViewModel
+            {
+                NewSupportServices = newSupportServices
+            };
+
+            return View("index",viewModel);
         }
 
        

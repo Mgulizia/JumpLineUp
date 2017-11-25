@@ -415,6 +415,7 @@
     <Compile Include="ViewModels\OtherContact\OtherContactIndexViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeIndexViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeCRUDViewModel.cs" />
+    <Compile Include="ViewModels\SupportServices\SupportServiceIndexViewModel.cs" />
     <Compile Include="ViewModels\SupportServices\SupportServicesViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthIndexViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthCRUDViewModel.cs" />
@@ -422,6 +423,7 @@
     <Content Include="Scripts\ApiAddEditForms\PopupOtherContactForm.js" />
     <Content Include="Views\OtherContact\OtherContactForm.cshtml" />
     <Content Include="Views\OtherContact\Index.cshtml" />
+    <Content Include="Views\SupportServices\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-Darkly.css" />

@@ -16,5 +16,7 @@ namespace JumpLineUp.Models
         public const string CanManageYouth = "CanManageYouth";
         public const string BasicUser = "BasicUser";
         public const string CanManageServiceTypes = "CanManageServiceTypes";
+        public const string CanAddEditSupportServices = "CanAddEditSupportServices";
+        public const string CanCloseSupportServices = "CanCloseSupportServices";
     }
 }

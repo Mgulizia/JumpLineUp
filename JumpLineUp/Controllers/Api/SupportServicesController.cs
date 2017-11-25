@@ -53,11 +53,18 @@ namespace JumpLineUp.Controllers.Api
 
             if (itemDto.FosterParentId == 0)
                 itemDto.FosterParentId = null;
-            
-
-
 
             var item = Mapper.Map<SupportServiceDto, SupportService>(itemDto);
+
+            foreach (var youth in item.YouthId)
+            {
+                item.Youth.Add(_context.Youths.SingleOrDefault(c=>c.Id == youth));
+            }
+            foreach (var others in item.OtherContactId)
+            {
+                item.OtherContacts.Add(_context.OtherContacts.SingleOrDefault(c=>c.Id == others));
+            }
+
             _context.SupportServices.Add(item);
             _context.SaveChanges();
 

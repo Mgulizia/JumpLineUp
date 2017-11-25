@@ -1,0 +1,106 @@
+﻿@model JumpLineUp.ViewModels.SupportServices.SupportServiceIndexViewModel
+@using System.ServiceModel.Configuration
+@using System.Web.UI.WebControls
+@using JumpLineUp.Models
+
+@{
+    ViewBag.Title = "SupportServices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        @if (User.IsInRole(RoleName.CanAddEditSupportServices))
+        {
+            <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+                @Html.ActionLink("Add a new Service", "create", "SupportServices", new { @class = "btn btn-primary" })
+            </div>
+        }
+        
+        <h2>Support Services</h2>
+    </div><!--Panel Heading End-->
+    <div class="panel-body">
+        <div class="well">
+            
+            <table id="newServiceTable" class="table table-responsive table-striped">
+                <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Master Case Number</th>
+                    <th>Authorization Number</th>
+                    <th>Service Type</th>
+                    <th>Client Name</th>
+                    <th>CFS Worker</th>
+                    <th>Youth Involved</th>
+                    <th>Others Involved</th>
+                    <th>Date Started</th>
+                    <th>Date Ended</th>
+                    
+                    
+
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var service in Model.NewSupportServices)
+                {
+
+                    <tr>@{
+                            var icon = "glyphicon glyphicon-remove";
+                            var color = "color: #e07979";
+                            var text = "Disabled";
+                            if (!service.OnHold)
+                            {
+                                icon = "glyphicon glyphicon-ok";
+                                color = "color: lightgreen";
+                                text = "Enabled";
+                            }
+                        }
+                        <td>@text <span class="@icon" style="@color"></span></td>
+                        <td>@service.MasterCaseNumber</td>
+                        <td>@service.AuthorizationNumber</td>
+                        <td>@service.ServiceType.ServiceAbbrieviation</td>
+                        <td>@service.Client.FirstName @service.Client.LastName</td>
+                        <td>@service.CfsWorker.FirstName @service.CfsWorker.LastName</td>
+                        <td>                            @if (service.Youth.Count > 0)
+                        {
+                            foreach (var kid in service.Youth)
+                            {
+                                <span>@kid.FirstName @kid.LastName</span><br />
+                                }
+                        }
+                        else
+                        {
+                                <span> ---</span>
+                        }</td>
+                        <td>@if (service.OtherContacts.Count > 0)
+                            {
+                                foreach (var others in service.OtherContacts)
+                                {
+                                    <span>@others.FirstName @others.LastName</span><br />
+                                }
+                            }
+                            else
+                            {
+                                <span> ---</span>
+                            }
+                        </td>
+                        <td>@(service.ServiceStart != null ? service.ServiceStart.Value.ToString("d"):"---")</td>
+                        <td>@(service.ServiceStop != null ? service.ServiceStop.Value.ToString("d"): "---")</td>
+                        
+                    
+
+                       
+
+                    </tr>
+                }
+                </tbody>
+            </table>
+      
+        </div><!-- End of Well-->
+    </div><!--Panel Body End-->
+</div>
+
+  

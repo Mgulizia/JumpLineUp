@@ -160,7 +160,7 @@
                         }
 
                         if ($("#modalFosterParentFirstName2").val().trim()) {
-                            fosterParentDto.FirstName2 = $("#modalFosterParentFirstName1").val();
+                            fosterParentDto.FirstName2 = $("#modalFosterParentFirstName2").val();
                             $("#errmodalFosterParentFirstName1").html("&nbsp;");
                         } else {
                             fosterParentDto.FirstName2 = "";
@@ -212,7 +212,7 @@
                         }
 
                         if ($("#modalFosterParentZip").val().trim()) {
-                            fosterParentDto.State = $("#modalFosterParentZip").val();
+                            fosterParentDto.Zip = $("#modalFosterParentZip").val();
                             $("#errmodalFosterParentZip").html("&nbsp;");
                         } else {
                             $("#errmodalFosterParentZip").html("Zip code is required");

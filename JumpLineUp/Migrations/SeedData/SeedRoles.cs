@@ -35,6 +35,9 @@ namespace JumpLineUp.Migrations.SeedData
             roles.Add("CanManageYouth", "Manage Client Youth");
             roles.Add("BasicUser", "Basic User Account");
             roles.Add("CanManageServiceTypes", "Manage BLCS Offered Services");
+            roles.Add("CanAddEditSupportServices", "Add and edit a current support service");
+            roles.Add("CanCloseSupportServices", "Close a current support service");
+
             
 
 

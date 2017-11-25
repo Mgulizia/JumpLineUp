@@ -149,6 +149,12 @@
                             <li id="selected-client" class="list-group-item">&nbsp;</li>
                         </ul>
                         
+                            
+                        
+                        </div><!-- End of Col-Md-6 -->
+
+                        <div id="toggleable" class="col-md-6 hidden">
+                        
                         <div class="form-group">
                             <label for="FosterParentIds">
                                 <button class="btn btn-default btn-xs btn-modal-fosterParent" type="button" style="color: lightgreen">
@@ -164,16 +170,11 @@
 
                         <ul id="fosterParents" class="list-group typeahead-selectedbox">
                             <li id="selected-fosterParents" class="list-group-item">&nbsp;</li>
-                        </ul>     
-                        
-                        
-                        
-                        
+                        </ul> 
+                    
+                    
+                    
 
-                    </div><!-- End of Col-Md-6 -->
-
-                    <div class="col-md-6">
-                        
                         <div class="form-group">
                             <label for="YouthId">
                                 <button class="btn btn-default btn-xs btn-modal-youth" type="button" style="color: lightgreen">
@@ -241,6 +242,7 @@
     <script src="~/Scripts/ApiAddEditForms/PopupFosterParentForm.js"></script>    
     <script>
 
+
         $(document).ready(function() {
 
 
@@ -267,6 +269,32 @@
                 selectOtherMonths: true
             });
 
+            //hides or shows foster and youth field depending on the service type selected.
+            $("#ServiceTypeId").change(function() {
+
+                var index = $("#ServiceTypeId").find(":selected").attr("value");
+                if (index === "1" || index === "2" || index === "6" || index === "8" || index === "9" || 
+                    index === "12" || index === "13" || index === "14" || index === "15") {
+
+                    $("#toggleable").addClass("hidden");
+                   
+                } else {
+                    $("#toggleable").removeClass("hidden");
+                    
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+    //Functions run when form is submitted
+    //---------------------------------------------------------------------------------------------------------------
             $("#supportServiceSubmit").click(function(e) {
                 e.preventDefault();
 
@@ -316,7 +344,6 @@
                 } else {
                     serviceFormDto.ServiceStart = $("#ServiceStart").datepicker({ dateFormat: 'dd-mm-yy' }).val();
                     $("#errServiceStart").html("&nbsp;");
-                    alert(serviceFormDto.ServiceStart);
                 }
 
 
@@ -326,7 +353,6 @@
                 } else {
                     serviceFormDto.ServiceStop = $("#ServiceStop").datepicker({ dateFormat: 'dd-mm-yy' }).val();
                     $("#errServiceStop").html("&nbsp;");
-                    alert(serviceFormDto.ServiceStop);
                 }
 
 
@@ -349,9 +375,11 @@
                 if ($("#ServiceTypeId")[0].selectedIndex > 0) {
                     var serviceId = $("#ServiceTypeId")[0].selectedIndex;
                     if ([1, 2, 6, 8, 9, 12, 13, 14, 15].indexOf(serviceId) > -1) {
+                        $("#toggleable").toggleClass("hidden", true);
                         $("#errYouthId").html("&nbsp;");
                         serviceFormDto.YouthId = [];
                     } else {
+                        $("#toggleable").toggleClass("hidden", false);
                         if (serviceFormDto.YouthId.length < 1) {
                             $("#errYouthId").html("At least one youth is required.");
                             valid = false;

@@ -131,7 +131,7 @@
             YouthComment: null,
             RestraintTypeId: 0,
             IsEnabled: true
-            }
+        };
 
         bootbox.dialog({
             message: youthBootBoxContent,
