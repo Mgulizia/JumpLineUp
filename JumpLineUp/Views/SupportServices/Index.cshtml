@@ -1,6 +1,7 @@
 ﻿@model JumpLineUp.ViewModels.SupportServices.SupportServiceIndexViewModel
 @using System.ServiceModel.Configuration
 @using System.Web.UI.WebControls
+@using JumpLineUp.Helpers
 @using JumpLineUp.Models
 
 @{
@@ -27,9 +28,7 @@
             <table id="newServiceTable" class="table table-responsive table-striped">
                 <thead>
                 <tr>
-                    <th>Status</th>
                     <th>Master Case Number</th>
-                    <th>Authorization Number</th>
                     <th>Service Type</th>
                     <th>Client Name</th>
                     <th>CFS Worker</th>
@@ -47,39 +46,36 @@
                 @foreach (var service in Model.NewSupportServices)
                 {
 
-                    <tr>@{
-                            var icon = "glyphicon glyphicon-remove";
-                            var color = "color: #e07979";
-                            var text = "Disabled";
-                            if (!service.OnHold)
-                            {
-                                icon = "glyphicon glyphicon-ok";
-                                color = "color: lightgreen";
-                                text = "Enabled";
-                            }
-                        }
-                        <td>@text <span class="@icon" style="@color"></span></td>
+                    <tr>
                         <td>@service.MasterCaseNumber</td>
-                        <td>@service.AuthorizationNumber</td>
                         <td>@service.ServiceType.ServiceAbbrieviation</td>
-                        <td>@service.Client.FirstName @service.Client.LastName</td>
-                        <td>@service.CfsWorker.FirstName @service.CfsWorker.LastName</td>
-                        <td>                            @if (service.Youth.Count > 0)
-                        {
-                            foreach (var kid in service.Youth)
+
+                        <td>@Html.ActionLink(service.Client.FirstName + " " + service.Client.LastName, "View", "Client", new { id = service.Client.Id }, null)</td>
+                       
+                        <td>
+                            @Html.ActionLink(service.CfsWorker.FirstName + " " + service.CfsWorker.LastName, "View", "CfsWorker", new { id = service.CfsWorker.Id},null)
+                        </td>
+                            
+                    
+                    
+
+                        <td>                            
+                            @if (service.Youth.Count > 0)
                             {
-                                <span>@kid.FirstName @kid.LastName</span><br />
+                                foreach (var kid in service.Youth)
+                                {
+                                    <span >@Html.ActionLink(kid.FirstName + " " + kid.LastName, "View", "Youth", new{ id = kid.Id},null)</span><br/>
                                 }
-                        }
-                        else
-                        {
+                            }
+                            else
+                            {
                                 <span> ---</span>
-                        }</td>
+                            }</td>
                         <td>@if (service.OtherContacts.Count > 0)
                             {
                                 foreach (var others in service.OtherContacts)
                                 {
-                                    <span>@others.FirstName @others.LastName</span><br />
+                                    <span>@Html.ActionLink(others.FirstName + " " +others.LastName, "View", "OtherContact", new{ id = others.Id},null)</span><br />
                                 }
                             }
                             else
@@ -103,4 +99,37 @@
     </div><!--Panel Body End-->
 </div>
 
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+
+            var tableName = "#newServiceTable";
+            $(tableName).DataTable({
+                "columnDefs": [
+                    {
+                        //"targets": 4,
+                        //"orderable": false
+                    }
+                ]
+            });
+
+            //$("[data-toggle=popover]")
+            //    .popover({ html: true });
+            //
+            //$('body').on('click', function (e) {
+            //    //did not click a popover toggle or popover
+            //    if ($(e.target).data('toggle') !== 'popover'
+            //        && $(e.target).parents('.popover.in').length === 0) { 
+            //        $('[data-toggle="popover"]').popover('hide');
+            //    }
+            //});
+
+
+
+        });
+    </script>
+}
   

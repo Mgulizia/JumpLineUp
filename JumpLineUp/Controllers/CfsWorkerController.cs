@@ -43,6 +43,13 @@ namespace JumpLineUp.Controllers
             return View(disabled);
         }
 
+        public ActionResult View(int id)
+        {
+            var item = _context.CfsWorkers.SingleOrDefault(c => c.Id == id);
+
+            return View("CfsView", item);
+        }
+
 
         //------------------------------ New Item Creation ---------------------------------------------------------------------
         public ActionResult NewCfsWorker()

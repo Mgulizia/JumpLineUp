@@ -16,7 +16,7 @@ namespace JumpLineUp.Controllers
 
 
 
-        //------------------------------ View List of Guardian ------------------------------------------------------------------------------
+        //------------------------------ View list / individual Other Contacts --------------------------------------------------------------
         // GET: Guardian
         public ActionResult Index()
         {
@@ -25,8 +25,15 @@ namespace JumpLineUp.Controllers
             return View("Index", viewModel);
         }
 
+        public ActionResult View(int id)
+        {
+            var item = _context.OtherContacts.SingleOrDefault(c => c.Id == id);
 
-        //------------------------------ Create New Guardian ------------------------------------------------------------------------------
+            return View("OtherContactView", item);
+        }
+
+
+        //------------------------------ Create New Other Contacts ------------------------------------------------------------------------------
         // GET: Guardian/Create/
         [Authorize(Roles = RoleName.CanManageGuardians)]
         public ActionResult Create()
@@ -39,7 +46,7 @@ namespace JumpLineUp.Controllers
         }
 
 
-        //------------------------------ Edit Guardian ------------------------------------------------------------------------------
+        //------------------------------ Edit Other Contacts ------------------------------------------------------------------------------
         // GET: Guardian/Edit
         [Authorize(Roles = RoleName.CanManageGuardians)]
         [HttpGet]
@@ -54,7 +61,7 @@ namespace JumpLineUp.Controllers
         }
 
 
-        //------------------------------ Save Guardian ------------------------------------------------------------------------------
+        //------------------------------ Save Other Contacts ------------------------------------------------------------------------------
         [HttpPost]
         [Authorize(Roles = RoleName.CanManageGuardians)]
         public ActionResult Save(OtherContactCrudViewModel model)

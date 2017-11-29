@@ -33,7 +33,7 @@ namespace JumpLineUp.Controllers
                 NewSupportServices = newSupportServices
             };
 
-            return View("index",viewModel);
+            return View("index", viewModel);
         }
 
        

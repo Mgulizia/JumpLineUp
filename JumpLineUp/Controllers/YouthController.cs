@@ -23,7 +23,7 @@ namespace JumpLineUp.Controllers
 
 
 
-        //------------------------------ View List of Youth ------------------------------------------------------------------------------
+        //------------------------------ View List or Individual Youth ------------------------------------------------------------------------------
         // GET: Youth/
         public ActionResult Index()
         {
@@ -31,6 +31,15 @@ namespace JumpLineUp.Controllers
             var viewModel = new YouthIndexViewModel {Youth = youth};
 
             return View("Index", viewModel);
+        }
+
+
+        // GET: Youth/{id}
+        public ActionResult View(int id)
+        {
+            var item = _context.Youths.Include(c=>c.RestraintType).SingleOrDefault(c => c.Id == id);
+
+            return View("YouthView", item);
         }
 
 

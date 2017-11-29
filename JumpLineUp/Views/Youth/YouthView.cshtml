@@ -1,0 +1,85 @@
+﻿@using System.Web.UI.WebControls
+@using JumpLineUp.Helpers
+@using JumpLineUp.Models
+@model JumpLineUp.Models.Youth
+@{
+    ViewBag.Title = "Youth Clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+
+    <div class="panel panel-default">
+     
+        <div class="panel-heading">
+            <h3>@Model.FirstName @Model.LastName</h3>
+            Youth Information
+        </div><!--Panel Heading End--> 
+
+        <div class="panel-body">
+
+       
+            <div class="well">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Birth Date</label>
+                            <p>@Model.BirthDate.ToString("MM/dd/yyyy")</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Current Age</label>
+                            <p>@Model.GetAge()</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Required Care Restraints:</label>
+                            <p>@Model.RestraintType.RestraintName</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <hr/>
+
+                <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Additional Notes and Comments:</label>
+                                <p>@Model.YouthComment</p>
+                        </div>
+                    </div>
+
+                    
+                 </div>
+
+            </div>
+
+        </div><!--Panel Body End-->
+        <div class="panel-footer">
+            <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back()" />
+            @if (User.IsInRole(RoleName.CanManageYouth))
+            {
+                @Html.ActionLink("Edit Youth","Edit","Youth",new{id = Model.Id } ,new{@class="btn btn-primary"})
+            }
+            
+
+
+        </div>
+    </div><!--Panel End-->
+
+
+@section scripts{
+
+
+}
+

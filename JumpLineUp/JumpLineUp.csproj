@@ -53,6 +53,7 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -357,6 +358,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedCfsWorkers.cs" />
+    <Compile Include="Migrations\SeedData\SeedFosterParents.cs" />
+    <Compile Include="Migrations\SeedData\SeedOtherContacts.cs" />
     <Compile Include="Migrations\SeedData\SeedYouth.cs" />
     <Compile Include="Migrations\SeedData\SeedClients.cs" />
     <Compile Include="Migrations\SeedData\SeedServiceAreas.cs" />
@@ -424,6 +427,10 @@
     <Content Include="Views\OtherContact\OtherContactForm.cshtml" />
     <Content Include="Views\OtherContact\Index.cshtml" />
     <Content Include="Views\SupportServices\Index.cshtml" />
+    <Content Include="Views\Client\ClientView.cshtml" />
+    <Content Include="Views\Youth\YouthView.cshtml" />
+    <Content Include="Views\CfsWorker\CfsView.cshtml" />
+    <Content Include="Views\OtherContact\OtherContactView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-Darkly.css" />
@@ -742,7 +749,6 @@
     <Content Include="Views\ServiceType\Index.cshtml" />
     <Content Include="Views\ServiceType\ServiceTypeForm.cshtml" />
     <Content Include="Views\SupportServices\SupportServiceCreate.cshtml" />
-    <Content Include="Views\ClientFamily\ClientFamillyCreateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

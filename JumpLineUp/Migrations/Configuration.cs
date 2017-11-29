@@ -45,9 +45,17 @@ namespace JumpLineUp.Migrations
 
             //Seed the CFS Workers
             SeedCfsWorkers.Seed();
+            
+            //Seed the CFS Workers
+            SeedFosterParents.Seed();
+            
+            //Seed the CFS Workers
+            SeedOtherContacts.Seed();
 
             //Seed the Youth
             SeedYouth.Seed();
+
+          
         }
     }
 }

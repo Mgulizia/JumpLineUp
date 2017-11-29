@@ -1,0 +1,119 @@
+﻿@using System.Web.UI.WebControls
+@using JumpLineUp.Helpers
+@using JumpLineUp.Models
+@model JumpLineUp.Models.Client
+@{
+    ViewBag.Title = "FosterParentForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3>@Model.FirstName @Model.LastName</h3>
+            Client Information
+        </div><!--Panel Heading End--> 
+
+        <div class="panel-body">
+
+       
+            <div class="well">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Master Case Number</label>
+                            <p>@Model.MasterCaseNumber</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Client ID:</label>
+                            <p>@Model.ClientId</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Phone Number:</label>
+                            <p><a href="tel:@Model.Phone">@Phone.DisplayPhone(@Model.Phone)</a></p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <hr/>
+
+                <div class="row">
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Street Address</label>
+                                <p>@Model.Street1</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Address Suffix</label>
+                            <p>@Model.Street2</p>
+                        </div>
+                    </div>
+
+                </div>
+
+               
+                
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>City</label>
+                            <p>@Model.City</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>State</label>
+                            <p>@Model.State</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <p>@Model.Zip</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div><!--Panel Body End-->
+        <div class="panel-footer">
+            <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back()" />
+            @if (User.IsInRole(RoleName.CanManageGuardians))
+            {
+                @Html.ActionLink("Edit Client","Edit","Client",new{id = Model.Id } ,new{@class="btn btn-primary"})
+            }
+            
+
+
+        </div>
+    </div><!--Panel End-->
+
+
+@section scripts{
+
+
+}
+

@@ -11,7 +11,7 @@ namespace JumpLineUp.Migrations.SeedData
             var context = ApplicationDbContext.Create();
 
             context.Youths.AddOrUpdate(x => x.Id,
-                new Youth() {  Id = 1, FirstName = "LittleBabyGirl", LastName = "Nelson", RestraintTypeId = RestraintNames.HighBackBoosterSeat, BirthDate = new DateTime(2010,1,10), IsEnabled = true },
+                new Youth() {  Id = 1, FirstName = "Juliette", LastName = "Nelson", RestraintTypeId = RestraintNames.HighBackBoosterSeat, BirthDate = new DateTime(2010,1,10), IsEnabled = true },
                 new Youth() {  Id = 2, FirstName = "Emily", LastName = "Crouch", RestraintTypeId = RestraintNames.HighBackBoosterSeat, BirthDate = new DateTime(2011,2,11), IsEnabled = true },
                 new Youth() {  Id = 3, FirstName = "Matt", LastName = "Crouch", RestraintTypeId = RestraintNames.HighBackBoosterSeat, BirthDate = new DateTime(2012,3,12), IsEnabled = true },
                 new Youth() {  Id = 4, FirstName = "Kaelin", LastName = "Gulizia", RestraintTypeId = RestraintNames.HighBackBoosterSeat, BirthDate = new DateTime(2013,4,13), IsEnabled = true },

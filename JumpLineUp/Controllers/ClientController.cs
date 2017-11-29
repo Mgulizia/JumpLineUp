@@ -22,14 +22,23 @@ namespace JumpLineUp.Controllers
 
 
 
-        //------------------------------ View List of Guardian ------------------------------------------------------------------------------
-        // GET: Guardian
+        //------------------------------ View List / individual Guardian ------------------------------------------------------------------------------
+        // GET: Guardians
         public ActionResult Index()
         {
             var guardians = _context.Clients.ToList();
             var viewModel = new ClientIndexViewModel {Guardians = guardians};
             return View("Index", viewModel);
         }
+
+        // GET: Guardian
+        public ActionResult View(int id)
+        {
+            var item = _context.Clients.SingleOrDefault(c => c.Id == id);
+            
+            return View("ClientView", item);
+        }
+        
 
 
         //------------------------------ Create New Guardian ------------------------------------------------------------------------------

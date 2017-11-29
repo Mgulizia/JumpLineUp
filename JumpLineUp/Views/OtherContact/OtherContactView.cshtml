@@ -1,0 +1,111 @@
+﻿@using System.Web.UI.WebControls
+@using JumpLineUp.Helpers
+@using JumpLineUp.Models
+@model JumpLineUp.Models.OtherContact
+@{
+    ViewBag.Title = "Other Contact Information View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3>@Model.FirstName @Model.LastName</h3>
+            Other Contact Information
+        </div><!--Panel Heading End--> 
+
+        <div class="panel-body">
+
+       
+            <div class="well">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Street Address</label>
+                            <p>@Model.Street1</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Street Suffix</label>
+                            <p>@Model.Street2</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>City</label>
+                            <p>@Model.City</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>State</label>
+                            <p>@Model.State</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Zip Code</label>
+                            <p>@Model.Zip</p>
+                        </div>
+                    </div>
+
+                </div>
+
+               
+                
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <p>
+                                @if (Model.IsEnabled)
+                                {
+                                    <span class="label label-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-default">Disabled</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div><!--Panel Body End-->
+        <div class="panel-footer">
+            <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back()" />
+            @if (User.IsInRole(RoleName.CanManageGuardians))
+            {
+                @Html.ActionLink("Edit Other Contact","Edit","OtherContact",new{id = Model.Id } ,new{@class="btn btn-primary"})
+            }
+            
+
+
+        </div>
+    </div><!--Panel End-->
+
+
+@section scripts{
+
+
+}
+
