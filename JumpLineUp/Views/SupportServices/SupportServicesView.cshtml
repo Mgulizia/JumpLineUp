@@ -1,0 +1,168 @@
+﻿@using JumpLineUp.Helpers
+@model JumpLineUp.Models.SupportService
+
+@{
+}
+
+<br/>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>@Model.Client.LastName Family</h3>
+        @Model.ServiceType.ServiceName Service out of the @Model.ServiceArea.ServiceAreaDescription.
+    </div><!-- Panel Heading End --->
+    <div class="panel-body">
+        
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Master Case Number</label>
+                    <div class="form-control-static">
+                        @Model.MasterCaseNumber
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Authorization Number</label>
+                    <div class="form-control-static">
+                        @Model.AuthorizationNumber
+                    </div>
+                </div>
+            </div><!-- Left Column End --->
+
+            <div class="col-md-6">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Service Start Date</label>
+                            <div class="form-control-static">
+                                @Model.ServiceStart.Value.ToString("MM/dd/yyyy")
+                            </div>
+                        </div>
+                    </div><!-- End of inner left column --->
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Service Start Date</label>
+                            <div class="form-control-static">
+                                @Model.ServiceStop.Value.ToString("MM/dd/yyyy")
+                            </div>
+                        </div>
+                    </div><!-- End of inner right column --->
+
+                </div><!-- End of 1st inner row --->
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        @{
+                            var totalDays = Model.ServiceStop - @Model.ServiceStart;
+                            var daysIn = DateTime.Today - Model.ServiceStart;
+                            var decimalPercentage = (daysIn.Value.TotalDays / totalDays.Value.TotalDays) * 100;
+                            var percentage = Math.Round(decimalPercentage);
+                        }
+                        <label>Service Completion:</label>   @daysIn.Value.TotalDays out of @totalDays.Value.TotalDays days
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="@daysIn" aria-valuemin="0" aria-valuemax="@totalDays" style="width:@percentage%">
+                                @percentage% Complete
+                            </div>
+                        </div>
+                    </div><!-- End of inner column --->
+
+                </div><!-- End of 2nd inner row --->
+
+            </div><!-- Right Column End --->
+
+        </div><!-- Row End --->
+
+
+
+        <div class="panel-group">
+            
+            <div class="col-md-12">
+                
+                <!------- CFS WORKERS INNER PANEL -------------->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Child Family Services Worker</h4>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div class="row">
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>CFS Worker Name</label>
+                                    <p class="form-control-static">
+                                        @Model.CfsWorker.FirstName @Model.CfsWorker.LastName
+                                    </p> 
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>CFS Email Address</label>
+                                    <p class="form-control-static">
+                                        <a href="mailto:@Model.CfsWorker.Email">@Model.CfsWorker.Email</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>CFS Phone Number</label>
+                                    <p class="form-control-static">
+                                        <a href="tel:@Model.CfsWorker.Phone">@Phone.DisplayPhone(Model.CfsWorker.Phone)</a>
+                                    </p>
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                        <div class="row">
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Office Location</label>
+                                    <p class="form-control-static">
+                                        @Model.CfsWorker.OfficeLocation
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <p>
+                                        @if (Model.CfsWorker.IsActive)
+                                        {
+                                            <span class="label label-success">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-default">Disabled</span>
+                                        }
+                                    </p>
+                                </div>
+                            </div>  
+                            
+                           
+                        </div>
+
+                    </div>
+                </div>
+                
+                    
+
+            </div>
+        </div>
+
+    </div><!-- Panel Body End --->
+
+    
+    <div class="panel-footer">
+        <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back()" />
+    </div>
+</div>

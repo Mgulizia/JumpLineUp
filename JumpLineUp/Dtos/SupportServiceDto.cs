@@ -43,6 +43,9 @@ namespace JumpLineUp.Dtos
         public FosterParent FosterParent { get; set; }
         public int? FosterParentId { get; set; }
 
+        public SupportServicesStatus Status { get; set; }
+        public byte StatusId { get; set; }
+
         public bool OnHold { get; set; }
     }
 }

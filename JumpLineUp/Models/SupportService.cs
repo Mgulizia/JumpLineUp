@@ -8,7 +8,6 @@ namespace JumpLineUp.Models
 {
     public class SupportService
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -43,6 +42,28 @@ namespace JumpLineUp.Models
         public int CfsWorkerId { get; set; }
 
         public bool OnHold { get; set; }
+
+        public SupportServicesStatus Status { get; set; }
+        public byte StatusId { get; set; }
+
+        public void CheckHoldStatus()
+        {
+            if (this.ServiceStop < DateTime.Now.AddDays(-1))
+            {
+                var _context = new ApplicationDbContext();
+                var thisInDb = _context.SupportServices.SingleOrDefault(c => c.Id == Id);
+                thisInDb.OnHold = true;
+                _context.SaveChanges();
+            }
+            else
+            {
+                var _context = new ApplicationDbContext();
+                var thisInDb = _context.SupportServices.SingleOrDefault(c => c.Id == Id);
+                thisInDb.OnHold = false;
+                _context.SaveChanges();
+            }
+        }
+
 
     }
 }

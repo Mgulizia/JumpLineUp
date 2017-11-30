@@ -355,11 +355,20 @@
     <Compile Include="Migrations\201711242005572_updateSupportServicesClientId.Designer.cs">
       <DependentUpon>201711242005572_updateSupportServicesClientId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711301733047_AddSupportServicesStatusModelAndLinkToSupportServices.cs" />
+    <Compile Include="Migrations\201711301733047_AddSupportServicesStatusModelAndLinkToSupportServices.Designer.cs">
+      <DependentUpon>201711301733047_AddSupportServicesStatusModelAndLinkToSupportServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711301942180_ServiceScheduleModelAdded.cs" />
+    <Compile Include="Migrations\201711301942180_ServiceScheduleModelAdded.Designer.cs">
+      <DependentUpon>201711301942180_ServiceScheduleModelAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedCfsWorkers.cs" />
     <Compile Include="Migrations\SeedData\SeedFosterParents.cs" />
     <Compile Include="Migrations\SeedData\SeedOtherContacts.cs" />
+    <Compile Include="Migrations\SeedData\SeedSupportStatus.cs" />
     <Compile Include="Migrations\SeedData\SeedYouth.cs" />
     <Compile Include="Migrations\SeedData\SeedClients.cs" />
     <Compile Include="Migrations\SeedData\SeedServiceAreas.cs" />
@@ -373,9 +382,11 @@
     <Compile Include="Models\OtherContact.cs" />
     <Compile Include="Models\ClientFamily.cs" />
     <Compile Include="Models\ServiceArea.cs" />
+    <Compile Include="Models\ServiceSchedule.cs" />
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Models\SupportService.cs" />
     <Compile Include="Models\OthersInService.cs" />
+    <Compile Include="Models\SupportServicesStatus.cs" />
     <Compile Include="Models\YouthInService.cs" />
     <Compile Include="ViewModels\Accounts\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -431,6 +442,9 @@
     <Content Include="Views\Youth\YouthView.cshtml" />
     <Content Include="Views\CfsWorker\CfsView.cshtml" />
     <Content Include="Views\OtherContact\OtherContactView.cshtml" />
+    <Content Include="Views\SupportServices\Partials\_needsScheduling.cshtml" />
+    <Content Include="Views\SupportServices\Partials\_expiredServices.cshtml" />
+    <Content Include="Views\SupportServices\SupportServicesView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-Darkly.css" />
@@ -850,6 +864,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711242005572_updateSupportServicesClientId.resx">
       <DependentUpon>201711242005572_updateSupportServicesClientId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711301733047_AddSupportServicesStatusModelAndLinkToSupportServices.resx">
+      <DependentUpon>201711301733047_AddSupportServicesStatusModelAndLinkToSupportServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711301942180_ServiceScheduleModelAdded.resx">
+      <DependentUpon>201711301942180_ServiceScheduleModelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

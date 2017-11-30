@@ -10,94 +10,79 @@
 }
 
 <br/>
-<div class="panel panel-default">
+<div class="container">
+    <div class="panel panel-default">
 
-    <div class="panel-heading">
-        @if (User.IsInRole(RoleName.CanAddEditSupportServices))
-        {
-            <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
-                @Html.ActionLink("Add a new Service", "create", "SupportServices", new { @class = "btn btn-primary" })
+        <div class="panel-heading">
+            @if (User.IsInRole(RoleName.CanAddEditSupportServices))
+            {
+                <div class="btn-toolbar pull-right" style="margin: 14px 0px;">
+                    @Html.ActionLink("Add a new Service", "create", "SupportServices", new { @class = "btn btn-primary" })
+                </div>
+            }
+
+            <h2>Support Services</h2>
+        </div><!--Panel Heading End-->
+        <div class="panel-body">
+
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="pill" href="#active">Needs Scheduling</a></li>
+                <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
+                <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
+                <li><a data-toggle="pill" href="#expired">Expired Services</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="active" class="tab-pane fade in active">
+                    <h3>Needs Scheduling</h3>
+                    <hr/>
+                    @Html.Partial("Partials/_needsScheduling")
+                </div>
+                
+                <div id="menu2" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                </div>
+
+                <div id="menu3" class="tab-pane fade">
+                    <h3>Menu 3</h3>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </div>
+                
+                <div id="expired" class="tab-pane fade">
+                    <h3>Expired Services</h3>
+                    <hr />
+                    @Html.Partial("Partials/_expiredServices")
+                </div>
+                
+                
+                
+
             </div>
-        }
-        
-        <h2>Support Services</h2>
-    </div><!--Panel Heading End-->
-    <div class="panel-body">
-        <div class="well">
             
-            <table id="newServiceTable" class="table table-responsive table-striped">
-                <thead>
-                <tr>
-                    <th>Master Case Number</th>
-                    <th>Service Type</th>
-                    <th>Client Name</th>
-                    <th>CFS Worker</th>
-                    <th>Youth Involved</th>
-                    <th>Others Involved</th>
-                    <th>Date Started</th>
-                    <th>Date Ended</th>
-                    
-                    
 
-                </tr>
-                </thead>
-
-                <tbody>
-                @foreach (var service in Model.NewSupportServices)
-                {
-
-                    <tr>
-                        <td>@service.MasterCaseNumber</td>
-                        <td>@service.ServiceType.ServiceAbbrieviation</td>
-
-                        <td>@Html.ActionLink(service.Client.FirstName + " " + service.Client.LastName, "View", "Client", new { id = service.Client.Id }, null)</td>
-                       
-                        <td>
-                            @Html.ActionLink(service.CfsWorker.FirstName + " " + service.CfsWorker.LastName, "View", "CfsWorker", new { id = service.CfsWorker.Id},null)
-                        </td>
-                            
-                    
-                    
-
-                        <td>                            
-                            @if (service.Youth.Count > 0)
-                            {
-                                foreach (var kid in service.Youth)
-                                {
-                                    <span >@Html.ActionLink(kid.FirstName + " " + kid.LastName, "View", "Youth", new{ id = kid.Id},null)</span><br/>
-                                }
-                            }
-                            else
-                            {
-                                <span> ---</span>
-                            }</td>
-                        <td>@if (service.OtherContacts.Count > 0)
-                            {
-                                foreach (var others in service.OtherContacts)
-                                {
-                                    <span>@Html.ActionLink(others.FirstName + " " +others.LastName, "View", "OtherContact", new{ id = others.Id},null)</span><br />
-                                }
-                            }
-                            else
-                            {
-                                <span> ---</span>
-                            }
-                        </td>
-                        <td>@(service.ServiceStart != null ? service.ServiceStart.Value.ToString("d"):"---")</td>
-                        <td>@(service.ServiceStop != null ? service.ServiceStop.Value.ToString("d"): "---")</td>
-                        
-                    
-
-                       
-
-                    </tr>
-                }
-                </tbody>
-            </table>
-      
-        </div><!-- End of Well-->
-    </div><!--Panel Body End-->
+        </div>
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

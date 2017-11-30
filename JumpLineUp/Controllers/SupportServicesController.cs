@@ -18,25 +18,52 @@ namespace JumpLineUp.Controllers
             _context = new ApplicationDbContext();
         }
 
+        //------------------------------ View List of / individual Support Services ------------------------------------------------------------
         public ActionResult Index()
         {
-            var newSupportServices = _context.SupportServices
-                .Include(c=>c.ServiceType)
-                .Include(c=>c.Client)
-                .Include(c=>c.CfsWorker)
-                .Include(c=>c.Youth)
-                .Include(c=>c.OtherContacts)
+            CheckHoldStatus();
+            var needsScheduling = _context.SupportServices
+                .Include(c => c.ServiceType)
+                .Include(c => c.Client)
+                .Include(c => c.CfsWorker)
+                .Where(c=> c.OnHold == false)
+                .Where(c => c.StatusId == 1)
+                .ToList();
+
+            var expiredServices = _context.SupportServices
+                .Include(c => c.ServiceType)
+                .Include(c => c.Client)
+                .Include(c => c.CfsWorker)
+                .Where(c => c.OnHold == true)
                 .ToList();
 
             var viewModel = new SupportServiceIndexViewModel
             {
-                NewSupportServices = newSupportServices
+                NeedsScheduling = needsScheduling,
+                ExpiredServices = expiredServices
             };
 
             return View("index", viewModel);
         }
 
-       
+        public ActionResult View(int id)
+        {
+            var item = _context.SupportServices
+                .Include(c => c.ServiceType)
+                .Include(c => c.ServiceArea)
+                .Include(c => c.Client)
+                .Include(c => c.CfsWorker)
+                .Include(c => c.OtherContacts)
+                .Include(c => c.FosterParent)
+                .SingleOrDefault(c => c.Id == id);
+
+            return View("SupportServicesView", item);
+        }
+
+
+
+
+        //------------------------------ Save new Support Service ------------------------------------------------------------------------------
         public ActionResult Create()
         {
             var viewModel = new SupportServicesViewModel
@@ -49,5 +76,25 @@ namespace JumpLineUp.Controllers
 
             return View("SupportServiceCreate", viewModel );
         }
+
+
+
+
+
+        //------------------------------ Misc Support Service Methods ------------------------------------------------------------------------------
+        private void CheckHoldStatus()
+        {
+            var currentServices = _context.SupportServices.ToList();
+
+            foreach (var service in currentServices)
+            {
+                service.CheckHoldStatus();
+            }
+        }
+
+
+
+
+
     }
 }

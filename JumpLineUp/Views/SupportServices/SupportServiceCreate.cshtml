@@ -258,7 +258,8 @@
                 ServiceTypeId: 0,
                 CfsWorkerId: 0,
                 FosterParentId: 0,
-                OnHold: false
+                OnHold: false,
+                StatusId: 1
             };
 
             $(".datepicker").datepicker({
@@ -411,6 +412,8 @@
                             data: serviceFormDto
                         })
                         .done(function (result) {
+                            
+                            window.location.href = "/SupportServices/";
                             toastr.success("Support services added");
                         })
                         .fail(function () {

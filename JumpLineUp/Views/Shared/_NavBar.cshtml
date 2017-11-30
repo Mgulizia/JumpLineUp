@@ -16,43 +16,47 @@
                 
                 @if (Request.IsAuthenticated)
                 {
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Service Management<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("View All Services", "Index", "SupportServices")</li>
-                            <li>@Html.ActionLink("Create New Service", "Create", "SupportServices")</li>
-                            
-                        </ul>
-                    </li>
-
+                    
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Data Management<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @if (User.IsInRole(RoleName.CanManageCfsWorkers))
+                            
+                            @if (User.IsInRole(RoleName.CanManageGuardians))
                             {
-                                <li>@Html.ActionLink("CFS Workers", "Index", "CfsWorker")</li>
-                            }
+                                <li>@Html.ActionLink("Adult Clients", "Index", "Client")</li>
+                                }
+
                             @if (User.IsInRole(RoleName.CanManageBlcsOffice))
                             {
                                 <li>@Html.ActionLink("BLCS Offices", "Index", "BlcsOffice")</li>
                             }
+
+                            @if (User.IsInRole(RoleName.CanManageServiceTypes))
+                            {
+                                <li>@Html.ActionLink("BLCS Services", "Index", "ServiceType")</li>
+                            }
+                            
+                            @if (User.IsInRole(RoleName.CanManageCfsWorkers))
+                            {
+                                <li>@Html.ActionLink("CFS Workers", "Index", "CfsWorker")</li>
+                            }
+                            
                             @if (User.IsInRole(RoleName.CanManageFosterParents))
                             {
                                 <li>@Html.ActionLink("Foster Parents", "Index", "FosterParent")</li>
+                                <li>@Html.ActionLink("Other Contacts", "Index", "OtherContact")</li>
                             }
-                            @if (User.IsInRole(RoleName.CanManageGuardians))
+                            
+                            @if (User.IsInRole(RoleName.CanManageServiceTypes))
                             {
-                                <li>@Html.ActionLink("Guardian Clients", "Index", "Client")</li>
-                                <li>@Html.ActionLink("Other Contacts","Index", "OtherContact")</li>
-                            }    
+                                <li>@Html.ActionLink("Support Services", "Index", "SupportServices")</li>
+                            }
+
                             @if (User.IsInRole(RoleName.CanManageYouth))
                             {
                                 <li>@Html.ActionLink("Youth Clients", "Index", "Youth")</li>
-                            }@if (User.IsInRole(RoleName.CanManageServiceTypes))
-                             {
-                                 <li>@Html.ActionLink("BLCS Services", "Index", "ServiceType")</li>
-                             }
-                            
+                            }
+
                         </ul>
                     </li>
                     @Html.Partial("_AdminPartial")

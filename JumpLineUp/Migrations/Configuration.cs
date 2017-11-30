@@ -54,6 +54,9 @@ namespace JumpLineUp.Migrations
 
             //Seed the Youth
             SeedYouth.Seed();
+            
+            //Seed the Support Service Statuses
+            SeedSupportStatus.Seed();
 
           
         }

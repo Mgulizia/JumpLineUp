@@ -52,15 +52,36 @@
 
                 <div class="row">
 
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Additional Notes and Comments:</label>
-                                <p>@Model.YouthComment</p>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Additional Notes and Comments:</label>
+                            <p>@Model.YouthComment</p>
                         </div>
                     </div>
 
                     
-                 </div>
+                </div>
+                
+                <div class="row">
+                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <p>
+                                @if (Model.IsEnabled)
+                                {
+                                    <span class="label label-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-default">Disabled</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
 
             </div>
 

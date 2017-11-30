@@ -8,7 +8,8 @@ namespace JumpLineUp.ViewModels.SupportServices
 {
     public class SupportServiceIndexViewModel
     {
-        public List<SupportService> NewSupportServices { get; set; }
+        public List<SupportService> NeedsScheduling { get; set; }
+        public List<SupportService> ExpiredServices { get; set; }
 
     }
 }
