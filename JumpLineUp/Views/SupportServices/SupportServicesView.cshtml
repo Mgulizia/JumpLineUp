@@ -65,7 +65,7 @@
                         }
                         <label>Service Completion:</label>   @daysIn.Value.TotalDays out of @totalDays.Value.TotalDays days
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="@daysIn" aria-valuemin="0" aria-valuemax="@totalDays" style="width:@percentage%">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="@daysIn" aria-valuemin="0" aria-valuemax="@totalDays" style="width:@percentage%">
                                 @percentage% Complete
                             </div>
                         </div>
@@ -81,80 +81,376 @@
 
         <div class="panel-group">
             
+            <h3>Individuals Involved</h3>
+
             <div class="col-md-12">
-                
+
                 <!------- CFS WORKERS INNER PANEL -------------->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>Child Family Services Worker</h4>
+                        <h4><a data-toggle="collapse" href="#collapseCfs">Child Family Services Worker</a></h4>
                     </div>
-                    <div class="panel-body">
-                        
-                        <div class="row">
-                            
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>CFS Worker Name</label>
-                                    <p class="form-control-static">
-                                        @Model.CfsWorker.FirstName @Model.CfsWorker.LastName
-                                    </p> 
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>CFS Email Address</label>
-                                    <p class="form-control-static">
-                                        <a href="mailto:@Model.CfsWorker.Email">@Model.CfsWorker.Email</a>
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>CFS Phone Number</label>
-                                    <p class="form-control-static">
-                                        <a href="tel:@Model.CfsWorker.Phone">@Phone.DisplayPhone(Model.CfsWorker.Phone)</a>
-                                    </p>
-                                </div>
-                            </div>
-                        
-                        </div>
-
-                        <div class="row">
-                            
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Office Location</label>
-                                    <p class="form-control-static">
-                                        @Model.CfsWorker.OfficeLocation
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <p>
-                                        @if (Model.CfsWorker.IsActive)
-                                        {
-                                            <span class="label label-success">Active</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="label label-default">Disabled</span>
-                                        }
-                                    </p>
-                                </div>
-                            </div>  
-                            
-                           
-                        </div>
-
-                    </div>
-                </div>
                 
+                    <div id="collapseCfs" class="panel-collapse collapse">
+                        
+                        <div class="panel-body">
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>CFS Worker Name</label>
+                                        <p class="form-control-static">
+                                            @Model.CfsWorker.FirstName @Model.CfsWorker.LastName
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>CFS Email Address</label>
+                                        <p class="form-control-static">
+                                            <a href="mailto:@Model.CfsWorker.Email">@Model.CfsWorker.Email</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>CFS Phone Number</label>
+                                        <p class="form-control-static">
+                                            <a href="tel:@Model.CfsWorker.Phone">@Phone.DisplayPhone(Model.CfsWorker.Phone)</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Office Location</label>
+                                        <p class="form-control-static">
+                                            @Model.CfsWorker.OfficeLocation
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <p>
+                                            @if (Model.CfsWorker.IsActive)
+                                            {
+                                                <span class="label label-success">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-default">Disabled</span>
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        
+
+                    </div>
                     
+                </div><!--- END OF CFS WORKER PANE -->
+                
+                
+                
+                
+                <!------- ADULT CLIENT INNER PANEL -------------->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><a data-toggle="collapse" href="#collapseClient">Adult Client</a></h4>
+                    </div>
+                
+                    <div id="collapseClient" class="panel-collapse collapse">
+                        
+                        <div class="panel-body">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>CFS Worker Name</label>
+                                        <p class="form-control-static">
+                                            @Model.Client.FirstName @Model.Client.LastName
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <p class="form-control-static">
+                                            <a href="tel:@Model.Client.Phone">@Phone.DisplayPhone(@Model.Client.Phone)</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Master Case Number</label>
+                                        <p class="form-control-static">
+                                            @Model.Client.MasterCaseNumber
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Client ID Number</label>
+                                        <p class="form-control-static">
+                                            @Model.Client.ClientId
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Street Address</label>
+                                        <p class="form-control-static">
+                                            @Model.Client.Street1
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Street Suffix</label>
+                                        <p class="form-control-static">
+                                            @Model.Client.Street2
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <p class="form-control-static">
+                                            @Model.Client.City
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>State</label>
+                                        <p class="form-control-static">
+                                            @Model.Client.State
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Zip Code</label>
+                                        <p class="form-control-static">
+                                            @Model.Client.Zip
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <p>
+                                            @if (Model.Client.IsEnabled)
+                                            {
+                                                <span class="label label-success">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-default">Disabled</span>
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-9">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div><!--- END OF ADULT CLIENT PANE -->
+
+                
+                @if (Model.FosterParent != null)
+                {
+
+                    <!------- ADULT CLIENT INNER PANEL -------------->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4><a data-toggle="collapse" href="#collapseFoster">Foster Family</a></h4>
+                        </div>
+                        
+                        <div id="collapseFoster" class="panel-collapse collapse">
+                            
+                            <div class="panel-body">
+
+                                <div class="row">
+
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Foster Parent - 1</label>
+                                            <p class="form-control-static">
+                                                @Model.FosterParent.FirstName1 @Model.FosterParent.LastName1
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Foster Parent 1 Phone Number</label>
+                                            <p class="form-control-static">
+                                                <a href="tel:@Model.FosterParent.Phone1">@Phone.DisplayPhone(@Model.FosterParent.Phone1)</a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Foster Parent - 2</label>
+                                            <p class="form-control-static">
+                                                @Model.FosterParent.FirstName2 @Model.FosterParent.LastName2
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Foster Parent 1 Phone Number</label>
+                                            <p class="form-control-static">
+                                                <a href="tel:@Model.FosterParent.Phone2">@Phone.DisplayPhone(@Model.FosterParent.Phone2)</a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Street Address</label>
+                                            <p class="form-control-static">
+                                                @Model.FosterParent.Street1
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Street Suffix</label>
+                                            <p class="form-control-static">
+                                                @Model.FosterParent.Street2
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <p class="form-control-static">
+                                                @Model.FosterParent.City
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <p class="form-control-static">
+                                                @Model.FosterParent.State
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Zip Code</label>
+                                            <p class="form-control-static">
+                                                @Model.FosterParent.Zip
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <p>
+                                                @if (Model.FosterParent.IsEnabled)
+                                                {
+                                                    <span class="label label-success">Active</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="label label-default">Disabled</span>
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-9">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        
+                    </div><!--- END OF ADULT CLIENT PANE -->
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
         </div>
