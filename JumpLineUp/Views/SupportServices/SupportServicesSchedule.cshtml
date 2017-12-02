@@ -1,0 +1,254 @@
+﻿@using JumpLineUp.Helpers
+@model JumpLineUp.ViewModels.SupportServices.ServiceScheduleCreateViewModel
+
+<br/>
+
+@using (Html.BeginForm("SaveSchedule", "SupportServices"))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Schedule for @Model.SupportService.Client.LastName Family - MC#: @Model.SupportService.MasterCaseNumber</h3>
+        </div><!-- Panel Heading End-->
+
+        <div class="panel-body">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ServiceSchedule.ScheduleStartDate)
+                @Html.TextBoxFor(m => m.ServiceSchedule.ScheduleStartDate, @"{0:MM/dd/yyyy}", new { @class = "form-control", Id = "datepicker" })
+                @Html.ValidationMessageFor(m => m.ServiceSchedule.ScheduleStartDate)
+            </div>
+        
+        
+        
+        
+
+
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+
+                    <span>Address Quick Entry - Pick Up</span><br />
+
+                    <div class="btn-group btn-group-xs">
+                        <a href="#" id="fc-pu" class="btn btn-link btn-xs">Foster Parent Address</a>
+                        <a href="#" id="cl-pu" class="btn btn-link btn-xs">Clients Address</a>
+                    </div><br /><br />
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ServiceSchedule.PickupDetails)
+                        @Html.TextAreaFor(m => m.ServiceSchedule.PickupDetails, new { @class = "form-control", Id = "pickUpLocation", rows = 8 })
+                        @Html.ValidationMessageFor(m => m.ServiceSchedule.PickupDetails)
+                    </div><br />
+                </div><!-- Column End-->
+
+                <div class="col-md-6">
+
+                    <span>Address Quick Entry - Drop Off</span><br />
+
+                    <div class="btn-group btn-group-xs">
+                        <a href="#" id="fc-do" class="btn btn-link btn-xs">Foster Parent Address</a>
+                        <a href="#" id="cl-do" class="btn btn-link btn-xs">Clients Address</a>
+                    </div><br /><br />
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ServiceSchedule.DropOffLocation)
+                        @Html.TextAreaFor(m => m.ServiceSchedule.DropOffLocation, new { @class = "form-control", Id = "dropOffLocation", rows = 8 })
+                        @Html.ValidationMessageFor(m => m.ServiceSchedule.DropOffLocation)
+                    </div>
+                </div><!-- Column End-->
+
+            </div><!-- Row End-->
+        
+        
+        
+        
+
+
+            <div class="row">
+                
+
+                <div class="col-md-12">
+
+                    <span>Address Quick Entry - Visitation Areas </span><br/>
+
+                    <div class="btn-group btn-group-xs">
+                        <a href="#" id="cl-vi" class="btn btn-link btn-xs">Clients Address</a>
+                        @{
+                            foreach (var office in Model.BlcsOffices)
+                            {
+                                <a href="#" id="@office.LocationDescription.Substring(0, 3)" class="btn btn-link btn-xs">@office.LocationDescription</a>
+                            }
+                        }
+
+
+                    </div><br/><br/>
+
+                    @Html.LabelFor(m => m.ServiceSchedule.VisitationLocation)
+                    @Html.TextAreaFor(m => m.ServiceSchedule.VisitationLocation, new {@class = "form-control", Id = "visitLocation", rows = 8})
+                    @Html.ValidationMessageFor(m => m.ServiceSchedule.VisitationLocation)
+
+
+                </div><!-- Column End-->
+            </div><!-- Row End-->
+            
+            <br/>
+            <hr/>
+
+
+    
+            <div class="row">
+                
+                <div class="panel-group">
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-1"><!--- SUNDAY ------------------------>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Sunday</h4>
+                            </div>
+                            <div class="panel-body">
+
+
+                            </div>
+                        </div>
+                    </div><!--- END OF SUNDAY ------------------------>
+                    
+                    <div class="col-md-2"><!--- MONDAY ------------------------>
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Monday</h4>
+                            </div>
+                            <div class="panel-body">
+
+
+                            </div>
+                        </div>
+                    </div><!--- END OF MONDAY ------------------------>
+                    
+                    <div class="col-md-2"><!--- SUNDAY ------------------------>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Sunday</h4>
+                            </div>
+                            <div class="panel-body">
+
+
+                            </div>
+                        </div>
+                    </div><!--- END OF SUNDAY ------------------------>
+
+                    <div class="col-md-2"><!--- MONDAY ------------------------>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Sunday</h4>
+                            </div>
+                            <div class="panel-body">
+
+
+                            </div>
+                        </div>
+                    </div><!--- END OF MONDAY ------------------------>
+
+
+                </div>
+                
+
+            </div><!-- Row End-->
+
+
+        </div><!-- Panel Body End-->
+
+        <div class="panel-footer">
+            <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back()" />
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Submit Schedule</button>
+        </div><!-- Panel Footer End-->
+
+    </div><!-- Panel End-->
+}
+
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#datepicker").datepicker({
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+
+
+            $("#fc-pu").click(function (e) {
+                e.preventDefault();
+                var address = "Foster Parents (@Model.SupportService.FosterParent.LastName1 Residence) " +
+                    "@AddressDisplay.Display(0, Model.SupportService.FosterParent.Id, 0)";
+
+                $("#pickUpLocation").val($("#pickUpLocation").val() + address);
+                $("#pickUpLocation").focus();
+            });
+
+            $("#cl-pu").click(function (e) {
+                e.preventDefault();
+                var address = "Biological Parents (@Model.SupportService.Client.LastName Residence) " +
+                    "@AddressDisplay.Display(Model.SupportService.Client.Id, 0, 0)";
+
+                $("#pickUpLocation").val($("#pickUpLocation").val() + address);
+                $("#pickUpLocation").focus();
+            });
+
+            $("#fc-do").click(function (e) {
+                e.preventDefault();
+                var address = "Foster Parents (@Model.SupportService.FosterParent.LastName1 Residence) " +
+                    "@AddressDisplay.Display(0, Model.SupportService.FosterParent.Id, 0)";
+                $("#dropOffLocation").val($("#dropOffLocation").val() + address);
+                $("#dropOffLocation").focus();
+            });
+
+            $("#cl-do").click(function (e) {
+                e.preventDefault();
+                var address = "Biological Parents (@Model.SupportService.Client.LastName Residence) " +
+                    "@AddressDisplay.Display(Model.SupportService.Client.Id, 0, 0)";
+
+                $("#dropOffLocation").val($("#dropOffLocation").val() + address);
+                $("#dropOffLocation").focus();
+            });
+
+            $("#cl-vi").click(function (e) {
+                e.preventDefault();
+                var address = "Biological Parents (@Model.SupportService.Client.LastName Residence) " +
+                    "@AddressDisplay.Display(Model.SupportService.Client.Id, 0, 0)";
+
+                $("#visitLocation").val($("#visitLocation").val() + address);
+                $("#visitLocation").focus();
+            });
+
+
+            @{
+                foreach (var office in Model.BlcsOffices)
+                {
+                    <text>
+                    $("#@office.LocationDescription.Substring(0,3)").click(function (e) {
+                        e.preventDefault();
+                        var address = "@office.LocationDescription - " +
+                            "@AddressDisplay.Display(0, 0, @office.Id)";
+
+                        $("#visitLocation").val($("#visitLocation").val() + address);
+                        $("#visitLocation").focus();
+                    });
+                    </text>
+                }
+            }
+
+
+
+
+
+
+        })
+    </script>
+}

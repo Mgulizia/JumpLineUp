@@ -88,7 +88,7 @@
                 <!------- CFS WORKERS INNER PANEL -------------->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4><a data-toggle="collapse" href="#collapseCfs">Child Family Services Worker</a></h4>
+                        <h4><a data-toggle="collapse" href="#collapseCfs">DHHS Child Family Services Worker</a></h4>
                     </div>
                 
                     <div id="collapseCfs" class="panel-collapse collapse">
@@ -434,7 +434,122 @@
                 }
 
 
+                @if (Model.Youth != null)
+                {
+                    var youthCount = 1;
 
+                    foreach (var youth in Model.Youth)
+                    {
+                        <!------- YOUTH CLIENT INNER PANEL -------------->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4><a data-toggle="collapse" href="#collapseYouth-@youthCount">Youth @youthCount - @youth.FirstName @youth.LastName</a></h4>
+                            </div>
+
+                            <div id="collapseYouth-@youthCount" class="panel-collapse collapse">
+
+                                <div class="panel-body">
+
+                                    <div class="row">
+
+
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Youth Name</label>
+                                                <p class="form-control-static">
+                                                    @youth.FirstName @youth.LastName
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Birth Date</label>
+                                                <p class="form-control-static">
+                                                    @youth.BirthDate.ToString("d")
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Age</label>
+                                                <p class="form-control-static">
+                                                    @youth.GetAge()
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Vehicle Restraints</label>
+                                                <p class="form-control-static">
+                                                    @youth.RestraintType.RestraintName
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Youth Comments and Notes</label>
+                                                <p class="form-control-static">
+                                                    @youth.YouthComment
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                       
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Status</label>
+                                                <p>
+                                                    @if (youth.IsEnabled)
+                                                    {
+                                                        <span class="label label-success">Active</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-default">Disabled</span>
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-9">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div><!--- END OF ADULT CLIENT PANE -->
+
+                        
+                        
+                            youthCount++;
+                        
+                    }
+
+
+
+
+
+
+                }
 
 
 

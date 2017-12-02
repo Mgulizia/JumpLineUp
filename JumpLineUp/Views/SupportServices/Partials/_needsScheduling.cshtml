@@ -2,18 +2,16 @@
 
     <table id="newServiceTable" class="table table-responsive table-striped">
         <thead>
-            <tr>
-                <th>Master Case Number</th>
-                <th>Service Type</th>
-                <th>Client Name</th>
-                <th>CFS Worker</th>
-                <th>Date Started</th>
-                <th>Date Ended</th>
-                <th>Status</th>
-
-
-
-            </tr>
+        <tr>
+            <th></th>
+            <th>Master Case #</th>
+            <th>Service Type</th>
+            <th>Client Name</th>
+            <th>CFS Worker</th>
+            <th>Date Started</th>
+            <th>Date Ended</th>
+            <th>Status</th>
+           </tr>
         </thead>
 
         <tbody>
@@ -21,13 +19,16 @@
             {
 
                 <tr>
+                    <td>
+                        <a href="@Url.Action("View","SupportServices", new{ id = service.Id})" class="btn btn-sm btn-primary">View</a>
+                    </td>
                     <td>@service.MasterCaseNumber</td>
                     <td>@service.ServiceType.ServiceAbbrieviation</td>
 
-                    <td>@Html.ActionLink((string)service.Client.FirstName + " " + (string)service.Client.LastName, "View", "Client", new { id = service.Client.Id }, null)</td>
+                    <td>@Html.ActionLink((string) service.Client.FirstName + " " + (string) service.Client.LastName, "View", "Client", new {id = service.Client.Id}, null)</td>
 
                     <td>
-                        @Html.ActionLink((string)service.CfsWorker.FirstName + " " + (string)service.CfsWorker.LastName, "View", "CfsWorker", new { id = service.CfsWorker.Id }, null)
+                        @Html.ActionLink((string) service.CfsWorker.FirstName + " " + (string) service.CfsWorker.LastName, "View", "CfsWorker", new {id = service.CfsWorker.Id}, null)
                     </td>
                     <td>@(service.ServiceStart != null ? service.ServiceStart.ToString("d") : "---")</td>
                     <td>@(service.ServiceStop != null ? service.ServiceStop.ToString("d") : "---")</td>
@@ -46,7 +47,8 @@
 
 
 
-            </tr>
+
+                </tr>
             }
         </tbody>
     </table>

@@ -52,6 +52,8 @@ namespace JumpLineUp.Controllers
                 .Include(c => c.ServiceType)
                 .Include(c => c.ServiceArea)
                 .Include(c => c.Client)
+                .Include(c => c.Youth)
+                .Include(c => c.Youth.Select(y => y.RestraintType))
                 .Include(c => c.CfsWorker)
                 .Include(c => c.OtherContacts)
                 .Include(c => c.FosterParent)
@@ -61,7 +63,32 @@ namespace JumpLineUp.Controllers
         }
 
 
+        //------------------------------ Edit and Processing of Support Service ------------------------------------------------------------------------------
+        public ActionResult Schedule(int id)
+        {
+            var serviceSchedule = new ServiceSchedule
+            {
+                ScheduleStartDate = DateTime.Today
+            };
 
+            var service = _context.SupportServices
+                .Include(c => c.Client)
+                .Include(c => c.FosterParent)
+                .SingleOrDefault(c => c.Id == id);
+
+
+
+            var vm = new ServiceScheduleCreateViewModel
+            {
+                ServiceSchedule = serviceSchedule,
+                SupportService = service,
+                BlcsOffices = _context.BlcsOffices.ToList()
+                
+            };
+
+            return View("SupportServicesSchedule",vm);
+        } 
+        
 
         //------------------------------ Save new Support Service ------------------------------------------------------------------------------
         public ActionResult Create()

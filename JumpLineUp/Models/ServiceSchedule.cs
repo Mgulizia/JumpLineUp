@@ -14,19 +14,28 @@ namespace JumpLineUp.Models
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Schedule Start Date")]
         public DateTime ScheduleStartDate { get; set; }
 
-        [Required]
+        [Display(Name = "Pick Up Details")]
         public string PickupDetails { get; set; }
 
         [Required]
+        [Display(Name = "Visit Location")]
         public string VisitationLocation { get; set; }
 
-        [Required]
+        [Display(Name = "Drop Off Location")]
         public string DropOffLocation { get; set; }
 
         [Required]
         public string Restrictions { get; set; }
+
+        public bool IsEnabled { get; set; }
+
+        // ---- RELATED MODELS -----------------------------------------------------
+
+        public SupportService SupportService { get; set; }
+        public int? SupportServiceId { get; set; }
 
 
         // ------------------------------- SUNDAY ----------------------------------

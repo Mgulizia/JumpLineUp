@@ -240,6 +240,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AddressDisplay.cs" />
     <Compile Include="Helpers\Phone.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="MessageHandlers\ApiKeyHandler.cs" />
@@ -363,6 +364,18 @@
     <Compile Include="Migrations\201711301942180_ServiceScheduleModelAdded.Designer.cs">
       <DependentUpon>201711301942180_ServiceScheduleModelAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712021629144_addIsEnabledToServiceScheduleForTrackingCurrent.cs" />
+    <Compile Include="Migrations\201712021629144_addIsEnabledToServiceScheduleForTrackingCurrent.Designer.cs">
+      <DependentUpon>201712021629144_addIsEnabledToServiceScheduleForTrackingCurrent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712021633545_AddRelationshipFromSupportServiceScheduleToSupportService.cs" />
+    <Compile Include="Migrations\201712021633545_AddRelationshipFromSupportServiceScheduleToSupportService.Designer.cs">
+      <DependentUpon>201712021633545_AddRelationshipFromSupportServiceScheduleToSupportService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.cs" />
+    <Compile Include="Migrations\201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.Designer.cs">
+      <DependentUpon>201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedCfsWorkers.cs" />
@@ -430,6 +443,7 @@
     <Compile Include="ViewModels\ServiceType\ServiceTypeIndexViewModel.cs" />
     <Compile Include="ViewModels\ServiceType\ServiceTypeCRUDViewModel.cs" />
     <Compile Include="ViewModels\SupportServices\SupportServiceIndexViewModel.cs" />
+    <Compile Include="ViewModels\SupportServices\ServiceScheduleCreateViewModel.cs" />
     <Compile Include="ViewModels\SupportServices\SupportServicesViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthIndexViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthCRUDViewModel.cs" />
@@ -445,6 +459,7 @@
     <Content Include="Views\SupportServices\Partials\_needsScheduling.cshtml" />
     <Content Include="Views\SupportServices\Partials\_expiredServices.cshtml" />
     <Content Include="Views\SupportServices\SupportServicesView.cshtml" />
+    <Content Include="Views\SupportServices\SupportServicesSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-Darkly.css" />
@@ -870,6 +885,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711301942180_ServiceScheduleModelAdded.resx">
       <DependentUpon>201711301942180_ServiceScheduleModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712021629144_addIsEnabledToServiceScheduleForTrackingCurrent.resx">
+      <DependentUpon>201712021629144_addIsEnabledToServiceScheduleForTrackingCurrent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712021633545_AddRelationshipFromSupportServiceScheduleToSupportService.resx">
+      <DependentUpon>201712021633545_AddRelationshipFromSupportServiceScheduleToSupportService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.resx">
+      <DependentUpon>201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
