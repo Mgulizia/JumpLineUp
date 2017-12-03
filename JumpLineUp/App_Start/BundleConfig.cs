@@ -17,7 +17,9 @@ namespace JumpLineUp
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js",
                         "~/Scripts/typeahead.bundle.js",
-                        "~/Scripts/toastr.js"
+                        "~/Scripts/toastr.js",
+                        "~/Scripts/jquery.timepicker.js",
+                        "~/Scripts/bootstrap-toggle.js"
                         
                         ));
 
@@ -35,6 +37,8 @@ namespace JumpLineUp
                       "~/Content/themes/base/jquery-ui.css",
                       "~/Content/typeahead.css",
                       "~/Content/toastr.css",
+                      "~/Content/jquery.timepicker.css",
+                      "~/Content/bootstrap-toggle.less",
                       "~/Content/site.css"
                       ));
         }

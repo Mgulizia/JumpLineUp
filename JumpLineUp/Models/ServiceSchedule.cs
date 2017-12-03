@@ -17,6 +17,10 @@ namespace JumpLineUp.Models
         [Display(Name = "Schedule Start Date")]
         public DateTime ScheduleStartDate { get; set; }
 
+        [Required]
+        [Display(Name = "Schedule End Date")]
+        public DateTime ScheduleEndDate { get; set; }
+
         [Display(Name = "Pick Up Details")]
         public string PickupDetails { get; set; }
 
@@ -27,10 +31,12 @@ namespace JumpLineUp.Models
         [Display(Name = "Drop Off Location")]
         public string DropOffLocation { get; set; }
 
-        [Required]
+        [Display(Name = "Visit Restrictions")]
         public string Restrictions { get; set; }
 
         public bool IsEnabled { get; set; }
+
+        public bool CurrentSchedule { get; set; }
 
         // ---- RELATED MODELS -----------------------------------------------------
 
@@ -43,8 +49,10 @@ namespace JumpLineUp.Models
         [DefaultValue(false)]
         public bool Sunday { get; set; }
 
+        [Display(Name = "Session Start")]
         public DateTime? SunStartTime { get; set; }
 
+        [Display(Name = "Session Duration")]
         public byte? SunDuration { get; set; }
         
 
@@ -53,8 +61,10 @@ namespace JumpLineUp.Models
         [DefaultValue(false)]
         public bool Monday { get; set; }
 
+        [Display(Name = "Session Start")]
         public DateTime? MonStartTime { get; set; }
 
+        [Display(Name = "Session Duration")]
         public byte? MonDuration { get; set; }
 
         // ------------------------------- TUESDAY ----------------------------------
@@ -62,8 +72,10 @@ namespace JumpLineUp.Models
         [DefaultValue(false)]
         public bool Tuesday { get; set; }
 
+        [Display(Name = "Session Start")]
         public DateTime? TueStartTime { get; set; }
 
+        [Display(Name = "Session Duration")]
         public byte? TueDuration { get; set; }
 
         // ------------------------------- WEDNESDAY ---------------------------------
@@ -71,8 +83,10 @@ namespace JumpLineUp.Models
         [DefaultValue(false)]
         public bool Wednesday { get; set; }
 
+        [Display(Name = "Session Start")]
         public DateTime? WedStartTime { get; set; }
 
+        [Display(Name = "Session Duration")]
         public byte? WedDuration { get; set; }
 
         // ------------------------------- THURSDAY ----------------------------------
@@ -80,8 +94,10 @@ namespace JumpLineUp.Models
         [DefaultValue(false)]
         public bool Thursday { get; set; }
 
+        [Display(Name = "Session Start")]
         public DateTime? ThurStartTime { get; set; }
 
+        [Display(Name = "Session Duration")]
         public byte? ThurDuration { get; set; }
 
         // ------------------------------- FRIDAY ------------------------------------
@@ -89,8 +105,10 @@ namespace JumpLineUp.Models
         [DefaultValue(false)]
         public bool Friday { get; set; }
 
+        [Display(Name = "Session Start")]
         public DateTime? FriStartTime { get; set; }
 
+        [Display(Name = "Session Duration")]
         public byte? FriDuration { get; set; }
 
         // ------------------------------- SATRUDAY ----------------------------------
@@ -98,8 +116,10 @@ namespace JumpLineUp.Models
         [DefaultValue(false)]
         public bool Saturday { get; set; }
 
+        [Display(Name = "Session Start")]
         public DateTime? SatStartTime { get; set; }
 
+        [Display(Name = "Session Duration")]
         public byte? SatDuration { get; set; }
 
 

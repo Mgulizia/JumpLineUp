@@ -65,3 +65,13 @@ textarea {
     height: 70%;
     font-size: 70%
 }
+
+
+.form-control[disabled], fieldset[disabled] .form-control {
+    cursor: not-allowed;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #656565;
+    opacity: 1;
+}

@@ -2,6 +2,27 @@
 @model JumpLineUp.ViewModels.SupportServices.ServiceScheduleCreateViewModel
 
 <br/>
+@{
+    var selectList = new List<SelectListItem>
+    {
+        new SelectListItem{ Text = "1 Hour", Value = "1"},
+        new SelectListItem{ Text = "2 Hours", Value = "2"},
+        new SelectListItem{ Text = "3 Hours", Value = "3"},
+        new SelectListItem{ Text = "4 Hours", Value = "4"},
+        new SelectListItem{ Text = "5 Hours", Value = "5"},
+        new SelectListItem{ Text = "6 Hours", Value = "6"},
+        new SelectListItem{ Text = "7 Hours", Value = "7"},
+        new SelectListItem{ Text = "8 Hours", Value = "8"},
+        new SelectListItem{ Text = "9 Hours", Value = "9"},
+        new SelectListItem{ Text = "10 Hours", Value = "10"},
+        new SelectListItem{ Text = "11 Hours", Value = "11"},
+        new SelectListItem{ Text = "12 Hours", Value = "12"},
+        new SelectListItem{ Text = "13 Hours", Value = "13"},
+        new SelectListItem{ Text = "14 Hours", Value = "14"},
+        new SelectListItem{ Text = "15 Hours", Value = "15"},
+        new SelectListItem{ Text = "16 Hours", Value = "16"}
+    };
+}
 
 @using (Html.BeginForm("SaveSchedule", "SupportServices"))
 {
@@ -11,12 +32,29 @@
         </div><!-- Panel Heading End-->
 
         <div class="panel-body">
+            
+        <div class="row">
+            <div class="col-md-6">
+                
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ServiceSchedule.ScheduleStartDate)
+                    @Html.TextBoxFor(m => m.ServiceSchedule.ScheduleStartDate, @"{0:MM/dd/yyyy}", new { @class = "form-control", Id = "scheduleStart" })
+                    @Html.ValidationMessageFor(m => m.ServiceSchedule.ScheduleStartDate)
+                </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.ServiceSchedule.ScheduleStartDate)
-                @Html.TextBoxFor(m => m.ServiceSchedule.ScheduleStartDate, @"{0:MM/dd/yyyy}", new { @class = "form-control", Id = "datepicker" })
-                @Html.ValidationMessageFor(m => m.ServiceSchedule.ScheduleStartDate)
             </div>
+            <div class="col-md-6">
+                
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ServiceSchedule.ScheduleEndDate)
+                    @Html.TextBoxFor(m => m.ServiceSchedule.ScheduleEndDate, @"{0:MM/dd/yyyy}", new { @class = "form-control", Id = "scheduleEnd" })
+                    @Html.ValidationMessageFor(m => m.ServiceSchedule.ScheduleEndDate)
+                </div>
+
+            </div>
+
+        </div>
+        
         
         
         
@@ -58,19 +96,12 @@
                 </div><!-- Column End-->
 
             </div><!-- Row End-->
-        
-        
-        
-        
-
 
             <div class="row">
-                
 
                 <div class="col-md-12">
 
-                    <span>Address Quick Entry - Visitation Areas </span><br/>
-
+                    <span>Address Quick Entry - Visitation Areas </span><br />
                     <div class="btn-group btn-group-xs">
                         <a href="#" id="cl-vi" class="btn btn-link btn-xs">Clients Address</a>
                         @{
@@ -79,83 +110,225 @@
                                 <a href="#" id="@office.LocationDescription.Substring(0, 3)" class="btn btn-link btn-xs">@office.LocationDescription</a>
                             }
                         }
+                    </div>
+                </div>
 
-
-                    </div><br/><br/>
-
-                    @Html.LabelFor(m => m.ServiceSchedule.VisitationLocation)
-                    @Html.TextAreaFor(m => m.ServiceSchedule.VisitationLocation, new {@class = "form-control", Id = "visitLocation", rows = 8})
-                    @Html.ValidationMessageFor(m => m.ServiceSchedule.VisitationLocation)
-
-
+            </div>
+            <div class="row">
+            
+                <div class="col-md-6">
+                    <br/>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ServiceSchedule.VisitationLocation)
+                        @Html.TextAreaFor(m => m.ServiceSchedule.VisitationLocation, new {@class = "form-control", Id = "visitLocation", rows = 8})
+                        @Html.ValidationMessageFor(m => m.ServiceSchedule.VisitationLocation)
+                    </div>
                 </div><!-- Column End-->
-            </div><!-- Row End-->
+
+                <div class="col-md-6">
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ServiceSchedule.Restrictions)
+                        @Html.TextAreaFor(m => m.ServiceSchedule.Restrictions, new {@class = "form-control", rows = 8})
+                        @Html.ValidationMessageFor(m => m.ServiceSchedule.Restrictions)
+                    </div>
+                </div><!-- Column End-->
+
+        </div><!-- Row End-->
             
             <br/>
-            <hr/>
+        <hr/>
+        <h3>Weekly Schedule</h3>
 
-
-    
+        <div class="panel-group">
             <div class="row">
-                
-                <div class="panel-group">
-                    <div class="col-md-1"></div>
 
-                    <div class="col-md-1"><!--- SUNDAY ------------------------>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Sunday</h4>
+
+
+
+
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Sunday</h4>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                @Html.CheckBoxFor(m => m.ServiceSchedule.Sunday, new { data_toggle = "toggle", data_on = "Scheduled", data_off = "N/A" })
                             </div>
-                            <div class="panel-body">
 
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ServiceSchedule.SunStartTime)
+                                @Html.TextBoxFor(m => m.ServiceSchedule.SunStartTime, new { disabled = "disabled", @class = "form-control" })
+                            </div>
 
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ServiceSchedule.SunDuration)
+                                @Html.DropDownListFor(m => m.ServiceSchedule.SunDuration, selectList, "-- Select Duration --", new { disabled = "disabled", @class = "form-control" })
                             </div>
                         </div>
-                    </div><!--- END OF SUNDAY ------------------------>
-                    
-                    <div class="col-md-2"><!--- MONDAY ------------------------>
-                        
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Monday</h4>
-                            </div>
-                            <div class="panel-body">
-
-
-                            </div>
-                        </div>
-                    </div><!--- END OF MONDAY ------------------------>
-                    
-                    <div class="col-md-2"><!--- SUNDAY ------------------------>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Sunday</h4>
-                            </div>
-                            <div class="panel-body">
-
-
-                            </div>
-                        </div>
-                    </div><!--- END OF SUNDAY ------------------------>
-
-                    <div class="col-md-2"><!--- MONDAY ------------------------>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Sunday</h4>
-                            </div>
-                            <div class="panel-body">
-
-
-                            </div>
-                        </div>
-                    </div><!--- END OF MONDAY ------------------------>
-
-
+                    </div>
                 </div>
-                
+
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Monday</h4>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                @Html.CheckBoxFor(m => m.ServiceSchedule.Monday, new { data_toggle = "toggle", data_on = "Scheduled", data_off = "N/A" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ServiceSchedule.MonStartTime)
+                                @Html.TextBoxFor(m => m.ServiceSchedule.MonStartTime, new { disabled = "disabled", @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ServiceSchedule.MonDuration)
+                                @Html.DropDownListFor(m => m.ServiceSchedule.MonDuration, selectList, "-- Select Duration --", new { disabled = "disabled", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Tuesday</h4>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                @Html.CheckBoxFor(m => m.ServiceSchedule.Tuesday, new { data_toggle = "toggle", data_on = "Scheduled", data_off = "N/A" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ServiceSchedule.TueStartTime)
+                                @Html.TextBoxFor(m => m.ServiceSchedule.TueStartTime, new { disabled = "disabled", @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ServiceSchedule.TueDuration)
+                                @Html.DropDownListFor(m => m.ServiceSchedule.TueDuration, selectList, "-- Select Duration --", new { disabled = "disabled", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Wednesday</h4>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                @Html.CheckBoxFor(m => m.ServiceSchedule.Wednesday, new { data_toggle = "toggle", data_on = "Scheduled", data_off = "N/A" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ServiceSchedule.WedStartTime)
+                                @Html.TextBoxFor(m => m.ServiceSchedule.WedStartTime, new { disabled = "disabled", @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ServiceSchedule.WedDuration)
+                                @Html.DropDownListFor(m => m.ServiceSchedule.WedDuration, selectList, "-- Select Duration --", new { disabled = "disabled", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
 
             </div><!-- Row End-->
+        </div>
+        <div class="form-group">
+                <div class="row">
+                
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Thursday</h4>
+                            </div>
+                            <div class="panel-body">
 
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(m => m.ServiceSchedule.Thursday, new { data_toggle = "toggle", data_on = "Scheduled", data_off = "N/A" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ServiceSchedule.ThurStartTime)
+                                    @Html.TextBoxFor(m => m.ServiceSchedule.ThurStartTime, new { disabled = "disabled", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ServiceSchedule.ThurDuration)
+                                    @Html.DropDownListFor(m => m.ServiceSchedule.ThurDuration, selectList, "-- Select Duration --", new { disabled = "disabled", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Friday</h4>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(m => m.ServiceSchedule.Friday, new { data_toggle = "toggle", data_on = "Scheduled", data_off = "N/A" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ServiceSchedule.FriStartTime)
+                                    @Html.TextBoxFor(m => m.ServiceSchedule.FriStartTime, new { disabled = "disabled", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ServiceSchedule.FriDuration)
+                                    @Html.DropDownListFor(m => m.ServiceSchedule.FriDuration, selectList, "-- Select Duration --", new { disabled = "disabled", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Saturday</h4>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(m => m.ServiceSchedule.Saturday, new { data_toggle = "toggle", data_on = "Scheduled", data_off = "N/A" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ServiceSchedule.SatStartTime)
+                                    @Html.TextBoxFor(m => m.ServiceSchedule.SatStartTime, new { disabled = "disabled", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ServiceSchedule.SatDuration)
+                                    @Html.DropDownListFor(m => m.ServiceSchedule.SatDuration, selectList, "-- Select Duration --", new { disabled = "disabled", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                </div>
+            </div>
+        
+            
+            @Html.HiddenFor(m=>m.ServiceSchedule.Id, new { value = Model.ServiceSchedule.Id })
+            @Html.HiddenFor(m=>m.ServiceSchedule.SupportServiceId, new { value = Model.ServiceSchedule.SupportServiceId})
 
         </div><!-- Panel Body End-->
 
@@ -174,13 +347,118 @@
     <script>
 
         $(document).ready(function () {
-            $("#datepicker").datepicker({
+
+            $("#scheduleStart").datepicker({
                 showButtonPanel: true,
                 changeMonth: true,
                 changeYear: true,
                 showOtherMonths: true,
                 selectOtherMonths: true
             });
+
+            $("#scheduleEnd").datepicker({
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+
+            $("#ServiceSchedule_SunStartTime").timepicker();
+            $("#ServiceSchedule_MonStartTime").timepicker();
+            $("#ServiceSchedule_TueStartTime").timepicker();
+            $("#ServiceSchedule_WedStartTime").timepicker();
+            $("#ServiceSchedule_ThurStartTime").timepicker();
+            $("#ServiceSchedule_FriStartTime").timepicker();
+            $("#ServiceSchedule_SatStartTime").timepicker();
+
+            $("#ServiceSchedule_Sunday").change(function() {
+                if ($("#ServiceSchedule_Sunday").prop('checked')) {
+                    $("#ServiceSchedule_SunStartTime").prop('disabled', false);
+                    $("#ServiceSchedule_SunDuration").prop('disabled', false);
+                } else {
+                    $("#ServiceSchedule_SunStartTime").prop('disabled', true);
+                    $("#ServiceSchedule_SunDuration").prop('disabled', true);
+                }
+
+            });
+
+            $("#ServiceSchedule_Monday").change(function () {
+                if ($("#ServiceSchedule_Monday").prop('checked')) {
+                    $("#ServiceSchedule_MonStartTime").prop('disabled', false);
+                    $("#ServiceSchedule_MonDuration").prop('disabled', false);
+                } else {
+                    $("#ServiceSchedule_MonStartTime").prop('disabled', true);
+                    $("#ServiceSchedule_MonDuration").prop('disabled', true);
+                }
+
+            });
+
+            $("#ServiceSchedule_Tuesday").change(function () {
+                if ($("#ServiceSchedule_Tuesday").prop('checked')) {
+                    $("#ServiceSchedule_TueStartTime").prop('disabled', false);
+                    $("#ServiceSchedule_TueDuration").prop('disabled', false);
+                } else {
+                    $("#ServiceSchedule_TueStartTime").prop('disabled', true);
+                    $("#ServiceSchedule_TueDuration").prop('disabled', true);
+                }
+
+            });
+
+            $("#ServiceSchedule_Wednesday").change(function () {
+                if ($("#ServiceSchedule_Wednesday").prop('checked')) {
+                    $("#ServiceSchedule_WedStartTime").prop('disabled', false);
+                    $("#ServiceSchedule_WedDuration").prop('disabled', false);
+                } else {
+                    $("#ServiceSchedule_WedStartTime").prop('disabled', true);
+                    $("#ServiceSchedule_WedDuration").prop('disabled', true);
+                }
+
+            });
+
+            $("#ServiceSchedule_Thursday").change(function () {
+                if ($("#ServiceSchedule_Thursday").prop('checked')) {
+                    $("#ServiceSchedule_ThurStartTime").prop('disabled', false);
+                    $("#ServiceSchedule_ThurDuration").prop('disabled', false);
+                } else {
+                    $("#ServiceSchedule_ThurStartTime").prop('disabled', true);
+                    $("#ServiceSchedule_ThurDuration").prop('disabled', true);
+                }
+
+            });
+
+            $("#ServiceSchedule_Friday").change(function () {
+                if ($("#ServiceSchedule_Friday").prop('checked')) {
+                    $("#ServiceSchedule_FriStartTime").prop('disabled', false);
+                    $("#ServiceSchedule_FriDuration").prop('disabled', false);
+                } else {
+                    $("#ServiceSchedule_FriStartTime").prop('disabled', true);
+                    $("#ServiceSchedule_FriDuration").prop('disabled', true);
+                }
+
+            });
+
+            $("#ServiceSchedule_Saturday").change(function () {
+                if ($("#ServiceSchedule_Saturday").prop('checked')) {
+                    $("#ServiceSchedule_SatStartTime").prop('disabled', false);
+                    $("#ServiceSchedule_SatDuration").prop('disabled', false);
+                } else {
+                    $("#ServiceSchedule_SatStartTime").prop('disabled', true);
+                    $("#ServiceSchedule_SatDuration").prop('disabled', true);
+                }
+
+            });
+
+
+
+
+
+
+
+
+
+
+
 
 
             $("#fc-pu").click(function (e) {

@@ -219,6 +219,7 @@
     <Compile Include="Controllers\Api\FosterParentsController.cs" />
     <Compile Include="Controllers\BlcsOfficeController.cs" />
     <Compile Include="Controllers\CfsWorkerController.cs" />
+    <Content Include="Content\bootstrap-toggle.less" />
     <None Include="Controllers\ClientFamilyController.cs.disabled" />
     <Compile Include="Controllers\OtherContactController.cs" />
     <Compile Include="Controllers\ServiceTypeController.cs" />
@@ -376,6 +377,18 @@
     <Compile Include="Migrations\201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.Designer.cs">
       <DependentUpon>201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712031739136_AddScheduleEndDateToServiceSchedule.cs" />
+    <Compile Include="Migrations\201712031739136_AddScheduleEndDateToServiceSchedule.Designer.cs">
+      <DependentUpon>201712031739136_AddScheduleEndDateToServiceSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712031823474_MakeRestrictionsNullableInServiceSchedule.cs" />
+    <Compile Include="Migrations\201712031823474_MakeRestrictionsNullableInServiceSchedule.Designer.cs">
+      <DependentUpon>201712031823474_MakeRestrictionsNullableInServiceSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712031849238_addCurrentScheduleToServiceSchedule.cs" />
+    <Compile Include="Migrations\201712031849238_addCurrentScheduleToServiceSchedule.Designer.cs">
+      <DependentUpon>201712031849238_addCurrentScheduleToServiceSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\SeedBlcsOffices.cs" />
     <Compile Include="Migrations\SeedData\SeedCfsWorkers.cs" />
@@ -444,11 +457,16 @@
     <Compile Include="ViewModels\ServiceType\ServiceTypeCRUDViewModel.cs" />
     <Compile Include="ViewModels\SupportServices\SupportServiceIndexViewModel.cs" />
     <Compile Include="ViewModels\SupportServices\ServiceScheduleCreateViewModel.cs" />
+    <Compile Include="ViewModels\SupportServices\SupportServiceDetailViewModel.cs" />
     <Compile Include="ViewModels\SupportServices\SupportServicesViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthIndexViewModel.cs" />
     <Compile Include="ViewModels\Youth\YouthCRUDViewModel.cs" />
+    <Content Include="Content\jquery.timepicker.css" />
     <Content Include="Scripts\ApiAddEditForms\PopupFosterParentForm.js" />
     <Content Include="Scripts\ApiAddEditForms\PopupOtherContactForm.js" />
+    <Content Include="Scripts\bootstrap-toggle.js" />
+    <Content Include="Scripts\jquery.timepicker.js" />
+    <Content Include="Scripts\jquery.timepicker.min.js" />
     <Content Include="Views\OtherContact\OtherContactForm.cshtml" />
     <Content Include="Views\OtherContact\Index.cshtml" />
     <Content Include="Views\SupportServices\Index.cshtml" />
@@ -460,6 +478,7 @@
     <Content Include="Views\SupportServices\Partials\_expiredServices.cshtml" />
     <Content Include="Views\SupportServices\SupportServicesView.cshtml" />
     <Content Include="Views\SupportServices\SupportServicesSchedule.cshtml" />
+    <Content Include="Views\SupportServices\Partials\_needsAssigning.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-Darkly.css" />
@@ -894,6 +913,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.resx">
       <DependentUpon>201712021704151_RemoveRequirementFromPickupAndDropOffFromSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712031739136_AddScheduleEndDateToServiceSchedule.resx">
+      <DependentUpon>201712031739136_AddScheduleEndDateToServiceSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712031823474_MakeRestrictionsNullableInServiceSchedule.resx">
+      <DependentUpon>201712031823474_MakeRestrictionsNullableInServiceSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712031849238_addCurrentScheduleToServiceSchedule.resx">
+      <DependentUpon>201712031849238_addCurrentScheduleToServiceSchedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
