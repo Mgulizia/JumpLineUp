@@ -118,7 +118,7 @@
             State: null,
             Zip: null,
             IsEnabled: true
-            }
+        };
 
         bootbox.dialog({
             message: FosterParentBootBoxContent,
