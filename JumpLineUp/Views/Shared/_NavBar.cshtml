@@ -46,11 +46,9 @@
                                 <li>@Html.ActionLink("Foster Parents", "Index", "FosterParent")</li>
                                 <li>@Html.ActionLink("Other Contacts", "Index", "OtherContact")</li>
                             }
-                            
-                            @if (User.IsInRole(RoleName.CanManageServiceTypes))
-                            {
+                           
                                 <li>@Html.ActionLink("Support Services", "Index", "SupportServices")</li>
-                            }
+                            
 
                             @if (User.IsInRole(RoleName.CanManageYouth))
                             {

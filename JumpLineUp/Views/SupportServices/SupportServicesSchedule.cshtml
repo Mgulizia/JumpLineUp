@@ -68,7 +68,11 @@
                     <span>Address Quick Entry - Pick Up</span><br />
 
                     <div class="btn-group btn-group-xs">
-                        <a href="#" id="fc-pu" class="btn btn-link btn-xs">Foster Parent Address</a>
+                        @if (Model.SupportService.FosterParent != null)
+                        {
+                            <a href="#" id="fc-pu" class="btn btn-link btn-xs">Foster Parent Address</a>
+                        }
+                        
                         <a href="#" id="cl-pu" class="btn btn-link btn-xs">Clients Address</a>
                     </div><br /><br />
 
@@ -84,7 +88,10 @@
                     <span>Address Quick Entry - Drop Off</span><br />
 
                     <div class="btn-group btn-group-xs">
-                        <a href="#" id="fc-do" class="btn btn-link btn-xs">Foster Parent Address</a>
+                        @if (Model.SupportService.FosterParent != null)
+                        {
+                            <a href="#" id="fc-do" class="btn btn-link btn-xs">Foster Parent Address</a>
+                        }
                         <a href="#" id="cl-do" class="btn btn-link btn-xs">Clients Address</a>
                     </div><br /><br />
 
@@ -460,15 +467,20 @@
 
 
 
-
-            $("#fc-pu").click(function (e) {
+            @if (Model.SupportService.FosterParent != null)
+            {
+            <text>
+            $("#fc-pu").click(function(e) {
                 e.preventDefault();
                 var address = "Foster Parents (@Model.SupportService.FosterParent.LastName1 Residence) " +
-                    "@AddressDisplay.Display(0, Model.SupportService.FosterParent.Id, 0)";
+                "@AddressDisplay.Display(0, Model.SupportService.FosterParent.Id, 0)";
 
                 $("#pickUpLocation").val($("#pickUpLocation").val() + address);
                 $("#pickUpLocation").focus();
             });
+            </text>
+            }
+
 
             $("#cl-pu").click(function (e) {
                 e.preventDefault();
@@ -479,13 +491,21 @@
                 $("#pickUpLocation").focus();
             });
 
-            $("#fc-do").click(function (e) {
-                e.preventDefault();
-                var address = "Foster Parents (@Model.SupportService.FosterParent.LastName1 Residence) " +
-                    "@AddressDisplay.Display(0, Model.SupportService.FosterParent.Id, 0)";
-                $("#dropOffLocation").val($("#dropOffLocation").val() + address);
-                $("#dropOffLocation").focus();
-            });
+
+
+            @if (Model.SupportService.FosterParent != null)
+            {
+            <text>
+                $("#fc-do").click(function (e) {
+                    e.preventDefault();
+                    var address = "Foster Parents (@Model.SupportService.FosterParent.LastName1 Residence) " +
+                        "@AddressDisplay.Display(0, Model.SupportService.FosterParent.Id, 0)";
+                    $("#dropOffLocation").val($("#dropOffLocation").val() + address);
+                    $("#dropOffLocation").focus();
+                });
+            </text>
+            }
+
 
             $("#cl-do").click(function (e) {
                 e.preventDefault();

@@ -1,4 +1,5 @@
-﻿
+﻿@using JumpLineUp.Models
+
 
     <table id="newServiceTable" class="table table-responsive table-striped">
         <thead>
@@ -42,7 +43,10 @@
                     </td>
                     <td>
                         <a href="@Url.Action("View","SupportServices", new{ id = service.Id})" class="btn btn-sm btn-primary">View</a>
-                        <a href="@Url.Action("Schedule","SupportServices", new{ id = service.Id})" class="btn btn-sm btn-primary">Schedule</a>
+                        @if (User.IsInRole(RoleName.CanAddEditSupportServices))
+                        {
+                            <a href="@Url.Action("Schedule","SupportServices", new{ id = service.Id})" class="btn btn-sm btn-primary">Schedule</a>
+                        }
                     </td>
 
                 </tr>
