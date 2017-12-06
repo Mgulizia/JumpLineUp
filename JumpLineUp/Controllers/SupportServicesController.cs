@@ -74,14 +74,16 @@ namespace JumpLineUp.Controllers
                 .Where(c => c.CurrentSchedule == true)
                 .OrderBy(c=>c.ScheduleEndDate)
                 .ToList();
-                
 
-            var model = new SupportServiceDetailViewModel()
-            {
-                SupportServices = service,
-                ServiceSchedule = schedule.First()
 
-            };
+            var model = new SupportServiceDetailViewModel();
+
+            model.SupportServices = service;
+
+            if (schedule.Count > 0)
+                model.ServiceSchedule = schedule.First();
+
+            
 
             return View("SupportServicesView", model);
         }

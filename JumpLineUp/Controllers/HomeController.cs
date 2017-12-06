@@ -10,7 +10,7 @@ namespace JumpLineUp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "SupportServices");
         }
 
         public ActionResult About()
